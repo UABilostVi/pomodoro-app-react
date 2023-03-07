@@ -1,0 +1,29 @@
+@import '../../variables.scss';
+
+.button {
+  border: none;
+  background: none;
+  padding: 0 16px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.tabsWrapper {
+  display: flex;
+}
+
+.tabItem {
+  border-right: 1px solid $prime-font-color;
+}
+
+.active {
+  color: $active-color;
+}
+
+.inActive {
+  color: $prime-font-color;
+  &:hover {
+    color: $el-hover-color;
+  }
+}
+

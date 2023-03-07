@@ -1,0 +1,15 @@
+.button {
+  background: transparent;
+  width: 150px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.centered {
+  margin: 15px auto;
+  display: block;
+}
+
+.service-button {
+  width: auto;
+}

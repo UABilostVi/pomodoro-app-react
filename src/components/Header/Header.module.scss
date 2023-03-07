@@ -1,0 +1,30 @@
+@import '../../variables.scss';
+
+.menu {
+  display: flex;
+  gap: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.pageName {
+  font-size: 32px;
+  font-weight: 500;
+  color: $title-font-color;
+}
+
+.active {
+  fill: $active-color;
+}
+
+.inActive {
+  fill: $prime-font-color;
+  &:hover {
+    fill: $el-hover-color;
+  }
+}
