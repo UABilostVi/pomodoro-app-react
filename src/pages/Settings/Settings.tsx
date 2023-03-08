@@ -1,28 +1,22 @@
 import React, { FC, useState } from 'react';
 import { Tabs } from '../../components/Tabs';
 
+import { SettingsCategories } from './SettingsCategories';
+
 import styles from './Settings.module.scss';
 
-const Settings = () => {
-	let tabsList = ['Pomodoros', 'Categories'];
-	let [toggleState, setToggleState] = useState(tabsList[0]);
+const Settings: FC = () => {
+	const tabsList = ['Pomodoros', 'Categories'];
+	const [toggleState, updateToggleState] = useState<string>(tabsList[0]);
 	return (
 		<>
 			<Tabs
 				tabsItems={tabsList}
 				tabState={toggleState}
-				setToggleState={setToggleState}
+				setToggleState={updateToggleState}
 			/>
-			<div
-				className={toggleState === tabsList[0] ? styles.visible : styles.hidden}
-			>
-				Pomodoro
-			</div>
-			<div
-				className={toggleState === tabsList[1] ? styles.visible : styles.hidden}
-			>
-				Categories
-			</div>
+			{toggleState === 'Categories' && <SettingsCategories />}
+			{toggleState === 'Pomodoros' && <div>Pomodoros</div>}
 		</>
 	);
 };

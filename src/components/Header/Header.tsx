@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { FC, useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 import { ReactComponent as SettingsIcon } from '../../assets/settingsIcon.svg';
@@ -11,12 +11,30 @@ type navLinkClassesProp = {
 };
 
 const Header: FC = () => {
+	const location = useLocation();
+	const [title, setTitle] = useState('');
+	useEffect(() => {
+		switch (location.pathname) {
+			case '/settings':
+				setTitle('Settings');
+				break;
+			case '/reports':
+				setTitle('Reports');
+				break;
+			case '/tasklist':
+				setTitle('Daily task');
+				break;
+			default:
+				break;
+		}
+	}, [location.pathname]);
+
 	const navLinkClasses = ({ isActive }: navLinkClassesProp) =>
 		isActive ? styles.active : styles.inActive;
 
 	return (
 		<header className={styles.header}>
-			<div className={styles.pageName}>Header</div>
+			<div className={styles.pageName}>{title}</div>
 			<nav>
 				<ul className={styles.menu}>
 					<li>

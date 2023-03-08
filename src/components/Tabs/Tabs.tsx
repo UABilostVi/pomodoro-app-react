@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './Tabs.module.scss';
 
-interface TabsProps {
+interface ITabsProps {
 	tabsItems: string[];
 	tabState: string;
-	setToggleState: Function;
+	setToggleState: (value: string) => void;
 }
 
-const Tabs = ({ tabsItems, tabState, setToggleState }: TabsProps) => {
+const Tabs = ({ tabsItems, tabState, setToggleState }: ITabsProps) => {
 	function toggleTab(tabName: string) {
 		setToggleState(tabName);
 	}
@@ -15,14 +15,18 @@ const Tabs = ({ tabsItems, tabState, setToggleState }: TabsProps) => {
 	const list = tabsItems.map((tab, index) => (
 		<li
 			key={tab}
-			className={tabsItems.length !== index + 1 ? styles.tabItem : ''}
+			className={
+				styles.tabItem +
+				' ' +
+				(tabsItems.length !== index + 1 ? styles.rightBorder : '')
+			}
 		>
 			<button
 				onClick={() => toggleTab(tab)}
 				className={
-					tabState === tab
-						? styles.button + ' ' + styles.active
-						: styles.button + ' ' + styles.inActive
+					styles.button +
+					' ' +
+					(tabState === tab ? styles.active : styles.inActive)
 				}
 			>
 				{tab}

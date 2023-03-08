@@ -2,20 +2,30 @@
 
 .menu {
   display: flex;
+  justify-content: end;
+  align-items: center;
   gap: 40px;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: 40px 0;
+  @media (min-width:$tablet-width) {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
 }
 
 .pageName {
   font-size: 32px;
   font-weight: 500;
   color: $title-font-color;
+  @media (min-width:$tablet-width) {
+    text-align: center;
+    order: 1;
+  }
 }
 
 .active {

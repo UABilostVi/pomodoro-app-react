@@ -3,16 +3,22 @@
 .button {
   border: none;
   background: none;
-  padding: 0 16px;
+  padding: 0 $tabs-padding;
   cursor: pointer;
   font-size: 22px;
 }
 
 .tabsWrapper {
   display: flex;
+  justify-content: end;
+  margin-right: -$tabs-padding;
 }
 
 .tabItem {
+  display: flex;
+}
+
+.rightBorder {
   border-right: 1px solid $prime-font-color;
 }
 
