@@ -34,7 +34,7 @@ const Header: FC = () => {
 
 	return (
 		<header className={styles.header}>
-			<div className={styles.pageName}>{title}</div>
+			<h1 className={styles.pageName}>{title}</h1>
 			<nav>
 				<ul className={styles.menu}>
 					<li>

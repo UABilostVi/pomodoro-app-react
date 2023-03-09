@@ -42,7 +42,7 @@ const Login: FC = () => {
 						labelText='Password'
 						onChange={onChangePassword}
 					/>
-					<Button type='submit' buttonText='Submit' centered={true} />
+					<Button type='ok'>Submit</Button>
 				</fieldset>
 			</form>
 			<p>

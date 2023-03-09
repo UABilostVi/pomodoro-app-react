@@ -1,0 +1,41 @@
+@import '../../variables.scss';
+
+.button {
+  cursor: pointer;
+  border: none;
+  color: $white;
+  font-size: 24px;
+  width: 100%;
+  padding: 24px 0;
+  font-weight: 700;
+}
+
+.save {
+  background-color: $mount-meadow;
+  &:hover {
+    background-color: $mount-meadow-dark;
+  }
+  &:active {
+    background-color: $deep-sea;
+  }
+}
+
+.cancel {
+  background-color: $tomato;
+  &:hover {
+    background-color: $dark-coral;
+  }
+  &:active {
+    background-color: $mahogany;
+  }
+}
+
+.ok {
+  background-color: $malibu;
+  &:hover {
+    background-color: $curious-blue;
+  }
+  &:active {
+    background-color: $pelorous;
+  }
+}

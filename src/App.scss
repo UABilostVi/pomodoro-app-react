@@ -1,8 +1,11 @@
 @import './variables.scss';
 
 .container {
+  height: 100%;
   padding: 0 24px;
   margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto 1fr;
   @media (min-width: $tablet-width) {
     padding: 0 44px;
   }
@@ -17,4 +20,14 @@ ul {
   padding: 0;
   list-style: none;
   font-size: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 28px;
+  font-weight: 300;
+  text-align: center;
 }

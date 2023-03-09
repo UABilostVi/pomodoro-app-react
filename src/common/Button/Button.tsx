@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
-import './button.css';
+import styles from './Button.module.scss';
 
-const Button = (props: any) => {
-	let classes = 'button';
-	classes += props.centered === true ? ' centered' : '';
-	classes += props.serviceButton === true ? ' service-button' : '';
+type ButtonType = 'save' | 'ok' | 'cancel';
+
+interface IButtonProps {
+	type: ButtonType;
+	onClickHandler?: MouseEventHandler<HTMLButtonElement>;
+	children: React.ReactNode;
+}
+
+const Button = ({ type, onClickHandler, children }: IButtonProps) => {
+	let classes = styles.button;
+	classes +=
+		type === 'save'
+			? ` ${styles.save}`
+			: type === 'ok'
+			? ` ${styles.ok}`
+			: type === 'cancel'
+			? ` ${styles.cancel}`
+			: '';
 	return (
-		<button
-			id={props.id}
-			className={classes}
-			type={props.type}
-			onClick={props.onClick}
-		>
-			{props.buttonText}
+		<button className={classes} onClick={onClickHandler}>
+			{children}
 		</button>
 	);
 };

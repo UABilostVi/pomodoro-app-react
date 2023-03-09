@@ -1,0 +1,25 @@
+@import '../../../variables.scss';
+
+.categItem {
+  font-size: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $lines-color;
+  margin-bottom: 25px;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    left: -36px;
+    top: 0;
+    transform: translateY(50%);
+  }
+}
+
+.categList {
+  margin: 50px auto;
+  max-width: 516px;
+  padding-left: 50px;
+}
