@@ -37,8 +37,12 @@ const SettingsCategories = () => {
 	return (
 		<>
 			<h2 className='subtitle'>Categories list overview</h2>
-			<ul className={styles.categList}>{categList}</ul>
-			<Button type='ok'>Go to Tasks</Button>
+			<div className={styles.settingsContent}>
+				<ul className={styles.categList}>{categList}</ul>
+				<div className='buttonsHolder'>
+					<Button type='ok'>Go to Tasks</Button>
+				</div>
+			</div>
 		</>
 	);
 };

@@ -5,6 +5,7 @@ import styles from './Header.module.scss';
 import { ReactComponent as SettingsIcon } from '../../assets/settingsIcon.svg';
 import { ReactComponent as ReportsIcon } from '../../assets/reportsIcon.svg';
 import { ReactComponent as TasksIcon } from '../../assets/tasksIcon.svg';
+import { ReactComponent as LogoutIcon } from '../../assets/logout.svg';
 
 type navLinkClassesProp = {
 	isActive: Boolean;
@@ -51,6 +52,12 @@ const Header: FC = () => {
 						<NavLink to='settings' className={navLinkClasses}>
 							<SettingsIcon />
 						</NavLink>
+					</li>
+					<li className={styles.user}>
+						<div className={styles.userName}>Vitalii</div>
+						<button className={styles.inActive + ' ' + styles.logoutButton}>
+							<LogoutIcon />
+						</button>
 					</li>
 				</ul>
 			</nav>

@@ -12,6 +12,7 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: 40px 0;
+  gap: 25px;
   @media (min-width:$tablet-width) {
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
@@ -36,4 +37,24 @@
   &:hover {
     fill: $el-hover-color;
   }
+}
+
+.userName {
+  font-size: 22px;
+  color: $white;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid $lines-color;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.logoutButton {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
 }

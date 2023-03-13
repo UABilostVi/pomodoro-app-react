@@ -8,6 +8,11 @@
   width: 100%;
   padding: 24px 0;
   font-weight: 700;
+  @media (min-width: $tablet-width) {
+    width: auto;
+    padding: 12px 32px;
+    font-size: 18px;
+  }
 }
 
 .save {

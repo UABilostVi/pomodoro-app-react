@@ -19,7 +19,14 @@
 }
 
 .categList {
-  margin: 50px auto;
+  margin: 30px auto;
   max-width: 516px;
+  width: 100%;
   padding-left: 50px;
+}
+
+.settingsContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

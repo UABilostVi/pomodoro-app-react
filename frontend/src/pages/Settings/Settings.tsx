@@ -9,7 +9,7 @@ const Settings: FC = () => {
 	const tabsList = ['Pomodoros', 'Categories'];
 	const [toggleState, updateToggleState] = useState<string>(tabsList[0]);
 	return (
-		<>
+		<div className={styles.settingsWrapper}>
 			<Tabs
 				tabsItems={tabsList}
 				tabState={toggleState}
@@ -17,7 +17,7 @@ const Settings: FC = () => {
 			/>
 			{toggleState === 'Categories' && <SettingsCategories />}
 			{toggleState === 'Pomodoros' && <div>Pomodoros</div>}
-		</>
+		</div>
 	);
 };
 
