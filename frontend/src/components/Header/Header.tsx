@@ -14,6 +14,7 @@ type navLinkClassesProp = {
 const Header: FC = () => {
 	const location = useLocation();
 	const [title, setTitle] = useState('');
+
 	useEffect(() => {
 		switch (location.pathname) {
 			case '/settings':
