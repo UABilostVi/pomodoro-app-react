@@ -9,6 +9,7 @@ const categories = [
 	{ id: 1, name: 'Work', color: 'orange' },
 	{ id: 2, name: 'Educ', color: 'blue' },
 	{ id: 3, name: 'Hobby', color: 'purple' },
+	{ id: 3, name: 'Pustik hyilo', color: 'pink' },
 ];
 
 interface ICategProps {

@@ -26,6 +26,13 @@ h1 {
   margin: 0;
 }
 
+a {
+  color: $white;
+  &:visited {
+    color: $white;
+  }
+}
+
 .subtitle {
   font-size: 28px;
   font-weight: 300;
@@ -37,4 +44,28 @@ h1 {
   display: flex;
   gap: 24px;
   justify-content: center;
+}
+
+.legend {
+  font-size: 28px;
+  font-weight: 700;
+  color: $white;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.customFieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.customForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+  max-width: 520px;
+  padding: 0 15px;
 }

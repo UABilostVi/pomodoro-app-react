@@ -5,8 +5,8 @@ import { Input } from '../../common/Input';
 import { Button } from '../../common/Button';
 
 const Login: FC = () => {
-	let [email, setEmail] = useState('');
-	let [password, setPassword] = useState('');
+	let [email, setEmail] = useState<String>('');
+	let [password, setPassword] = useState<String>('');
 	// const dispatch = useDispatch();
 	// const navigate = useNavigate();
 
@@ -33,22 +33,28 @@ const Login: FC = () => {
 
 	return (
 		<div className='auth-wrapper'>
-			<form onSubmit={onSubmit}>
-				<fieldset>
+			<form onSubmit={onSubmit} className='customForm'>
+				<fieldset className='customFieldset'>
 					<legend className='legend'>Login</legend>
-					<Input type='email' labelText='Email' onChange={onChangeEmail} />
+					<Input
+						type='email'
+						placeholder='Enter your email'
+						labelText='Email'
+						onChange={onChangeEmail}
+					/>
 					<Input
 						type='password'
 						labelText='Password'
 						onChange={onChangePassword}
+						placeholder='Enter you password'
 					/>
-					<Button type='ok'>Submit</Button>
 				</fieldset>
+				<Button type='ok'>Login</Button>
+				<p>
+					If you don`t have an account you can{' '}
+					<Link to='/registration'>Register</Link>
+				</p>
 			</form>
-			<p>
-				If you have an account you can{' '}
-				{/* <Link to='/registration'>Registration</Link> */}
-			</p>
 		</div>
 	);
 };

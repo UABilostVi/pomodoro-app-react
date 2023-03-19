@@ -8,9 +8,10 @@ interface IButtonProps {
 	type: ButtonType;
 	onClickHandler?: MouseEventHandler<HTMLButtonElement>;
 	children: React.ReactNode;
+	disabled?: boolean;
 }
 
-const Button = ({ type, onClickHandler, children }: IButtonProps) => {
+const Button = ({ type, disabled, onClickHandler, children }: IButtonProps) => {
 	let classes = styles.button;
 	classes +=
 		type === 'save'
@@ -21,7 +22,7 @@ const Button = ({ type, onClickHandler, children }: IButtonProps) => {
 			? ` ${styles.cancel}`
 			: '';
 	return (
-		<button className={classes} onClick={onClickHandler}>
+		<button className={classes} onClick={onClickHandler} disabled={disabled}>
 			{children}
 		</button>
 	);

@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from './';
+import type { RootState } from '..';
+import { ICategory } from '../../types/Category';
 
-type CategoriesState = any[];
+type CategoriesState = ICategory[];
 
 const initialState: CategoriesState = [];
 
@@ -9,7 +10,7 @@ export const counterSlice = createSlice({
 	name: 'categories',
 	initialState,
 	reducers: {
-		addNewCategory: (state, action: PayloadAction<any>) => {
+		addNewCategory: (state, action: PayloadAction<ICategory>) => {
 			state.push(action.payload);
 		},
 	},

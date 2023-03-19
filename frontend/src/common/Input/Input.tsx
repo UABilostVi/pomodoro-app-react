@@ -1,16 +1,17 @@
 import React from 'react';
 
-import './input.css';
+import styles from './Input.module.scss';
 
 const Input = (props: any) => {
 	return (
-		<label htmlFor={props.id}>
+		<label className={styles.customInput} htmlFor={props.id}>
 			{props.labelText}
 			<input
 				defaultValue={props.defaultValue}
 				value={props.value}
 				name={props.name}
 				onChange={props.onChange}
+				onBlur={props.onBlur}
 				style={props.style}
 				type={props.type}
 				id={props.id}
@@ -18,6 +19,7 @@ const Input = (props: any) => {
 				required={props.required}
 				min={props.min}
 				minLength={props.minLength}
+				maxLength={props.maxLength}
 				ref={props.refer}
 			/>
 		</label>
