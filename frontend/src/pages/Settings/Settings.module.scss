@@ -1,5 +1,11 @@
+@import '../../variables.scss';
+
 .settingsWrapper {
   height: 100%;
   display: grid;
   grid-template-rows: auto auto 1fr;
+  padding-bottom: 48px;
+  @media (min-width: $tablet-width) {
+    padding-bottom: 72px;
+  }
 }

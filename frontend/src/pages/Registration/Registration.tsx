@@ -1,22 +1,25 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { Watch } from 'react-loader-spinner';
 
 import { Input } from '../../common/Input';
 import { Button } from '../../common/Button';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { registerUser } from '../../store/auth/async';
-
 import { unSetSucces } from '../../store/auth/authSlice';
+
 import { useInput } from '../../hooks/useInput';
 
 const Registration: FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const { loading, error, success } = useAppSelector((state) => state.auth);
-	const username = useInput('', { isEmpty: true, minLength: 3, maxLength: 30 });
-	const password = useInput('', { isEmpty: true, minLength: 3, maxLength: 30 });
+	const { loading, error, success } = useAppSelector((state) => state.auth); //FIXME decide what to do with err from server
+	const username = useInput('', { isEmpty: true, minLength: 3, maxLength: 20 });
+	const password = useInput('', { isEmpty: true, minLength: 3, maxLength: 20 });
 	const email = useInput('', { isEmpty: true, isEmail: true });
+	const isDisabled =
+		!email.inpuValid || !password.inpuValid || !username.inpuValid;
 
 	const newUser = {
 		username: username.value,
@@ -38,7 +41,6 @@ const Registration: FC = () => {
 
 	return (
 		<div className='auth-wrapper'>
-			{loading && <h2>Loading...</h2>}
 			<form onSubmit={onSubmit} className='customForm'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Registration</legend>
@@ -49,10 +51,8 @@ const Registration: FC = () => {
 						onChange={username.onChange}
 						onBlur={username.onBlur}
 						placeholder='Add username here'
+						inputName={username}
 					/>
-					{username.isDirty && username.isEmpty && <div>Empty</div>}
-					{username.isDirty && username.minLengthErr && <div>Min</div>}
-					{username.isDirty && username.maxLengthErr && <div>Max</div>}
 					<Input
 						value={email.value}
 						type='email'
@@ -60,9 +60,8 @@ const Registration: FC = () => {
 						onChange={email.onChange}
 						onBlur={email.onBlur}
 						placeholder='Add email here'
+						inputName={email}
 					/>
-					{email.isDirty && email.isEmpty && <div>Empty mail</div>}
-					{email.isDirty && email.emailErr && <div>Error mail</div>}
 					<Input
 						value={password.value}
 						type='password'
@@ -70,19 +69,17 @@ const Registration: FC = () => {
 						onChange={password.onChange}
 						onBlur={password.onBlur}
 						placeholder='Add password here'
+						inputName={password}
 					/>
-					{password.isDirty && password.isEmpty && <div>Empty</div>}
-					{password.isDirty && password.minLengthErr && <div>Min</div>}
-					{password.isDirty && password.maxLengthErr && <div>Max</div>}
 				</fieldset>
-				<Button
-					type='save'
-					disabled={
-						!email.inpuValid || !password.inpuValid || !username.inpuValid
-					}
-				>
-					Register
-				</Button>
+				<div className='buttonsHolder'>
+					<Button type='save' disabled={isDisabled}>
+						{!loading && 'Register'}
+						{loading && (
+							<Watch wrapperClass='loader' color='white' height={24} />
+						)}
+					</Button>
+				</div>
 				<p>
 					If you have an account you can <Link to='/login'>Login</Link>
 				</p>

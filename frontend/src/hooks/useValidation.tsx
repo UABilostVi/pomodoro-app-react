@@ -2,33 +2,34 @@ import { useEffect, useState } from 'react';
 import { IValidation } from '../types/Validations';
 
 export const useValidation = (value: string, validations: IValidation) => {
-	const [isEmpty, setIsEmpty] = useState<boolean>(true);
-	const [minLengthErr, setMinLengthErr] = useState<boolean>(false);
-	const [maxLengthErr, setMaxLengthErr] = useState<boolean>(false);
-	const [emailErr, setEmailErr] = useState<boolean>(false);
+	const [isEmpty, setIsEmpty] = useState<string>('');
+	const [minLengthErr, setMinLengthErr] = useState<string>('');
+	const [maxLengthErr, setMaxLengthErr] = useState<string>('');
+	const [emailErr, setEmailErr] = useState<string>('');
 	const [inpuValid, setInputValid] = useState<boolean>(false);
+	const err = isEmpty || minLengthErr || maxLengthErr || emailErr;
 
 	useEffect(() => {
 		for (const val in validations) {
 			switch (val) {
 				case 'minLength':
 					value.length < validations[val]
-						? setMinLengthErr(true)
-						: setMinLengthErr(false);
+						? setMinLengthErr(`Min length must be ${validations[val]} chars`)
+						: setMinLengthErr('');
 					break;
 				case 'maxLength':
 					value.length > validations[val]
-						? setMaxLengthErr(true)
-						: setMaxLengthErr(false);
+						? setMaxLengthErr(`Max length must be ${validations[val]} chars`)
+						: setMaxLengthErr('');
 					break;
 				case 'isEmpty':
-					value ? setIsEmpty(false) : setIsEmpty(true);
+					value ? setIsEmpty('') : setIsEmpty('Must be filled');
 					break;
 				case 'isEmail':
 					const re = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 					re.test(String(value).toLowerCase())
-						? setEmailErr(false)
-						: setEmailErr(true);
+						? setEmailErr('')
+						: setEmailErr('Wrong email format');
 					break;
 			}
 		}
@@ -48,5 +49,6 @@ export const useValidation = (value: string, validations: IValidation) => {
 		maxLengthErr,
 		emailErr,
 		inpuValid,
+		err,
 	};
 };

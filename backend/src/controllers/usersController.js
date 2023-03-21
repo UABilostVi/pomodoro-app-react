@@ -34,7 +34,7 @@ const login = async (req, res) => {
       if (token) {
         return res.status(200).json(token);
       }
-      return res.status(400).json({ message: 'Not authorized' });
+      return res.status(400).json({ message: 'Wrong email or password' });
     });
 };
 

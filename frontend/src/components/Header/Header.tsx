@@ -1,19 +1,15 @@
 import React, { FC, useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { NavItem } from './NavItem';
+import classNames from 'classnames';
 
 import styles from './Header.module.scss';
-import { ReactComponent as SettingsIcon } from '../../assets/settingsIcon.svg';
-import { ReactComponent as ReportsIcon } from '../../assets/reportsIcon.svg';
-import { ReactComponent as TasksIcon } from '../../assets/tasksIcon.svg';
-import { ReactComponent as LogoutIcon } from '../../assets/logout.svg';
-
-type navLinkClassesProp = {
-	isActive: Boolean;
-};
+import { useAppSelector } from '../../store/hooks';
 
 const Header: FC = () => {
 	const location = useLocation();
 	const [title, setTitle] = useState('');
+	const { userInfo } = useAppSelector((state) => state.auth);
 
 	useEffect(() => {
 		switch (location.pathname) {
@@ -31,33 +27,18 @@ const Header: FC = () => {
 		}
 	}, [location.pathname]);
 
-	const navLinkClasses = ({ isActive }: navLinkClassesProp) =>
-		isActive ? styles.active : styles.inActive;
-
 	return (
 		<header className={styles.header}>
 			<h1 className={styles.pageName}>{title}</h1>
 			<nav>
 				<ul className={styles.menu}>
-					<li>
-						<NavLink to='tasklist' className={navLinkClasses}>
-							<TasksIcon />
-						</NavLink>
-					</li>
-					<li>
-						<NavLink to='reports' className={navLinkClasses}>
-							<ReportsIcon />
-						</NavLink>
-					</li>
-					<li>
-						<NavLink to='settings' className={navLinkClasses}>
-							<SettingsIcon />
-						</NavLink>
-					</li>
-					<li className={styles.user}>
-						<div className={styles.userName}>Vitalii</div>
-						<button className={styles.inActive + ' ' + styles.logoutButton}>
-							<LogoutIcon />
+					<NavItem to='tasklist' icon='icon-tasklist' />
+					<NavItem to='reports' icon='icon-reports' />
+					<NavItem to='settings' icon='icon-settings' />
+					<li className={styles.userInfo}>
+						<div>{userInfo?.username}</div>
+						<button className={styles.logoutButton}>
+							<span className='icon-logout'></span>
 						</button>
 					</li>
 				</ul>

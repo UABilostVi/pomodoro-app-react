@@ -22,6 +22,9 @@ const Input = (props: any) => {
 				maxLength={props.maxLength}
 				ref={props.refer}
 			/>
+			{props?.inputName?.isDirty && props?.inputName?.err && (
+				<div className={styles.err}>{props.inputName.err}</div>
+			)}
 		</label>
 	);
 };

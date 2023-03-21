@@ -1,0 +1,21 @@
+@import '../../../variables.scss';
+
+.active span::before {
+  color: $active-color;
+}
+
+.inActive span{
+  &::before {
+    color: $prime-font-color;
+  }
+  &:hover::before {
+    color: $el-hover-color;
+  }
+}
+
+.menuItem {
+  font-size: 24px;
+  a {
+    text-decoration: none;
+  }
+}

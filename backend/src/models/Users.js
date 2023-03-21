@@ -6,7 +6,6 @@ const userJoiSchema = Joi.object({
     .alphanum()
     .min(2)
     .max(25)
-    .required()
     .messages({ 'string.alphanum': 'Requires the {{#label}} value to only contain a-z, A-Z, 0-9 and no space allowed' }),
 
   password: Joi.string()
@@ -17,7 +16,7 @@ const userJoiSchema = Joi.object({
     .messages({ 'string.pattern.base': 'Password must be minimun 3 and maximum 30 charts long' }),
 
   email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+    .pattern(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
     .required()
     .messages({ 'string.email': 'Email must have look like `email@email.com`' }),
 });
