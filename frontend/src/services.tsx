@@ -42,13 +42,13 @@ export const serviceAPI = {
 	// 	return axs.get('authors/all');
 	// },
 
-	// fetchCurrentUser() {
-	// 	return axs.get('users/me', {
-	// 		headers: {
-	// 			Authorization: `${localStorage.getItem('userToken')}`,
-	// 		},
-	// 	});
-	// },
+	fetchCurrentUser() {
+		return axs.get('users/me', {
+			headers: {
+				Authorization: `${localStorage.getItem('token')}`,
+			},
+		});
+	},
 
 	// fetchDelCourse(courseId) {
 	// 	return axs.delete(`courses/${courseId}`, {

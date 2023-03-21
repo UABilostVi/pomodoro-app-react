@@ -5,10 +5,15 @@ type navLinkClassesProp = {
 	isActive: Boolean;
 };
 
+type NavItemPropsType = {
+	to: string;
+	icon: string;
+};
+
 const navLinkClasses = ({ isActive }: navLinkClassesProp) =>
 	isActive ? styles.active : styles.inActive;
 
-const NavItem = (props: any) => {
+const NavItem = (props: NavItemPropsType) => {
 	return (
 		<li className={styles.menuItem}>
 			<NavLink to={props.to} className={navLinkClasses}>

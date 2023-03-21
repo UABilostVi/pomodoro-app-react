@@ -14,7 +14,9 @@ import { useInput } from '../../hooks/useInput';
 const Registration: FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const { loading, error, success } = useAppSelector((state) => state.auth); //FIXME decide what to do with err from server
+	const { loading, error, success, userInfo } = useAppSelector(
+		(state) => state.auth
+	); //FIXME decide what to do with err from server
 	const username = useInput('', { isEmpty: true, minLength: 3, maxLength: 20 });
 	const password = useInput('', { isEmpty: true, minLength: 3, maxLength: 20 });
 	const email = useInput('', { isEmpty: true, isEmail: true });
@@ -33,6 +35,12 @@ const Registration: FC = () => {
 			navigate('/login');
 		}
 	}, [success, navigate, dispatch]);
+
+	useEffect(() => {
+		if (userInfo) {
+			navigate('/');
+		}
+	}, [userInfo, navigate, dispatch]);
 
 	function onSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();

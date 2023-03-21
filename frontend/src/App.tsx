@@ -1,5 +1,11 @@
-import React, { FC } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import React, { FC, useEffect } from 'react';
+import {
+	Routes,
+	Route,
+	Navigate,
+	useLocation,
+	useNavigate,
+} from 'react-router-dom';
 
 import { Login } from './pages/Login';
 import { Registration } from './pages/Registration';
@@ -10,10 +16,25 @@ import { Timer } from './pages/Timer';
 
 import { Header } from './components/Header';
 
+import { getCurrentUser } from './store/auth/async';
+import { useAppDispatch } from './store/hooks';
+
 import './App.scss';
 
 const App: FC = () => {
 	const location = useLocation();
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const token = localStorage.getItem('token');
+
+	useEffect(() => {
+		if (token) {
+			dispatch(getCurrentUser());
+		} else {
+			navigate('login');
+		}
+	}, []);
+
 	const headerRender =
 		location.pathname === '/login' ? (
 			false
@@ -28,13 +49,14 @@ const App: FC = () => {
 			{headerRender}
 			<main>
 				<Routes>
+					<Route path='/' element={<Navigate to='/tasklist' />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/registration' element={<Registration />} />
-					<Route path='/' element={<Navigate to='/tasklist' />} />
 					<Route path='/settings' element={<Settings />} />
 					<Route path='/reports' element={<Reports />} />
 					<Route path='/tasklist' element={<TaskList />} />
 					<Route path='/timer' element={<Timer />} />
+					<Route path='*' element={<h1>Page not found</h1>} />
 				</Routes>
 			</main>
 		</div>

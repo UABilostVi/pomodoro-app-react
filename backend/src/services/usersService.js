@@ -25,7 +25,7 @@ const loginUser = async (password, email) => {
 
 const getProfile = async (id) => {
   const user = await User.findById({ _id: id });
-  return user;
+  return { user: { id: user.id, username: user.username } };
 };
 
 const delProfile = async (id) => {

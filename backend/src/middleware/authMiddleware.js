@@ -10,7 +10,7 @@ const authMiddleware = (req, res, next) => {
     return res.status(401).json({ message: 'Please, provide authorization header' });
   }
 
-  const [, token] = authorization.split(' ');
+  const token = authorization;
 
   if (!token) {
     return res.status(401).json({ message: 'Please, include token to request' });
@@ -24,7 +24,7 @@ const authMiddleware = (req, res, next) => {
     };
     return next();
   } catch (err) {
-    return res.status(401).json({ message: err.message });
+    return res.status(401).json({ message: `${err.message} authMiddle` });
   }
 };
 

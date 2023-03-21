@@ -36,7 +36,7 @@ const Header: FC = () => {
 					<NavItem to='reports' icon='icon-reports' />
 					<NavItem to='settings' icon='icon-settings' />
 					<li className={styles.userInfo}>
-						<div>{userInfo?.username}</div>
+						{userInfo?.username}
 						<button className={styles.logoutButton}>
 							<span className='icon-logout'></span>
 						</button>

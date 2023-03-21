@@ -12,7 +12,7 @@ import { loginUser } from '../../store/auth/async';
 const Login: FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const { loading, error, success, userToken, userInfo } = useAppSelector(
+	const { loading, error, success, userInfo } = useAppSelector(
 		(state) => state.auth
 	);
 	const password = useInput('', { isEmpty: true, minLength: 3, maxLength: 20 });
