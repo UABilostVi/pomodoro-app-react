@@ -20,18 +20,16 @@ import { getCurrentUser } from './store/auth/async';
 import { useAppDispatch } from './store/hooks';
 
 import './App.scss';
+import { PrivateRoute } from './components/PrivateRoute';
 
 const App: FC = () => {
 	const location = useLocation();
-	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const token = localStorage.getItem('token');
 
 	useEffect(() => {
 		if (token) {
 			dispatch(getCurrentUser());
-		} else {
-			navigate('login');
 		}
 	}, []);
 
@@ -50,12 +48,20 @@ const App: FC = () => {
 			<main>
 				<Routes>
 					<Route path='/' element={<Navigate to='/tasklist' />} />
-					<Route path='/login' element={<Login />} />
-					<Route path='/registration' element={<Registration />} />
-					<Route path='/settings' element={<Settings />} />
-					<Route path='/reports' element={<Reports />} />
-					<Route path='/tasklist' element={<TaskList />} />
-					<Route path='/timer' element={<Timer />} />
+					<Route
+						path='/login'
+						element={token ? <Navigate to='/' /> : <Login />}
+					/>
+					<Route
+						path='/registration'
+						element={token ? <Navigate to='/' /> : <Registration />}
+					/>
+					<Route element={<PrivateRoute />}>
+						<Route path='/settings' element={<Settings />} />
+						<Route path='/reports' element={<Reports />} />
+						<Route path='/tasklist' element={<TaskList />} />
+						<Route path='/timer' element={<Timer />} />
+					</Route>
 					<Route path='*' element={<h1>Page not found</h1>} />
 				</Routes>
 			</main>

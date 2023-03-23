@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 
 import styles from './Button.module.scss';
 
@@ -11,7 +11,12 @@ interface IButtonProps {
 	disabled?: boolean;
 }
 
-const Button = ({ type, disabled, onClickHandler, children }: IButtonProps) => {
+const Button: FC<IButtonProps> = ({
+	type,
+	disabled,
+	onClickHandler,
+	children,
+}) => {
 	let classes = styles.button;
 	classes +=
 		type === 'save'

@@ -1,4 +1,6 @@
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import styles from './NavItem.module.scss';
 
 type navLinkClassesProp = {
@@ -13,7 +15,7 @@ type NavItemPropsType = {
 const navLinkClasses = ({ isActive }: navLinkClassesProp) =>
 	isActive ? styles.active : styles.inActive;
 
-const NavItem = (props: NavItemPropsType) => {
+const NavItem: FC<NavItemPropsType> = (props) => {
 	return (
 		<li className={styles.menuItem}>
 			<NavLink to={props.to} className={navLinkClasses}>

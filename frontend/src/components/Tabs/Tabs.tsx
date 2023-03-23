@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './Tabs.module.scss';
 
 interface ITabsProps {
@@ -7,7 +7,7 @@ interface ITabsProps {
 	setToggleState: (value: string) => void;
 }
 
-const Tabs = ({ tabsItems, tabState, setToggleState }: ITabsProps) => {
+const Tabs: FC<ITabsProps> = ({ tabsItems, tabState, setToggleState }) => {
 	function toggleTab(tabName: string) {
 		setToggleState(tabName);
 	}

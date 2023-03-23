@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '../../../common/Button';
@@ -22,7 +22,7 @@ const CategoriesItem = styled.li`
 	}
 `;
 
-const SettingsCategories = () => {
+const SettingsCategories: FC = () => {
 	const categList = categories.map((item) => {
 		return (
 			<CategoriesItem

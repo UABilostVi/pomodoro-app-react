@@ -10,16 +10,24 @@ export const serviceAPI = {
 		return axs.post('users/login', loginPayload);
 	},
 
-	// fetchLogout() {
-	// 	return axs.delete('users/logout', {
-	// 		headers: {
-	// 			Authorization: `${localStorage.getItem('userToken')}`,
-	// 		},
-	// 	});
-	// },
+	fetchDelUser() {
+		return axs.delete('users/me', {
+			headers: {
+				Authorization: `${localStorage.getItem('token')}`,
+			},
+		});
+	},
 
 	fetchRegistr(newUser: IUser) {
 		return axs.post('users/register', newUser);
+	},
+
+	fetchCurrentUser() {
+		return axs.get('users/me', {
+			headers: {
+				Authorization: `${localStorage.getItem('token')}`,
+			},
+		});
 	},
 
 	// fetchCategories() {
@@ -41,14 +49,6 @@ export const serviceAPI = {
 	// fetchAllAuthors() {
 	// 	return axs.get('authors/all');
 	// },
-
-	fetchCurrentUser() {
-		return axs.get('users/me', {
-			headers: {
-				Authorization: `${localStorage.getItem('token')}`,
-			},
-		});
-	},
 
 	// fetchDelCourse(courseId) {
 	// 	return axs.delete(`courses/${courseId}`, {

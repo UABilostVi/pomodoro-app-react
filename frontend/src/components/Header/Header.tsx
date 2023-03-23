@@ -1,15 +1,17 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { NavItem } from './NavItem';
-import classNames from 'classnames';
 
 import styles from './Header.module.scss';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { unSetUser } from '../../store/auth/authSlice';
 
 const Header: FC = () => {
 	const location = useLocation();
-	const [title, setTitle] = useState('');
+	const [title, setTitle] = useState<string>('');
 	const { userInfo } = useAppSelector((state) => state.auth);
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		switch (location.pathname) {
@@ -27,17 +29,30 @@ const Header: FC = () => {
 		}
 	}, [location.pathname]);
 
+	function onLogout() {
+		dispatch(unSetUser());
+		localStorage.removeItem('token');
+		navigate('/login');
+	}
+
 	return (
 		<header className={styles.header}>
 			<h1 className={styles.pageName}>{title}</h1>
 			<nav>
 				<ul className={styles.menu}>
+					{location.pathname === '/tasklist' && (
+						<li>
+							<button className={styles.delButton}>
+								<span className='icon-delete'></span>
+							</button>
+						</li>
+					)}
 					<NavItem to='tasklist' icon='icon-tasklist' />
 					<NavItem to='reports' icon='icon-reports' />
 					<NavItem to='settings' icon='icon-settings' />
 					<li className={styles.userInfo}>
 						{userInfo?.username}
-						<button className={styles.logoutButton}>
+						<button className={styles.logoutButton} onClick={onLogout}>
 							<span className='icon-logout'></span>
 						</button>
 					</li>

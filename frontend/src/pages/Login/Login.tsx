@@ -1,28 +1,17 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Input } from '../../common/Input';
 import { Button } from '../../common/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { useInput } from '../../hooks/useInput';
 import { Watch } from 'react-loader-spinner';
-import { unSetSucces } from '../../store/auth/authSlice';
 import { loginUser } from '../../store/auth/async';
 
 const Login: FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const { loading, error, success, userInfo } = useAppSelector(
-		(state) => state.auth
-	);
-	const password = useInput('', { isEmpty: true, minLength: 3, maxLength: 20 });
-	const email = useInput('', { isEmpty: true, isEmail: true });
-	const isDisabled = !email.inpuValid || !password.inpuValid;
-
-	const loginPayload = {
-		password: password.value,
-		email: email.value,
-	};
+	const { loading, error, userInfo } = useAppSelector((state) => state.auth);
 
 	useEffect(() => {
 		if (userInfo) {
@@ -30,38 +19,66 @@ const Login: FC = () => {
 		}
 	}, [userInfo, navigate, dispatch]);
 
-	function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
-		dispatch(loginUser(loginPayload));
-	}
+	type FormValues = {
+		email: string;
+		password: string;
+	};
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isValid },
+	} = useForm<FormValues>({ mode: 'onBlur' });
+
+	const onSubmit: SubmitHandler<FormValues> = (data) =>
+		dispatch(loginUser(data));
 
 	return (
 		<div className='auth-wrapper'>
-			{error && <div>{error}</div>}
-			<form onSubmit={onSubmit} className='customForm'>
+			<form onSubmit={handleSubmit(onSubmit)} className='customForm'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Login</legend>
 					<Input
-						value={email.value}
 						type='email'
 						labelText='Email'
-						onChange={email.onChange}
-						onBlur={email.onBlur}
 						placeholder='Enter your email'
-						inputName={email}
+						error={errors.email}
+						register={register}
+						registerData={[
+							'email',
+							{
+								required: 'Must be filled',
+								pattern: {
+									value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+									message: 'Invalid e-mail format',
+								},
+							},
+						]}
 					/>
 					<Input
-						value={password.value}
 						type='password'
 						labelText='Password'
-						onChange={password.onChange}
-						onBlur={password.onBlur}
 						placeholder='Enter you password'
-						inputName={password}
+						error={errors.password}
+						register={register}
+						registerData={[
+							'password',
+							{
+								required: 'Must be filled',
+								minLength: {
+									value: 3,
+									message: 'Min length 3',
+								},
+								maxLength: {
+									value: 30,
+									message: 'Max length 30',
+								},
+							},
+						]}
 					/>
 				</fieldset>
 				<div className='buttonsHolder'>
-					<Button type='ok' disabled={isDisabled}>
+					<Button type='ok' disabled={!isValid}>
 						{!loading && 'Login'}
 						{loading && (
 							<Watch wrapperClass='loader' color='white' height={24} />

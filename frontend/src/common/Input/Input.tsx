@@ -1,29 +1,37 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { FieldError } from 'react-hook-form';
 
 import styles from './Input.module.scss';
 
-const Input = (props: any) => {
+type RegisterDataProps = [string, object];
+
+type InputProps = {
+	type: string;
+	labelText: string;
+	placeholder: string;
+	error: FieldError | undefined;
+	register: Function;
+	registerData: RegisterDataProps;
+};
+
+const Input: FC<InputProps> = ({
+	type,
+	labelText,
+	placeholder,
+	error,
+	register,
+	registerData,
+}) => {
 	return (
-		<label className={styles.customInput} htmlFor={props.id}>
-			{props.labelText}
+		<label className={styles.customInput}>
+			{labelText}
 			<input
-				defaultValue={props.defaultValue}
-				value={props.value}
-				name={props.name}
-				onChange={props.onChange}
-				onBlur={props.onBlur}
-				style={props.style}
-				type={props.type}
-				id={props.id}
-				placeholder={props.placeholder}
-				required={props.required}
-				min={props.min}
-				minLength={props.minLength}
-				maxLength={props.maxLength}
-				ref={props.refer}
+				type={type}
+				placeholder={placeholder}
+				{...register(...registerData)}
 			/>
-			{props?.inputName?.isDirty && props?.inputName?.err && (
-				<div className={styles.err}>{props.inputName.err}</div>
+			{error && (
+				<div className={styles.err}>{error?.message || 'Error occured'}</div>
 			)}
 		</label>
 	);

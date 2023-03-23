@@ -29,9 +29,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.options('/*', (_, res) => {
-//   res.sendStatus(200);
-// });
+app.options('/*', (_, res) => {
+  res.sendStatus(200);
+});
 
 app.use('/api/categories', authMiddleware, categoriesRouter);
 app.use('/api/tasks', authMiddleware, tasksRouter);

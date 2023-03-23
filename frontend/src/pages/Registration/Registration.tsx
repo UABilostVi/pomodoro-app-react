@@ -8,26 +8,12 @@ import { Button } from '../../common/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { registerUser } from '../../store/auth/async';
 import { unSetSucces } from '../../store/auth/authSlice';
-
-import { useInput } from '../../hooks/useInput';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 const Registration: FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const { loading, error, success, userInfo } = useAppSelector(
-		(state) => state.auth
-	); //FIXME decide what to do with err from server
-	const username = useInput('', { isEmpty: true, minLength: 3, maxLength: 20 });
-	const password = useInput('', { isEmpty: true, minLength: 3, maxLength: 20 });
-	const email = useInput('', { isEmpty: true, isEmail: true });
-	const isDisabled =
-		!email.inpuValid || !password.inpuValid || !username.inpuValid;
-
-	const newUser = {
-		username: username.value,
-		password: password.value,
-		email: email.value,
-	};
+	const { loading, error, success } = useAppSelector((state) => state.auth); //FIXME decide what to do with err from server
 
 	useEffect(() => {
 		if (success) {
@@ -36,52 +22,88 @@ const Registration: FC = () => {
 		}
 	}, [success, navigate, dispatch]);
 
-	useEffect(() => {
-		if (userInfo) {
-			navigate('/');
-		}
-	}, [userInfo, navigate, dispatch]);
+	type FormValues = {
+		username: string;
+		email: string;
+		password: string;
+	};
 
-	function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
-		dispatch(registerUser(newUser));
-	}
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isValid },
+	} = useForm<FormValues>({ mode: 'onBlur' });
+
+	const onSubmit: SubmitHandler<FormValues> = (data) =>
+		dispatch(registerUser(data));
 
 	return (
 		<div className='auth-wrapper'>
-			<form onSubmit={onSubmit} className='customForm'>
+			<form onSubmit={handleSubmit(onSubmit)} className='customForm'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Registration</legend>
 					<Input
-						value={username.value}
 						type='text'
 						labelText='Username'
-						onChange={username.onChange}
-						onBlur={username.onBlur}
 						placeholder='Add username here'
-						inputName={username}
+						error={errors.username}
+						register={register}
+						registerData={[
+							'username',
+							{
+								required: 'Must be filled',
+								minLength: {
+									value: 3,
+									message: 'Min length 3',
+								},
+								maxLength: {
+									value: 30,
+									message: 'Max length 30',
+								},
+							},
+						]}
 					/>
 					<Input
-						value={email.value}
 						type='email'
 						labelText='Email'
-						onChange={email.onChange}
-						onBlur={email.onBlur}
 						placeholder='Add email here'
-						inputName={email}
+						error={errors.email}
+						register={register}
+						registerData={[
+							'email',
+							{
+								required: 'Must be filled',
+								pattern: {
+									value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+									message: 'Invalid e-mail format',
+								},
+							},
+						]}
 					/>
 					<Input
-						value={password.value}
 						type='password'
 						labelText='Password'
-						onChange={password.onChange}
-						onBlur={password.onBlur}
 						placeholder='Add password here'
-						inputName={password}
+						error={errors.password}
+						register={register}
+						registerData={[
+							'password',
+							{
+								required: 'Must be filled',
+								minLength: {
+									value: 3,
+									message: 'Min length 3',
+								},
+								maxLength: {
+									value: 30,
+									message: 'Max length 30',
+								},
+							},
+						]}
 					/>
 				</fieldset>
 				<div className='buttonsHolder'>
-					<Button type='save' disabled={isDisabled}>
+					<Button type='save' disabled={!isValid}>
 						{!loading && 'Register'}
 						{loading && (
 							<Watch wrapperClass='loader' color='white' height={24} />
