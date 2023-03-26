@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer, useState } from 'react';
 import { v4 } from 'uuid';
 import Notification from './Notification';
+import styles from './Notification.module.scss';
 
 const NotificationContext = createContext();
 
@@ -18,7 +19,7 @@ const NotificationProvider = (props) => {
 
 	return (
 		<NotificationContext.Provider value={dispatch}>
-			<div className={'notification-wrapper'}>
+			<div className={styles.notificationWrapper}>
 				{state.map((note) => {
 					return <Notification dispatch={dispatch} key={note.id} {...note} />;
 				})}

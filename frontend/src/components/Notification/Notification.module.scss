@@ -1,45 +1,58 @@
 @import '../../variables.scss';
 
-.notification {
-  // position: fixed;
+.notificationItem {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0, 0.3);
+  border-radius: 4px;
+  font-size: 22px;
+  color: $white;
+  font-weight: 700;
+  margin-bottom: 20px;
+  animation: SlideLeft 0.4s;
+  animation-fill-mode: forwards;
+  border: 1px solid $white;
   min-height: 72px;
-  // bottom: 32px;
-  // left: $padding-mobile;
-  // right: $padding-mobile;
-  // display: flex;
-  // justify-content: space-between;
-  // border: 1px solid $white;
-  // border-radius: 4px;
-  // font-size: 22px;
-  // color: $white;
-  // font-weight: 700;
-  // z-index: 5;
   @media (min-width: $tablet-width) {
     min-height: 56px;
     font-size: 15px;
-    left: auto;
+  }
+}
+
+.notificationWrapper {
+  position: fixed;
+  bottom: 12px;
+  right: $padding-mobile;
+  left: $padding-mobile;
+  z-index: 9999;
+  @media (min-width: $tablet-width) {
+    width: 456px;
     right: $padding-tablet;
+    left: auto;
   }
   @media (min-width: $desktop-width) {
+    width: 496px;
     right: $padding-desktop;
   }
 }
 
 .message {
-  padding: 0 20px;
   display: flex;
   align-items: center;
+  padding: 0 20px 5px 20px;
   @media (min-width: $tablet-width) {
-    padding: 0 16px;
+    padding: 0 16px 5px 16px;
   }
 }
 
 .icon {
   padding: 0 20px;
   font-size: 48px;
-  mix-blend-mode: normal;
   display: flex;
   align-items: center;
+  padding-bottom: 5px;
   @media (min-width: $tablet-width) {
     font-size: 32px;
   }
@@ -51,11 +64,25 @@
   background-color: transparent;
   border: none;
   padding: 0 20px;
+  padding-bottom: 5px;
   @media (min-width: $tablet-width) {
     cursor: pointer;
     padding: 0 16px;
+    padding-bottom: 5px;
     font-size: 24px;
   }
+}
+
+.exit {
+  animation: SlideRight 0.4s;
+  animation-fill-mode: forwards;
+}
+
+.bar {
+  height: 5px;
+  background-color: $white;
+  position: absolute;
+  bottom: 0;
 }
 
 .error {
@@ -80,31 +107,6 @@
   }
 }
 
-.notDisplay {
-  display: none;
-}
-
-
-
-
-
-
-.notificationItem {
-  box-shadow: 0 0 10px rgba(0,0,0, 0.3);
-  border-radius: 4px;
-  overflow: hidden;
-  font-size: 22px;
-  color: $white;
-  font-weight: 700;
-  margin-bottom: 20px;
-  animation: SlideLeft 0.4s;
-  animation-fill-mode: forwards;
-  width: 300px;
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid $white;
-}
-
 @keyframes SlideLeft {
   0% {
       margin-left: 120%;
@@ -123,26 +125,4 @@
   100% {
       margin-left: 120%;
   }
-}
-
-.notificationItem.exit {
-  animation: SlideRight 0.4s;
-  animation-fill-mode: forwards;
-}
-
-// .notificationItem p {
-//   margin: 0;
-//   padding: 10px;
-// }
-
-.notificationItem .bar {
-  height: 10px;
-}
-
-.notificationItem.success .bar {
-  background-color: #65d266;
-}
-
-.notificationItem.error .bar {
-  background-color: red;
 }
