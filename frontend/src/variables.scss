@@ -28,13 +28,29 @@ $chestnut: #B74E4B;
 $dark-turquoise: #00D4D9;
 $persian-green: #04A5A5;
 
-// main colors
-$prime-bg-color: $madison;
+//buttons & notifications colors
+$save-color: $mount-meadow;
+$save-active-color: $deep-sea;
+$save-hover-color: $mount-meadow-dark;
+
+$ok-color: $malibu;
+$ok-active-color: $pelorous;
+$ok-hover-color: $curious-blue;
+
+$cancel-color: $tomato;
+$cancel-active-color: $mahogany;
+$cancel-hover-color: $dark-coral;
+
+$warning-color: $yellow-orange;
+
+// font colors
 $prime-font-color: $nepal;
-$el-hover-color: $spray;
 $title-font-color: $white;
+
+$el-hover-color: $spray;
 $active-color: $white;
 $lines-color: #425869;
+$prime-bg-color: $madison;
 $disabled-color: $dark-gray;
 
 $tablet-width: 768px;
@@ -45,17 +61,10 @@ $tabs-padding: 16px;
 $button-font-size: 24px;
 $button-tablet-font-size: 18px;
 
-// buttons colors
-// $save-button: $mount-meadow, $mount-meadow-dark, $deep-sea;
-// $ok-button: $malibu, $curious-blue, $pelorous;
-// $cancel-button: $tomato, $dark-coral, $mahogany;
+$padding-mobile: 24px;
+$padding-tablet: 48px;
+$padding-desktop: 108px;
 
-// categories-colors
-// $work-colors: $selective-yellow, $tangerine;
-// $education-colors: $malibu, $curious-blue;
-// $hobby-colors: $amethyst, $deep-lilac;
-// $sport-colors: $terra-cotta, $chestnut;
-// $other-colors: $dark-turquoise, $persian-green;
 
 //priority colors
 // $urgent-colors: $tomato, $dark-coral;

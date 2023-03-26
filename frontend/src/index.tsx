@@ -5,6 +5,7 @@ import './index.scss';
 import App from './App';
 import store from './store';
 import { Provider } from 'react-redux';
+import NotificationProvider from './components/Notification/NotificationProvider';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
 	<Provider store={store}>
 		<BrowserRouter>
-			<App />
+			<NotificationProvider>
+				<App />
+			</NotificationProvider>
 		</BrowserRouter>
 	</Provider>
 );

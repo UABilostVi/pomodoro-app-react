@@ -1,0 +1,148 @@
+@import '../../variables.scss';
+
+.notification {
+  // position: fixed;
+  min-height: 72px;
+  // bottom: 32px;
+  // left: $padding-mobile;
+  // right: $padding-mobile;
+  // display: flex;
+  // justify-content: space-between;
+  // border: 1px solid $white;
+  // border-radius: 4px;
+  // font-size: 22px;
+  // color: $white;
+  // font-weight: 700;
+  // z-index: 5;
+  @media (min-width: $tablet-width) {
+    min-height: 56px;
+    font-size: 15px;
+    left: auto;
+    right: $padding-tablet;
+  }
+  @media (min-width: $desktop-width) {
+    right: $padding-desktop;
+  }
+}
+
+.message {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  @media (min-width: $tablet-width) {
+    padding: 0 16px;
+  }
+}
+
+.icon {
+  padding: 0 20px;
+  font-size: 48px;
+  mix-blend-mode: normal;
+  display: flex;
+  align-items: center;
+  @media (min-width: $tablet-width) {
+    font-size: 32px;
+  }
+}
+
+.closeButton {
+  color: $white;
+  font-size: 32px;
+  background-color: transparent;
+  border: none;
+  padding: 0 20px;
+  @media (min-width: $tablet-width) {
+    cursor: pointer;
+    padding: 0 16px;
+    font-size: 24px;
+  }
+}
+
+.error {
+  background-color: rgba($cancel-color, 0.85);
+}
+
+.info {
+  background-color: rgba($ok-color, 0.85);
+}
+
+.success {
+  background-color: rgba($save-color, 0.85);
+}
+
+.warning {
+  background-color: rgba($warning-color, 0.85);
+}
+
+.warning, .success, .info, .error {
+  .icon {
+    background-color: rgba($white, 0.2);
+  }
+}
+
+.notDisplay {
+  display: none;
+}
+
+
+
+
+
+
+.notificationItem {
+  box-shadow: 0 0 10px rgba(0,0,0, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 22px;
+  color: $white;
+  font-weight: 700;
+  margin-bottom: 20px;
+  animation: SlideLeft 0.4s;
+  animation-fill-mode: forwards;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid $white;
+}
+
+@keyframes SlideLeft {
+  0% {
+      margin-left: 120%;
+  }
+
+  100% {
+      margin-left: 0;
+  }
+}
+
+@keyframes SlideRight {
+  0% {
+      margin-left: 0;
+  }
+
+  100% {
+      margin-left: 120%;
+  }
+}
+
+.notificationItem.exit {
+  animation: SlideRight 0.4s;
+  animation-fill-mode: forwards;
+}
+
+// .notificationItem p {
+//   margin: 0;
+//   padding: 10px;
+// }
+
+.notificationItem .bar {
+  height: 10px;
+}
+
+.notificationItem.success .bar {
+  background-color: #65d266;
+}
+
+.notificationItem.error .bar {
+  background-color: red;
+}

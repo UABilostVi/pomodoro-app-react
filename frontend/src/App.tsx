@@ -1,11 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import {
-	Routes,
-	Route,
-	Navigate,
-	useLocation,
-	useNavigate,
-} from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 import { Login } from './pages/Login';
 import { Registration } from './pages/Registration';

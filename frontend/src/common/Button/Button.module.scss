@@ -1,32 +1,33 @@
 @import '../../variables.scss';
 
 .save {
-  background-color: $mount-meadow;
+  // background-color: $mount-meadow;
+  background-color: $save-color;
   &:hover {
-    background-color: $mount-meadow-dark;
+    background-color: $save-hover-color;
   }
   &:active {
-    background-color: $deep-sea;
+    background-color: $save-active-color;
   }
 }
 
 .cancel {
-  background-color: $tomato;
+  background-color: $cancel-color;
   &:hover {
-    background-color: $dark-coral;
+    background-color: $cancel-hover-color;
   }
   &:active {
-    background-color: $mahogany;
+    background-color: $cancel-active-color;
   }
 }
 
 .ok {
-  background-color: $malibu;
+  background-color: $ok-color;
   &:hover {
-    background-color: $curious-blue;
+    background-color: $ok-hover-color;
   }
   &:active {
-    background-color: $pelorous;
+    background-color: $ok-active-color;
   }
 }
 

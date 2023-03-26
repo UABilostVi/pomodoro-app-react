@@ -7,11 +7,14 @@ import { Button } from '../../common/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { Watch } from 'react-loader-spinner';
 import { loginUser } from '../../store/auth/async';
+import { Notification } from '../../components/Notification';
+import { useNotification } from '../../components/Notification/NotificationProvider';
 
 const Login: FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const { loading, error, userInfo } = useAppSelector((state) => state.auth);
+	const dispatchNotif = useNotification();
 
 	useEffect(() => {
 		if (userInfo) {
@@ -33,8 +36,17 @@ const Login: FC = () => {
 	const onSubmit: SubmitHandler<FormValues> = (data) =>
 		dispatch(loginUser(data));
 
+	useEffect(() => {
+		dispatchNotif({
+			type: 'error',
+			message: error,
+			title: 'Wrong Request',
+		});
+	}, [error, dispatchNotif]);
+
 	return (
 		<div className='auth-wrapper'>
+			{/* {error && <Notification />} */}
 			<form onSubmit={handleSubmit(onSubmit)} className='customForm'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Login</legend>

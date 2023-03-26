@@ -15,7 +15,6 @@ export const getCurrentUser = createAsyncThunk(
 			const response = await serviceAPI.fetchCurrentUser();
 			dispatch(setUser(response.data.user));
 		} catch (err: any) {
-			// FIXME errors types
 			if (err.response && err.response.data.message) {
 				return rejectWithValue(err.response.data.message);
 			} else {
@@ -31,7 +30,6 @@ export const registerUser = createAsyncThunk(
 		try {
 			await serviceAPI.fetchRegistr(user);
 		} catch (err: any) {
-			// FIXME errors types
 			if (err.response && err.response.data.message) {
 				return rejectWithValue(err.response.data.message);
 			} else {
@@ -49,7 +47,6 @@ export const loginUser = createAsyncThunk(
 			localStorage.setItem('token', response.data.token);
 			dispatch(setUser(response.data.user));
 		} catch (err: any) {
-			// FIXME errors types
 			if (err.response && err.response.data.message) {
 				return rejectWithValue(err.response.data.message);
 			} else {
