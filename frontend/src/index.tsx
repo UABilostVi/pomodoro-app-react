@@ -5,7 +5,7 @@ import './index.scss';
 import App from './App';
 import store from './store';
 import { Provider } from 'react-redux';
-import NotificationProvider from './components/Notification/NotificationProvider';
+import { NotificationProvider } from './components/Notification';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement

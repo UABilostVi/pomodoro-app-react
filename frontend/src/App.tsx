@@ -9,12 +9,12 @@ import { TaskList } from './pages/TaskList';
 import { Timer } from './pages/Timer';
 
 import { Header } from './components/Header';
+import { PrivateRoute } from './components/PrivateRoute';
 
 import { getCurrentUser } from './store/auth/async';
 import { useAppDispatch } from './store/hooks';
 
 import './App.scss';
-import { PrivateRoute } from './components/PrivateRoute';
 
 const App: FC = () => {
 	const location = useLocation();

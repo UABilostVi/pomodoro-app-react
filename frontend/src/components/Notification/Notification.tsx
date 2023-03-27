@@ -1,17 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import styles from './Notification.module.scss';
+import { NotificationProps } from './NotificationProvider';
 
-type NotificationType = 'info' | 'error' | 'success' | 'warning';
+const Notification: FC<NotificationProps> = ({
+	message,
+	type,
+	dispatch,
+	id,
+}) => {
+	const [exit, setExit] = useState<boolean>(false);
+	const [width, setWidth] = useState<number>(0);
+	const [intervalID, setIntervalID] = useState<NodeJS.Timer>();
 
-// type NotificationProps = {
-// 	message: string;
-// 	type: NotificationType;
-// };
+	useEffect(() => {
+		if (width === 100) {
+			handleCloseNotification();
+		}
+	}, [width]);
 
-const Notification = (props: any) => {
-	const [exit, setExit] = useState(false);
-	const [width, setWidth] = useState(0);
-	const [intervalID, setIntervalID] = useState<any>(null);
+	useEffect(() => {
+		handleStartTimer();
+	}, []);
 
 	const handleStartTimer = () => {
 		const id = setInterval(() => {
@@ -36,34 +45,23 @@ const Notification = (props: any) => {
 		handlePauseTimer();
 		setExit(true);
 		setTimeout(() => {
-			props.dispatch({
+			dispatch({
 				type: 'REMOVE_NOTIFICATION',
-				id: props.id,
+				id: id,
 			});
 		}, 200);
 	};
-
-	useEffect(() => {
-		if (width === 100) {
-			// Close notification
-			handleCloseNotification();
-		}
-	}, [width]);
-
-	useEffect(() => {
-		handleStartTimer();
-	}, []);
 
 	return (
 		<div
 			onMouseEnter={handlePauseTimer}
 			onMouseLeave={handleStartTimer}
-			className={`${styles.notificationItem} ${styles[props.type]} ${
+			className={`${styles.notificationItem} ${styles[type]} ${
 				exit ? 'exit' : ''
 			}`}
 		>
-			<div className={`${styles.icon} icon-tomato-${props.type}`}></div>
-			<div className={styles.message}>{props.message}</div>
+			<div className={`${styles.icon} icon-tomato-${type}`}></div>
+			<div className={styles.message}>{message}</div>
 			<button
 				className={`${styles.closeButton} icon-close`}
 				onClick={handleCloseNotification}

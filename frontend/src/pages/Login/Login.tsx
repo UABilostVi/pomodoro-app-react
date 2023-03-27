@@ -1,26 +1,36 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Watch } from 'react-loader-spinner';
+
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import { Input } from '../../common/Input';
 import { Button } from '../../common/Button';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { Watch } from 'react-loader-spinner';
+
 import { loginUser } from '../../store/auth/async';
-// import { useNotification } from '../../components/Notification/NotificationProvider';
+import { useNotification } from '../../components/Notification/NotificationProvider';
 
 const Login: FC = () => {
 	const dispatch = useAppDispatch();
+	const dispatchNotification = useNotification();
 	const navigate = useNavigate();
 	const { loading, error, userInfo } = useAppSelector((state) => state.auth);
-	// const dispatchNotif = useNotification();
-	console.log('login');
 
 	useEffect(() => {
 		if (userInfo) {
 			navigate('/');
 		}
-	}, [userInfo, navigate, dispatch]);
+	}, [userInfo]);
+
+	useEffect(() => {
+		if (error) {
+			dispatchNotification({
+				type: 'error',
+				message: error,
+			});
+		}
+	}, [error]);
 
 	type FormValues = {
 		email: string;
@@ -35,15 +45,6 @@ const Login: FC = () => {
 
 	const onSubmit: SubmitHandler<FormValues> = (data) =>
 		dispatch(loginUser(data));
-
-	// useEffect(() => {
-	// 	if (error) {
-	// 		dispatchNotif({
-	// 			type: 'error',
-	// 			message: error,
-	// 		});
-	// 	}
-	// }, [error, dispatchNotif]);
 
 	return (
 		<div className='auth-wrapper'>

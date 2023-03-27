@@ -1,26 +1,37 @@
 import React, { FC, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Watch } from 'react-loader-spinner';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Input } from '../../common/Input';
 import { Button } from '../../common/Button';
+import { useNotification } from '../../components/Notification/NotificationProvider';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { registerUser } from '../../store/auth/async';
 import { unSetSucces } from '../../store/auth/authSlice';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
 const Registration: FC = () => {
 	const dispatch = useAppDispatch();
+	const dispatchNotification = useNotification();
 	const navigate = useNavigate();
-	const { loading, error, success } = useAppSelector((state) => state.auth); //FIXME decide what to do with err from server
+	const { loading, error, success } = useAppSelector((state) => state.auth);
 
 	useEffect(() => {
 		if (success) {
 			dispatch(unSetSucces());
 			navigate('/login');
 		}
-	}, [success, navigate, dispatch]);
+	}, [success]);
+
+	useEffect(() => {
+		if (error) {
+			dispatchNotification({
+				type: 'error',
+				message: error,
+			});
+		}
+	}, [error]);
 
 	type FormValues = {
 		username: string;
