@@ -37,6 +37,9 @@ h1 {
   font-size: 28px;
   font-weight: 300;
   text-align: center;
+  @media (min-width: $tablet-width) {
+    font-size: 22px;
+  }
 }
 
 .buttonsHolder {
