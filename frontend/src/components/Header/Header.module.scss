@@ -39,6 +39,10 @@
   border: 1px solid $lines-color;
   border-radius: 10px;
   padding: 10px;
+  @media (min-width:$tablet-width) {
+    padding: 5px;
+    font-size: 16px;
+  }
 }
 
 .logoutButton {
@@ -46,18 +50,24 @@
   border: none;
   background-color: transparent;
   display: flex;
-  font-size: 24px;
+  font-size: $nav-font-size;
   color: $white;
+  @media (min-width:$tablet-width) {
+    font-size: $nav-font-size-tablet;
+  }
 }
 
 .delButton {
-  font-size: 24px;
+  font-size: $nav-font-size;
   color: $prime-font-color;
   border: none;
   background-color: transparent;
   cursor: pointer;
   &:hover {
     color: $el-hover-color;
+  }
+  @media (min-width:$tablet-width) {
+    font-size: $nav-font-size-tablet;
   }
 }
  

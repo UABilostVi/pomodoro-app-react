@@ -1,0 +1,28 @@
+@import '../../../variables.scss';
+
+.itemsWrapper {
+  display: grid;
+  margin: 0 auto;
+  gap: 30px;
+  @media (min-width:$tablet-width) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 45px;
+    row-gap: 64px;
+  }
+  @media (min-width:$desktop-width) {
+    column-gap: 64px;
+  }
+}
+
+.graph {
+  background-color: pink;
+  height: 72px;
+}
+
+.settingsContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 64px;
+}
+

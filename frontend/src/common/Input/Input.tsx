@@ -9,7 +9,7 @@ type InputProps = {
 	type: string;
 	labelText: string;
 	placeholder: string;
-	error: FieldError | undefined;
+	error?: FieldError;
 	register: Function;
 	registerData: RegisterDataProps;
 };

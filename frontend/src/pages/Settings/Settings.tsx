@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { Tabs } from '../../components/Tabs';
 
 import { SettingsCategories } from './SettingsCategories';
+import { SettingsPomodoros } from './SettingsPomodoros';
 
 import styles from './Settings.module.scss';
 
@@ -16,7 +17,7 @@ const Settings: FC = () => {
 				setToggleState={updateToggleState}
 			/>
 			{toggleState === 'Categories' && <SettingsCategories />}
-			{toggleState === 'Pomodoros' && <div>Pomodoros</div>}
+			{toggleState === 'Pomodoros' && <SettingsPomodoros />}
 		</div>
 	);
 };

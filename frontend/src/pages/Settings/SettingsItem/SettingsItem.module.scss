@@ -1,0 +1,85 @@
+@import '../../../variables.scss';
+
+.item {
+  font-size: 16px;
+  position: relative;
+  padding-left: 32px;
+  &::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: yellow;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 2px;
+  }
+  @media (min-width:$tablet-width) {
+    font-size: 14px;
+  }
+}
+
+
+.itemTitle {
+  text-transform: uppercase;
+}
+
+.markedText, .itemTitle {
+  color: $white;
+}
+
+.inputNumber {
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  color: $prime-font-color;
+  text-align: center;
+  max-width: 25px;
+}
+
+.inputWrapper {
+  width: 160px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $lines-color;
+  display: flex;
+  justify-content: space-between;
+  &:hover {
+    border-bottom: 1px solid $el-hover-color;
+  } 
+}
+
+.itemContext {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  color: $prime-font-color;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: $el-hover-color;
+  }
+  &:disabled {
+    color: $gray;
+  }
+}
+
+.workTime::before {
+  background-color: $worktime-color;
+}
+
+.workIter::before {
+  background-color: $workiteration-color;
+}
+
+.shortBreak::before {
+  background-color: $shortbreak-color;
+}
+
+.longBreak::before {
+  background-color: $longbreak-color;
+}

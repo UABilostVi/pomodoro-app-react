@@ -14,9 +14,9 @@
 }
 
 .menuItem {
-  font-size: 24px;
+  font-size: $nav-font-size;
   @media (min-width:$tablet-width) {
-    font-size: 20px;
+    font-size: $nav-font-size-tablet;
   }
   a {
     text-decoration: none;
