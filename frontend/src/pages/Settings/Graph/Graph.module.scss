@@ -1,0 +1,69 @@
+@import '../../../variables.scss';
+
+.graph {
+  margin-bottom: 20px;
+}
+
+.title {
+  color: $white;
+  text-align: center;
+}
+
+.graphBar {
+  height: 10px;
+  display: flex;
+}
+
+.longBreak {
+  background-color: $longbreak-color;
+}
+
+.shortBreak {
+  background-color: $shortbreak-color;
+}
+
+.workTime {
+  background-color: $worktime-color;
+}
+
+.longBreak, .shortBreak, .workTime, .marker {
+  transition: all 0.2s ease-out;
+}
+
+.marker {
+  position: absolute;
+  font-size: 12px;
+  &:before {
+    content: '';
+    width: 4px;
+    height: 5px;
+    background-color: $workiteration-color;
+    position: absolute;
+    border-radius: 50%;
+  }
+}
+
+.hoursMarker {
+  top: 15px;
+  &:before {
+    top: -5px;
+  }
+}
+
+.graphTimeMarker {
+  &:before {
+    top: 20px;
+  }
+}
+
+.markersHolder {
+  position: relative;
+  height: 32px;
+}
+
+.fullTimeMarker {
+  right: 0;
+  &:before {
+    right: 0;
+  }
+}

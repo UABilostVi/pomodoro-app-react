@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from '../../../common/Button';
@@ -23,6 +24,12 @@ const CategoriesItem = styled.li`
 `;
 
 const SettingsCategories: FC = () => {
+	const navigate = useNavigate();
+
+	function onClickHandler() {
+		navigate('/tasklist');
+	}
+
 	const categList = categories.map((item) => {
 		return (
 			<CategoriesItem
@@ -40,7 +47,9 @@ const SettingsCategories: FC = () => {
 			<div className={styles.settingsContent}>
 				<ul className={styles.categList}>{categList}</ul>
 				<div className='buttonsHolder'>
-					<Button type='ok'>Go to Tasks</Button>
+					<Button type='ok' onClickHandler={onClickHandler}>
+						Go to Tasks
+					</Button>
 				</div>
 			</div>
 		</>

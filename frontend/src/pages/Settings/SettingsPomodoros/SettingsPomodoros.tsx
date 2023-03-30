@@ -1,6 +1,8 @@
 import React, { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../../../common/Button';
+import { Graph } from '../Graph';
 import { SettingsItem } from '../SettingsItem';
 
 import styles from './SettingsPomodoros.module.scss';
@@ -10,6 +12,11 @@ const SettingsPomodoros: FC = () => {
 	const [workIter, setWorkIter] = useState(3);
 	const [shortBreak, setShortBreak] = useState(3);
 	const [longBreak, setLongBreak] = useState(15);
+	const navigate = useNavigate();
+
+	function onClickHandler() {
+		navigate('/tasklist');
+	}
 
 	return (
 		<>
@@ -57,11 +64,16 @@ const SettingsPomodoros: FC = () => {
 						step={5}
 					/>
 				</div>
-				<div className={styles.graph}>
-					lksdjfsldkjfskldfjslkdfjslkdfjsdlkfjslkdf
-				</div>
+				<Graph
+					workTime={workTime}
+					workIter={workIter}
+					shortBreak={shortBreak}
+					longBreak={longBreak}
+				/>
 				<div className='buttonsHolder'>
-					<Button type='ok'>Go to Tasks</Button>
+					<Button type='ok' onClickHandler={onClickHandler}>
+						Go to Tasks
+					</Button>
 					<Button type='save'>Save</Button>
 				</div>
 			</div>
