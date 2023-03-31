@@ -1,0 +1,82 @@
+@import '../../variables.scss';
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.5s;
+  pointer-events: none;
+  backdrop-filter: blur(5px);
+  @media (min-width: $tablet-width) {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.activeModal {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modalContent {
+  height: 100%;
+  width: 100%;
+  background-color: $prime-bg-color;
+  padding: 120px 96px;
+  position: relative;
+  transition: 0.4s all;
+  transform: scale(0.5);
+  @media (min-width: $tablet-width) {
+    height: auto;
+    max-width: 520px;
+    padding: 40px 48px;
+  }
+}
+
+.activeModalContent {
+  transform: scale(1);
+}
+
+.buttonsHolder {
+  display: flex;
+  justify-content: end;
+  gap: 32px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  @media (min-width: $tablet-width) {
+    gap: 16px;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.button {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: $prime-font-color;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  &:hover {
+    color: $el-hover-color;
+  }
+  &:disabled {
+    color: $gray;
+  }
+  @media (min-width: $tablet-width) {
+    font-size: 20px;
+  }
+}
+
+.title {
+  color: $white;
+  text-align: center;
+  font-size: 28px;
+}

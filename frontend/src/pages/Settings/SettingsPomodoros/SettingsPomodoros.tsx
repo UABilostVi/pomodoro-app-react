@@ -14,10 +14,6 @@ const SettingsPomodoros: FC = () => {
 	const [longBreak, setLongBreak] = useState(15);
 	const navigate = useNavigate();
 
-	function onClickHandler() {
-		navigate('/tasklist');
-	}
-
 	return (
 		<>
 			<h2 className='subtitle'>Pomodoros settings</h2>
@@ -71,7 +67,7 @@ const SettingsPomodoros: FC = () => {
 					longBreak={longBreak}
 				/>
 				<div className='buttonsHolder'>
-					<Button type='ok' onClickHandler={onClickHandler}>
+					<Button type='ok' onClickHandler={() => navigate('/tasklist')}>
 						Go to Tasks
 					</Button>
 					<Button type='save'>Save</Button>

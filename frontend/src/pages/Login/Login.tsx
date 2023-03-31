@@ -17,6 +17,11 @@ const Login: FC = () => {
 	const navigate = useNavigate();
 	const { loading, error, userInfo } = useAppSelector((state) => state.auth);
 
+	type FormValues = {
+		email: string;
+		password: string;
+	};
+
 	useEffect(() => {
 		if (userInfo) {
 			navigate('/');
@@ -31,11 +36,6 @@ const Login: FC = () => {
 			});
 		}
 	}, [error]);
-
-	type FormValues = {
-		email: string;
-		password: string;
-	};
 
 	const {
 		register,

@@ -7,7 +7,7 @@ type RegisterDataProps = [string, object];
 
 type InputProps = {
 	type: string;
-	labelText: string;
+	labelText?: string;
 	placeholder: string;
 	error?: FieldError;
 	register: Function;
