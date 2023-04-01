@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Watch } from 'react-loader-spinner';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -114,7 +114,7 @@ const Registration: FC = () => {
 					/>
 				</fieldset>
 				<div className='buttonsHolder'>
-					<Button type='save' disabled={!isValid}>
+					<Button buttonType='submit' customType='save' disabled={!isValid}>
 						{!loading && 'Register'}
 						{loading && (
 							<Watch wrapperClass='loader' color='white' height={24} />

@@ -2,32 +2,40 @@ import React, { FC, MouseEventHandler } from 'react';
 
 import styles from './Button.module.scss';
 
-type ButtonType = 'save' | 'ok' | 'cancel';
+type CustomType = 'save' | 'ok' | 'cancel';
+type ButtonType = 'submit' | 'reset' | 'button' | undefined;
 
 interface IButtonProps {
-	type: ButtonType;
+	buttonType: ButtonType;
+	customType: CustomType;
 	onClickHandler?: MouseEventHandler<HTMLButtonElement>;
 	children: React.ReactNode;
 	disabled?: boolean;
 }
 
 const Button: FC<IButtonProps> = ({
-	type,
+	customType,
 	disabled,
 	onClickHandler,
 	children,
+	buttonType,
 }) => {
 	let classes = styles.button;
 	classes +=
-		type === 'save'
+		customType === 'save'
 			? ` ${styles.save}`
-			: type === 'ok'
+			: customType === 'ok'
 			? ` ${styles.ok}`
-			: type === 'cancel'
+			: customType === 'cancel'
 			? ` ${styles.cancel}`
 			: '';
 	return (
-		<button className={classes} onClick={onClickHandler} disabled={disabled}>
+		<button
+			type={buttonType}
+			className={classes}
+			onClick={onClickHandler}
+			disabled={disabled}
+		>
 			{children}
 		</button>
 	);

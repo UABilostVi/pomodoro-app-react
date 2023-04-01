@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../../../common/Button';
@@ -67,10 +67,16 @@ const SettingsPomodoros: FC = () => {
 					longBreak={longBreak}
 				/>
 				<div className='buttonsHolder'>
-					<Button type='ok' onClickHandler={() => navigate('/tasklist')}>
+					<Button
+						buttonType='button'
+						customType='ok'
+						onClickHandler={() => navigate('/tasklist')}
+					>
 						Go to Tasks
 					</Button>
-					<Button type='save'>Save</Button>
+					<Button buttonType='button' customType='save'>
+						Save
+					</Button>
 				</div>
 			</div>
 		</>

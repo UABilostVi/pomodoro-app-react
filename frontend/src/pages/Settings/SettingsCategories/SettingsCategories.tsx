@@ -1,13 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { CSSTransition, Transition } from 'react-transition-group';
 
 import { Button } from '../../../common/Button';
+import { Input } from '../../../common/Input';
+
+import { Modal } from '../../../components/Modal';
 
 import styles from './SettingsCategories.module.scss';
-import { Modal } from '../../../components/Modal';
-import { Input } from '../../../common/Input';
 
 const categories = [
 	{ id: 1, name: 'Work', color: 'orange' },
@@ -20,20 +22,20 @@ interface ICategProps {
 	color: string;
 }
 
-const CategoriesItem = styled.li`
-	:before {
-		background-color: ${(props: ICategProps) => props.color};
-	}
-`;
+type FormValues = {
+	name: string;
+	color: string;
+};
 
 const SettingsCategories: FC = () => {
 	const navigate = useNavigate();
 	const [activeModal, setActiveModal] = useState(false);
 
-	type FormValues = {
-		name: string;
-		color: string;
-	};
+	const CategoriesItem = styled.li`
+		:before {
+			background-color: ${(props: ICategProps) => props.color};
+		}
+	`;
 
 	const categList = categories.map((item) => {
 		return (
@@ -50,7 +52,7 @@ const SettingsCategories: FC = () => {
 		register,
 		handleSubmit,
 		formState: { errors, isValid },
-	} = useForm<FormValues>({ mode: 'onBlur' });
+	} = useForm<FormValues>({ mode: 'onChange' });
 
 	return (
 		<>
@@ -58,47 +60,70 @@ const SettingsCategories: FC = () => {
 			<div className={styles.settingsContent}>
 				<ul className={styles.categList}>{categList}</ul>
 				<div className='buttonsHolder'>
-					<Button type='ok' onClickHandler={() => navigate('/tasklist')}>
+					<Button
+						buttonType='button'
+						customType='ok'
+						onClickHandler={() => navigate('/tasklist')}
+					>
 						Go to Tasks
 					</Button>
-					<Button type='save' onClickHandler={() => setActiveModal(true)}>
+					<Button
+						buttonType='button'
+						customType='save'
+						onClickHandler={() => setActiveModal(true)}
+					>
 						Add new
 					</Button>
 				</div>
 			</div>
-
-			<Modal
-				active={activeModal}
-				setActive={setActiveModal}
-				title='Add category'
-				isValid={isValid}
-			>
-				<Input
-					type='text'
-					labelText='Name:'
-					placeholder='Enter category name'
-					error={errors.name}
-					register={register}
-					registerData={[
-						'name',
-						{
-							required: 'Must be filled',
-							minLength: {
-								value: 3,
-								message: 'Min length 3',
-							},
-							maxLength: {
-								value: 30,
-								message: 'Max length 30',
-							},
-						},
-					]}
-				/>
-				<label className={styles.colorLabel}>
-					Color:
-					<input type='color' className={styles.colorInput} />
-				</label>
-			</Modal>
+			<Transition in={activeModal} timeout={200} mountOnEnter unmountOnExit>
+				{(state) => {
+					return (
+						<Modal
+							transitionClass={state}
+							setActive={setActiveModal}
+							title='Add category'
+							isValid={isValid}
+							handleSubmit={handleSubmit}
+						>
+							<Input
+								type='text'
+								labelText='Name:'
+								placeholder='Enter category name'
+								error={errors.name}
+								register={register}
+								registerData={[
+									'name',
+									{
+										required: 'Must be filled',
+										minLength: {
+											value: 3,
+											message: 'Min length 3',
+										},
+										maxLength: {
+											value: 30,
+											message: 'Max length 30',
+										},
+									},
+								]}
+							/>
+							<Input
+								type='color'
+								labelText='Choose color:'
+								placeholder='Enter color'
+								error={errors.color}
+								register={register}
+								registerData={[
+									'color',
+									{
+										required: 'Must be filled',
+									},
+								]}
+							/>
+						</Modal>
+					);
+				}}
+			</Transition>
 		</>
 	);
 };

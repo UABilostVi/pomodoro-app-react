@@ -91,7 +91,7 @@ const Login: FC = () => {
 					/>
 				</fieldset>
 				<div className='buttonsHolder'>
-					<Button type='ok' disabled={!isValid}>
+					<Button buttonType='submit' customType='ok' disabled={!isValid}>
 						{!loading && 'Login'}
 						{loading && (
 							<Watch wrapperClass='loader' color='white' height={24} />

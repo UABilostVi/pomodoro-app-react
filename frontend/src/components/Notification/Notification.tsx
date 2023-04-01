@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC } from 'react';
 import styles from './Notification.module.scss';
 import { NotificationProps } from './NotificationProvider';
 

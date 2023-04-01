@@ -1,5 +1,23 @@
 @import '../../variables.scss';
 
+@keyframes show-modal-content {
+  0% {
+    transform: scale(0.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes show-modal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -9,28 +27,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: 0.5s;
-  pointer-events: none;
   backdrop-filter: blur(5px);
+  &.entering {
+    animation: show-modal 0.5s forwards;
+  }
+  &.exiting {
+    animation: show-modal 0.5s reverse;
+  }
   @media (min-width: $tablet-width) {
     background-color: rgba(0, 0, 0, 0.4);
   }
-}
-
-.activeModal {
-  opacity: 1;
-  pointer-events: all;
 }
 
 .modalContent {
   height: 100%;
   width: 100%;
   background-color: $prime-bg-color;
-  padding: 120px 96px;
+  padding: 48px 96px;
   position: relative;
-  transition: 0.4s all;
-  transform: scale(0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  &.entering {
+    animation: show-modal-content 0.5s forwards;
+  }
+  &.exiting {
+    animation: show-modal-content 0.5s reverse;
+  }
   @media (min-width: $tablet-width) {
     height: auto;
     max-width: 520px;
@@ -38,21 +61,23 @@
   }
 }
 
-.activeModalContent {
-  transform: scale(1);
-}
-
 .buttonsHolder {
-  display: flex;
-  justify-content: end;
-  gap: 32px;
-  position: absolute;
-  top: 24px;
-  right: 24px;
+  display: none;
   @media (min-width: $tablet-width) {
+    display: flex;
+    justify-content: end;
+    position: absolute;
     gap: 16px;
     top: 20px;
     right: 20px;
+  }
+}
+
+.phoneButtonsHolder {
+  display: flex;
+  gap: 20px;
+  @media (min-width: $tablet-width) {
+    display: none;
   }
 }
 
