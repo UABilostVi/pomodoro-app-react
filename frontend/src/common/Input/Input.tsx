@@ -3,12 +3,12 @@ import { FieldError } from 'react-hook-form';
 
 import styles from './Input.module.scss';
 
-type RegisterDataProps = [string, object];
+type RegisterDataProps = [string, object?];
 
 type InputProps = {
 	type: string;
 	labelText?: string;
-	placeholder: string;
+	placeholder?: string;
 	error?: FieldError;
 	register: Function;
 	registerData: RegisterDataProps;

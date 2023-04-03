@@ -4,6 +4,14 @@ import { Transition } from 'react-transition-group';
 
 import { Input } from '../../../common/Input';
 import { Modal } from '../../../components/Modal';
+import { Select } from '../../../common/Select';
+import { Estimation } from './Estimation';
+
+const categories = [
+	{ id: '1', name: 'Work', color: 'orange' },
+	{ id: '2', name: 'Educ', color: 'blue' },
+	{ id: '3', name: 'Hobby', color: 'purple' },
+];
 
 type TaskModalProps = {
 	activeModal: boolean;
@@ -14,6 +22,8 @@ type FormValues = {
 	title: string;
 	description: string;
 	deadline: string;
+	category: string;
+	estimation: number;
 };
 
 const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
@@ -76,6 +86,18 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 								},
 							]}
 						/>
+						<Select
+							labelText='Category:'
+							categories={categories}
+							register={register}
+							registerData={[
+								'category',
+								{
+									required: 'Must be filled',
+								},
+							]}
+							error={errors.category}
+						/>
 						<Input
 							type='date'
 							labelText='Deadline:'
@@ -84,6 +106,16 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 							register={register}
 							registerData={[
 								'deadline',
+								{
+									required: 'Must be filled',
+								},
+							]}
+						/>
+						<Estimation
+							labelText='Estimation:'
+							register={register}
+							registerData={[
+								'estimation',
 								{
 									required: 'Must be filled',
 								},

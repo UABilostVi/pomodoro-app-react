@@ -1,0 +1,34 @@
+@import '../../variables.scss';
+
+.customSelect {
+  color: $white;
+  text-transform: uppercase;
+  font-size: 14px;
+  display: block;
+  position: relative;
+  select {
+    cursor: pointer;
+    font-size: 16px;
+    color: $prime-font-color;
+    padding: 8px 0;
+    display: block;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid $lines-color;
+    background-color: transparent;
+    margin-bottom: 15px;
+  }
+  option {
+    background-color: $lines-color;
+    max-width: 100%;
+  }
+}
+
+.err {
+  color: red;
+  font-size: 9px;
+  position: absolute;
+  bottom: -11px;
+  text-transform: none;
+}
+

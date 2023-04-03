@@ -76,13 +76,3 @@ h1 {
   justify-content: center;
   align-items: center;
 }
-
-::-webkit-calendar-picker-indicator { 
-  background: transparent;
-  position: absolute;
-  width: 100%;
-}
-
-input[type=date] {
-  position: relative;
-}

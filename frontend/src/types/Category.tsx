@@ -1,7 +1,7 @@
 export interface ICategory {
-	_id?: String;
-	name: String;
-	color: String;
-	createdBy: Date;
-	createdDate: Date;
+	id?: string;
+	name: string;
+	color: string;
+	createdBy?: Date;
+	createdDate?: Date;
 }

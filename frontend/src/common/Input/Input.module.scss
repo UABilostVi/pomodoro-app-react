@@ -20,6 +20,16 @@
   input[type=color]{
     padding: 0;
     height: 60px;
+    cursor: pointer;
+  }
+
+  input[type=date] {
+    position: relative;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
   }
 }
 
@@ -39,15 +49,17 @@ input::-webkit-inner-spin-button {
   appearance: none;
 }
 
- input[type=number] {
-    -moz-appearance: textfield;
-    -webkit-appearance: textfield;
- }
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px $prime-bg-color inset;
     -webkit-text-fill-color: $prime-font-color !important;
+}
+
+::-webkit-calendar-picker-indicator { 
+  background: transparent;
+  position: absolute;
+  width: 100%;
+  cursor: pointer;
 }
