@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 const Reports: FC = () => {
-	return <div>Reports</div>;
+	return <input type='data' />;
 };
 
 export default Reports;

@@ -51,32 +51,24 @@ const Login: FC = () => {
 			<form onSubmit={handleSubmit(onSubmit)} className='customForm'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Login</legend>
-					<Input
-						type='email'
-						labelText='Email'
-						placeholder='Enter your email'
-						error={errors.email}
-						register={register}
-						registerData={[
-							'email',
-							{
+					<Input labelText='Email' error={errors.email}>
+						<input
+							type='email'
+							placeholder='Enter your email'
+							{...register('email', {
 								required: 'Must be filled',
 								pattern: {
 									value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
 									message: 'Invalid e-mail format',
 								},
-							},
-						]}
-					/>
-					<Input
-						type='password'
-						labelText='Password'
-						placeholder='Enter you password'
-						error={errors.password}
-						register={register}
-						registerData={[
-							'password',
-							{
+							})}
+						/>
+					</Input>
+					<Input labelText='Password' error={errors.password}>
+						<input
+							type='password'
+							placeholder='Enter you password'
+							{...register('password', {
 								required: 'Must be filled',
 								minLength: {
 									value: 3,
@@ -86,9 +78,9 @@ const Login: FC = () => {
 									value: 30,
 									message: 'Max length 30',
 								},
-							},
-						]}
-					/>
+							})}
+						/>
+					</Input>
 				</fieldset>
 				<div className='buttonsHolder'>
 					<Button buttonType='submit' customType='ok' disabled={!isValid}>

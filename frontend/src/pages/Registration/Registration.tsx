@@ -53,15 +53,11 @@ const Registration: FC = () => {
 			<form onSubmit={handleSubmit(onSubmit)} className='customForm'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Registration</legend>
-					<Input
-						type='text'
-						labelText='Username'
-						placeholder='Add username here'
-						error={errors.username}
-						register={register}
-						registerData={[
-							'username',
-							{
+					<Input labelText='Username' error={errors.username}>
+						<input
+							type='text'
+							placeholder='Add username here'
+							{...register('username', {
 								required: 'Must be filled',
 								minLength: {
 									value: 3,
@@ -71,35 +67,27 @@ const Registration: FC = () => {
 									value: 30,
 									message: 'Max length 30',
 								},
-							},
-						]}
-					/>
-					<Input
-						type='email'
-						labelText='Email'
-						placeholder='Add email here'
-						error={errors.email}
-						register={register}
-						registerData={[
-							'email',
-							{
+							})}
+						/>
+					</Input>
+					<Input labelText='Email' error={errors.email}>
+						<input
+							type='email'
+							placeholder='Add email here'
+							{...register('email', {
 								required: 'Must be filled',
 								pattern: {
 									value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
 									message: 'Invalid e-mail format',
 								},
-							},
-						]}
-					/>
-					<Input
-						type='password'
-						labelText='Password'
-						placeholder='Add password here'
-						error={errors.password}
-						register={register}
-						registerData={[
-							'password',
-							{
+							})}
+						/>
+					</Input>
+					<Input labelText='Password' error={errors.password}>
+						<input
+							type='password'
+							placeholder='Add password here'
+							{...register('password', {
 								required: 'Must be filled',
 								minLength: {
 									value: 3,
@@ -109,9 +97,9 @@ const Registration: FC = () => {
 									value: 30,
 									message: 'Max length 30',
 								},
-							},
-						]}
-					/>
+							})}
+						/>
+					</Input>
 				</fieldset>
 				<div className='buttonsHolder'>
 					<Button buttonType='submit' customType='save' disabled={!isValid}>

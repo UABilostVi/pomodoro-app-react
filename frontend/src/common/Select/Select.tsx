@@ -31,9 +31,11 @@ const Select: FC<InputProps> = ({
 	`;
 
 	return (
-		<label className={styles.customSelect}>
-			{labelText}
-			<select {...register(...registerData)}>
+		<div className={styles.selectWrapper}>
+			<label htmlFor='category' className={styles.customSelect}>
+				{labelText}
+			</label>
+			<select name='category' {...register(...registerData)}>
 				{categories.map((category) => {
 					return (
 						<OptionItem
@@ -49,7 +51,7 @@ const Select: FC<InputProps> = ({
 			{error && (
 				<div className={styles.err}>{error?.message || 'Error occured'}</div>
 			)}
-		</label>
+		</div>
 	);
 };
 

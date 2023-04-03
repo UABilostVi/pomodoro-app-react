@@ -4,8 +4,10 @@
   color: $white;
   text-transform: uppercase;
   font-size: 14px;
-  display: block;
   position: relative;
+}
+
+.selectWrapper {
   select {
     cursor: pointer;
     font-size: 16px;
@@ -18,6 +20,7 @@
     background-color: transparent;
     margin-bottom: 15px;
   }
+  
   option {
     background-color: $lines-color;
     max-width: 100%;

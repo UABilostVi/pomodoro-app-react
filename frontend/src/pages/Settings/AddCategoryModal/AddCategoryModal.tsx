@@ -36,15 +36,11 @@ const AddCategoryModal: FC<AddCategoryModalProps> = ({
 						isValid={isValid}
 						handleSubmit={handleSubmit}
 					>
-						<Input
-							type='text'
-							labelText='Name:'
-							placeholder='Enter category name'
-							error={errors.name}
-							register={register}
-							registerData={[
-								'name',
-								{
+						<Input labelText='Name:' error={errors.name}>
+							<input
+								type='text'
+								placeholder='Enter category name'
+								{...register('name', {
 									required: 'Must be filled',
 									minLength: {
 										value: 3,
@@ -54,22 +50,18 @@ const AddCategoryModal: FC<AddCategoryModalProps> = ({
 										value: 30,
 										message: 'Max length 30',
 									},
-								},
-							]}
-						/>
-						<Input
-							type='color'
-							labelText='Choose color:'
-							placeholder='Enter color'
-							error={errors.color}
-							register={register}
-							registerData={[
-								'color',
-								{
+								})}
+							/>
+						</Input>
+						<Input labelText='Choose color:' error={errors.color}>
+							<input
+								type='color'
+								placeholder='Enter color'
+								{...register('color', {
 									required: 'Must be filled',
-								},
-							]}
-						/>
+								})}
+							/>
+						</Input>
 					</Modal>
 				);
 			}}

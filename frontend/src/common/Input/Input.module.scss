@@ -1,10 +1,6 @@
 @import '../../variables.scss';
 
-.customInput {
-  color: $white;
-  text-transform: uppercase;
-  font-size: 14px;
-  display: block;
+.inputWrapper {
   position: relative;
   input {
     font-size: 16px;
@@ -13,24 +9,52 @@
     display: block;
     width: 100%;
     border: 0;
-    border-bottom: 1px solid $lines-color;
     background-color: transparent;
-    margin-bottom: 15px;
+    margin: 0;
+    border-bottom: 1px solid $lines-color;
+    margin-bottom: 20px;
   }
+  
   input[type=color]{
     padding: 0;
     height: 60px;
     cursor: pointer;
   }
-
+  
   input[type=date] {
     position: relative;
   }
-
+  
   input[type=number] {
     -moz-appearance: textfield;
     -webkit-appearance: textfield;
   }
+  
+  input[type=radio]{
+    appearance: none;
+    width: auto;
+    margin: 0;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: all 0.1s ease-in-out;
+    background: url('../../assets/svg/empty-tomato.svg'); 
+    &:hover,
+    &:hover ~ input,
+    &:checked,
+    &:checked ~ input {
+      background: url('../../assets/svg/fill-tomato.svg');
+    }
+  }
+}
+
+.label {
+  color: $white;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 
 .err {
