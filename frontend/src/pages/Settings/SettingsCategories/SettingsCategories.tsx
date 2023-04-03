@@ -1,13 +1,9 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { CSSTransition, Transition } from 'react-transition-group';
 
 import { Button } from '../../../common/Button';
-import { Input } from '../../../common/Input';
-
-import { Modal } from '../../../components/Modal';
+import { AddCategoryModal } from '../AddCategoryModal';
 
 import styles from './SettingsCategories.module.scss';
 
@@ -21,11 +17,6 @@ interface ICategProps {
 	key: number;
 	color: string;
 }
-
-type FormValues = {
-	name: string;
-	color: string;
-};
 
 const SettingsCategories: FC = () => {
 	const navigate = useNavigate();
@@ -47,12 +38,6 @@ const SettingsCategories: FC = () => {
 			/>
 		);
 	});
-
-	const {
-		register,
-		handleSubmit,
-		formState: { errors, isValid },
-	} = useForm<FormValues>({ mode: 'onChange' });
 
 	return (
 		<>
@@ -76,54 +61,10 @@ const SettingsCategories: FC = () => {
 					</Button>
 				</div>
 			</div>
-			<Transition in={activeModal} timeout={200} mountOnEnter unmountOnExit>
-				{(state) => {
-					return (
-						<Modal
-							transitionClass={state}
-							setActive={setActiveModal}
-							title='Add category'
-							isValid={isValid}
-							handleSubmit={handleSubmit}
-						>
-							<Input
-								type='text'
-								labelText='Name:'
-								placeholder='Enter category name'
-								error={errors.name}
-								register={register}
-								registerData={[
-									'name',
-									{
-										required: 'Must be filled',
-										minLength: {
-											value: 3,
-											message: 'Min length 3',
-										},
-										maxLength: {
-											value: 30,
-											message: 'Max length 30',
-										},
-									},
-								]}
-							/>
-							<Input
-								type='color'
-								labelText='Choose color:'
-								placeholder='Enter color'
-								error={errors.color}
-								register={register}
-								registerData={[
-									'color',
-									{
-										required: 'Must be filled',
-									},
-								]}
-							/>
-						</Modal>
-					);
-				}}
-			</Transition>
+			<AddCategoryModal
+				activeModal={activeModal}
+				setActiveModal={setActiveModal}
+			/>
 		</>
 	);
 };
