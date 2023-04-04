@@ -51,7 +51,7 @@ const Login: FC = () => {
 			<form onSubmit={handleSubmit(onSubmit)} className='customForm'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Login</legend>
-					<Input labelText='Email' error={errors.email}>
+					<Input legendText='Email' error={errors.email}>
 						<input
 							type='email'
 							placeholder='Enter your email'
@@ -64,7 +64,7 @@ const Login: FC = () => {
 							})}
 						/>
 					</Input>
-					<Input labelText='Password' error={errors.password}>
+					<Input legendText='Password' error={errors.password}>
 						<input
 							type='password'
 							placeholder='Enter you password'

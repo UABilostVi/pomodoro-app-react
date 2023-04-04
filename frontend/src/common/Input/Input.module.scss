@@ -1,23 +1,32 @@
 @import '../../variables.scss';
 
-.inputWrapper {
+.fieldset {
   position: relative;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid $lines-color;
   input {
     font-size: 16px;
     color: $prime-font-color;
     padding: 8px 0;
-    display: block;
-    width: 100%;
     border: 0;
     background-color: transparent;
     margin: 0;
-    border-bottom: 1px solid $lines-color;
-    margin-bottom: 20px;
+  }
+
+  input[type=text]{
+    width: 100%;
   }
   
   input[type=color]{
     padding: 0;
     height: 60px;
+    cursor: pointer;
+  }
+
+  input[type=radio]{
     cursor: pointer;
   }
   
@@ -30,28 +39,12 @@
     -webkit-appearance: textfield;
   }
   
-  input[type=radio]{
-    appearance: none;
-    width: auto;
-    margin: 0;
-    display: inline-block;
-    position: relative;
+  label {
     cursor: pointer;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    transition: all 0.1s ease-in-out;
-    background: url('../../assets/svg/empty-tomato.svg'); 
-    &:hover,
-    &:hover ~ input,
-    &:checked,
-    &:checked ~ input {
-      background: url('../../assets/svg/fill-tomato.svg');
-    }
   }
 }
 
-.label {
+.legend {
   color: $white;
   text-transform: uppercase;
   font-size: 14px;
@@ -61,7 +54,7 @@
   color: red;
   font-size: 9px;
   position: absolute;
-  bottom: -11px;
+  bottom: -15px;
   text-transform: none;
 }
 

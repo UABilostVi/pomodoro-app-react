@@ -1,7 +1,74 @@
+@import '../../../variables.scss';
+
+.priorityWrapper {
+  display: flex;
+  gap: 32px;
+  padding: 8px 0;
+  label:hover {
+    color: $el-hover-color;
+  }
+
+  input {
+    appearance: none;
+    background-color: $prime-font-color;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;  
+  }
+
+  input:checked + label {
+    color: $white;
+  }
+
+  input:not(:checked):hover + label {
+    color: $el-hover-color;
+  }
+}
+
+.urgentradio:checked {
+  background-color: $urgent-color;
+}
+
+.highradio:checked {
+  background-color: $high-color;
+}
+
+.middleradio:checked {
+  background-color: $middle-color;
+}
+
+.lowradio:checked {
+  background-color: $low-color;
+}
+
+.priorityHolder {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .estimationHolder {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
   gap: 5px;
   padding: 8px 0;
+}
+
+.estimationsInput{
+  appearance: none;
+  margin: 0;
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.1s ease-in-out;
+  background: url('../../../assets/svg/empty-tomato.svg'); 
+  &:hover,
+  &:hover ~ input,
+  &:checked,
+  &:checked ~ input {
+    background: url('../../../assets/svg/fill-tomato.svg');
+  }
 }

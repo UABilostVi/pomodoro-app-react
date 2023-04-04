@@ -46,13 +46,8 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 						isValid={isValid}
 						handleSubmit={handleSubmit}
 					>
-						<Input
-							labelFor='titleInput'
-							labelText='Title:'
-							error={errors.title}
-						>
+						<Input legendText='Title:' error={errors.title}>
 							<input
-								id='titleInput'
 								type='text'
 								placeholder='Enter title here'
 								{...register('title', {
@@ -68,13 +63,8 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 								})}
 							/>
 						</Input>
-						<Input
-							labelFor='descriptionInput'
-							labelText='Description:'
-							error={errors.description}
-						>
+						<Input legendText='Description:' error={errors.description}>
 							<input
-								id='descriptionInput'
 								type='text'
 								placeholder='Enter description here'
 								{...register('description', {
@@ -102,13 +92,8 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 								},
 							]}
 						/>
-						<Input
-							labelFor='dateInput'
-							labelText='Deadline:'
-							error={errors.deadline}
-						>
+						<Input legendText='Deadline:' error={errors.deadline}>
 							<input
-								id='dateInput'
 								type='date'
 								placeholder='Enter deadline here'
 								{...register('deadline', {
@@ -116,9 +101,10 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 								})}
 							/>
 						</Input>
-						<Input labelText='Estimations:' error={errors.estimations}>
+						<Input legendText='Estimations:' error={errors.estimations}>
 							<div className={styles.estimationHolder}>
 								<input
+									className={styles.estimationsInput}
 									type='radio'
 									value={5}
 									{...register('estimations', {
@@ -126,6 +112,7 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 									})}
 								/>
 								<input
+									className={styles.estimationsInput}
 									type='radio'
 									value={4}
 									{...register('estimations', {
@@ -133,6 +120,7 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 									})}
 								/>
 								<input
+									className={styles.estimationsInput}
 									type='radio'
 									value={3}
 									{...register('estimations', {
@@ -140,6 +128,7 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 									})}
 								/>
 								<input
+									className={styles.estimationsInput}
 									type='radio'
 									value={2}
 									{...register('estimations', {
@@ -147,6 +136,7 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 									})}
 								/>
 								<input
+									className={styles.estimationsInput}
 									type='radio'
 									value={1}
 									{...register('estimations', {
@@ -155,24 +145,58 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 								/>
 							</div>
 						</Input>
-						{/* <Input labelText='Priority:' error={errors.priority}>
-							<input
-								type='radio'
-								value={5}
-								{...register('priority', {
-									required: 'Must be filled',
-								})}
-							/>
+						<Input legendText='Priority:' error={errors.priority}>
+							<div className={styles.priorityWrapper}>
+								<div className={styles.priorityHolder}>
+									<input
+										id='urgentradio'
+										className={styles.urgentradio}
+										type='radio'
+										value='urgent'
+										{...register('priority', {
+											required: 'Must be filled',
+										})}
+									/>
+									<label htmlFor='urgentradio'>Urgent</label>
+								</div>
+								<div className={styles.priorityHolder}>
+									<input
+										id='highradio'
+										className={styles.highradio}
+										type='radio'
+										value='high'
+										{...register('priority', {
+											required: 'Must be filled',
+										})}
+									/>
+									<label htmlFor='highradio'>High</label>
+								</div>
+								<div className={styles.priorityHolder}>
+									<input
+										id='middleradio'
+										className={styles.middleradio}
+										type='radio'
+										value='middle'
+										{...register('priority', {
+											required: 'Must be filled',
+										})}
+									/>
+									<label htmlFor='middleradio'>Middle</label>
+								</div>
+								<div className={styles.priorityHolder}>
+									<input
+										id='lowradio'
+										className={styles.lowradio}
+										type='radio'
+										value='low'
+										{...register('priority', {
+											required: 'Must be filled',
+										})}
+									/>
+									<label htmlFor='lowradio'>Low</label>
+								</div>
+							</div>
 						</Input>
-						<Input labelText='Priority:' error={errors.priority}>
-							<input
-								type='radio'
-								value={5}
-								{...register('priority', {
-									required: 'Must be filled',
-								})}
-							/>
-						</Input> */}
 					</Modal>
 				);
 			}}

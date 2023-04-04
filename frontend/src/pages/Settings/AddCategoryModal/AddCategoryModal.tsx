@@ -36,7 +36,7 @@ const AddCategoryModal: FC<AddCategoryModalProps> = ({
 						isValid={isValid}
 						handleSubmit={handleSubmit}
 					>
-						<Input labelText='Name:' error={errors.name}>
+						<Input legendText='Name:' error={errors.name}>
 							<input
 								type='text'
 								placeholder='Enter category name'
@@ -53,7 +53,7 @@ const AddCategoryModal: FC<AddCategoryModalProps> = ({
 								})}
 							/>
 						</Input>
-						<Input labelText='Choose color:' error={errors.color}>
+						<Input legendText='Choose color:' error={errors.color}>
 							<input
 								type='color'
 								placeholder='Enter color'

@@ -53,7 +53,7 @@ const Registration: FC = () => {
 			<form onSubmit={handleSubmit(onSubmit)} className='customForm'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Registration</legend>
-					<Input labelText='Username' error={errors.username}>
+					<Input legendText='Username' error={errors.username}>
 						<input
 							type='text'
 							placeholder='Add username here'
@@ -70,7 +70,7 @@ const Registration: FC = () => {
 							})}
 						/>
 					</Input>
-					<Input labelText='Email' error={errors.email}>
+					<Input legendText='Email' error={errors.email}>
 						<input
 							type='email'
 							placeholder='Add email here'
@@ -83,7 +83,7 @@ const Registration: FC = () => {
 							})}
 						/>
 					</Input>
-					<Input labelText='Password' error={errors.password}>
+					<Input legendText='Password' error={errors.password}>
 						<input
 							type='password'
 							placeholder='Add password here'

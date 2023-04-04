@@ -4,23 +4,20 @@ import { FieldError } from 'react-hook-form';
 import styles from './Input.module.scss';
 
 type InputProps = {
-	labelText: string;
+	legendText: string;
 	error?: FieldError;
 	children: React.ReactNode;
-	labelFor?: string;
 };
 
-const Input: FC<InputProps> = ({ labelText, error, children, labelFor }) => {
+const Input: FC<InputProps> = ({ legendText, error, children }) => {
 	return (
-		<div className={styles.inputWrapper}>
-			<label htmlFor={labelFor} className={styles.label}>
-				{labelText}
-			</label>
+		<fieldset className={styles.fieldset}>
+			<legend className={styles.legend}>{legendText}</legend>
 			{children}
 			{error && (
 				<div className={styles.err}>{error?.message || 'Error occured'}</div>
 			)}
-		</div>
+		</fieldset>
 	);
 };
 
