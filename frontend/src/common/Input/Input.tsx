@@ -6,7 +6,7 @@ import styles from './Input.module.scss';
 type InputProps = {
 	legendText: string;
 	error?: FieldError;
-	children: React.ReactNode;
+	children: any;
 };
 
 const Input: FC<InputProps> = ({ legendText, error, children }) => {

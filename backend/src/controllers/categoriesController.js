@@ -19,9 +19,7 @@ const getUserCategories = async (req, res) => {
       if (categories.length === 0) {
         return res.status(400).json({ message: 'No categories found' });
       }
-      return res.status(200).json({
-        categories,
-      });
+      return res.status(200).json(categories);
     });
 };
 
@@ -46,7 +44,7 @@ const updateUserCategoryById = async (req, res) => {
       if (!result) {
         return res.status(400).json({ message: 'Access denied' });
       }
-      return res.status(200).json({ message: 'Category details changed successfully' });
+      return res.status(200).json(result);
     });
 };
 

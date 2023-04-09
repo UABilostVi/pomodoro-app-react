@@ -28,8 +28,8 @@ const updateCategoryById = async (name, color, categId, userId) => {
   return category;
 };
 
-const delCategory = async (Id) => {
-  await Category.findByIdAndDelete(Id);
+const delCategory = async (id) => {
+  await Category.findByIdAndDelete(id);
 };
 
 module.exports = {

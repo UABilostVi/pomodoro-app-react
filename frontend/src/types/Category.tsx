@@ -1,5 +1,5 @@
 export interface ICategory {
-	id?: string;
+	_id?: string;
 	name: string;
 	color: string;
 	createdBy?: Date;

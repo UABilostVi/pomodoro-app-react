@@ -1,49 +1,30 @@
 import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { Button } from '../../../common/Button';
 import { AddCategoryModal } from '../AddCategoryModal';
 
 import styles from './SettingsCategories.module.scss';
-
-const categories = [
-	{ id: 1, name: 'Work', color: 'orange' },
-	{ id: 2, name: 'Educ', color: 'blue' },
-	{ id: 3, name: 'Hobby', color: 'purple' },
-];
-
-interface ICategProps {
-	key: number;
-	color: string;
-}
+import { CategoriesList } from './CategoriesList';
+import { ICategory } from '../../../types/Category';
 
 const SettingsCategories: FC = () => {
 	const navigate = useNavigate();
-	const [activeModal, setActiveModal] = useState(false);
+	const [activeModal, setActiveModal] = useState<boolean>(false);
+	const [editMode, setEditMode] = useState<boolean>(false);
+	const [editedCategory, setEditedCategory] = useState<ICategory>();
 
-	const CategoriesItem = styled.li`
-		:before {
-			background-color: ${(props: ICategProps) => props.color};
-		}
-	`;
-
-	const categList = categories.map((item) => {
-		return (
-			<CategoriesItem
-				key={item.id}
-				className={styles.categItem}
-				children={item.name}
-				color={item.color}
-			/>
-		);
-	});
+	function onEdit(item: ICategory) {
+		setEditedCategory(item);
+		setEditMode(true);
+		setActiveModal(true);
+	}
 
 	return (
 		<>
 			<h2 className='subtitle'>Categories list overview</h2>
 			<div className={styles.settingsContent}>
-				<ul className={styles.categList}>{categList}</ul>
+				<CategoriesList onEdit={onEdit} />
 				<div className='buttonsHolder'>
 					<Button
 						buttonType='button'
@@ -62,8 +43,11 @@ const SettingsCategories: FC = () => {
 				</div>
 			</div>
 			<AddCategoryModal
+				editedCategory={editedCategory}
 				activeModal={activeModal}
 				setActiveModal={setActiveModal}
+				editMode={editMode}
+				setEditMode={setEditMode}
 			/>
 		</>
 	);

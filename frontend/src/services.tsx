@@ -25,7 +25,7 @@ export const serviceAPI = {
 	fetchCurrentUser() {
 		return axs.get('users/me', {
 			headers: {
-				Authorization: `${localStorage.getItem('token')}`,
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
 			},
 		});
 	},

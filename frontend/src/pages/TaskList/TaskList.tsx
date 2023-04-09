@@ -6,7 +6,7 @@ const TaskList: FC = () => {
 	return (
 		<>
 			<div>TaskList</div>
-			<TaskModal activeModal={isActiveModal} setActiveModal={setActiveModal} />
+			{/* <TaskModal activeModal={isActiveModal} setActiveModal={setActiveModal} /> */}
 		</>
 	);
 };

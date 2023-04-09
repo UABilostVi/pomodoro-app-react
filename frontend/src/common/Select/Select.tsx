@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import { FieldError } from 'react-hook-form';
+import styled from 'styled-components';
+
+import { ICategory } from '../../types/Category';
 
 import styles from './Select.module.scss';
-import { ICategory } from '../../types/Category';
-import styled from 'styled-components';
 
 type RegisterDataProps = [string, object];
 
@@ -39,8 +40,8 @@ const Select: FC<InputProps> = ({
 				{categories.map((category) => {
 					return (
 						<OptionItem
-							value={category.id}
-							key={category.id}
+							value={category._id}
+							key={category._id}
 							color={category.color}
 						>
 							{category.name}

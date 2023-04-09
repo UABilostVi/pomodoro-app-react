@@ -10,7 +10,7 @@ const authMiddleware = (req, res, next) => {
     return res.status(401).json({ message: 'Please, provide authorization header' });
   }
 
-  const token = authorization;
+  const [, token] = authorization.split(' ');
 
   if (!token) {
     return res.status(401).json({ message: 'Please, include token to request' });

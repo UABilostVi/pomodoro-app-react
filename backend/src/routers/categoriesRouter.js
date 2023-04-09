@@ -1,5 +1,4 @@
 const express = require('express');
-const { authMiddleware } = require('../middleware/authMiddleware');
 
 const asyncWrapper = (controller) => (req, res, next) => controller(req, res, next).catch(next);
 
@@ -12,13 +11,13 @@ const {
   updateUserCategoryById,
 } = require('../controllers/categoriesController');
 
-router.post('/', authMiddleware, asyncWrapper(addUserCategory));
+router.post('/', asyncWrapper(addUserCategory));
 
-router.get('/', authMiddleware, asyncWrapper(getUserCategories));
+router.get('/', asyncWrapper(getUserCategories));
 
 router.get('/:id', asyncWrapper(getUserCategoryById));
 
-router.patch('/:id', asyncWrapper(updateUserCategoryById));
+router.put('/:id', asyncWrapper(updateUserCategoryById));
 
 router.delete('/:id', asyncWrapper(deleteUserCategoryById));
 

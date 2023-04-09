@@ -14,30 +14,59 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;  
+    position: relative;
   }
 
-  input:checked + label {
-    color: $white;
-  }
-
-  input:not(:checked):hover + label {
-    color: $el-hover-color;
-  }
+  input:checked {
+    &::before,
+    &::after  {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 50%;
+    }
+    &::before {
+      background-color: $prime-bg-color;
+      width: 8px;
+      height: 8px;
+    }
+    &::after {
+      width: 4px;
+      height: 4px;
+    }
+    & + label {
+      color: $white;
+    }
+  
+    input:not(:checked):hover + label {
+      color: $el-hover-color;
+    }
+  } 
 }
 
-.urgentradio:checked {
+.priorityLabel {
+  text-transform: capitalize;
+}
+
+.urgentradio:checked,
+.urgentradio:checked::after {
   background-color: $urgent-color;
 }
 
-.highradio:checked {
+.highradio:checked,
+.highradio:checked::after {
   background-color: $high-color;
 }
 
-.middleradio:checked {
+.middleradio:checked,
+.middleradio:checked::after {
   background-color: $middle-color;
 }
 
-.lowradio:checked {
+.lowradio:checked,
+.lowradio:checked::after {
   background-color: $low-color;
 }
 
