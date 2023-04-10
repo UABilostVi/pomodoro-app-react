@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { TaskModal } from './TaskModal';
+// import { TaskModal } from './TaskModal';
 
 const TaskList: FC = () => {
 	const [isActiveModal, setActiveModal] = useState(true);

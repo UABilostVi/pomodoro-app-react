@@ -1,25 +1,26 @@
-import React, { FC } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import React, { FC, useContext, useState } from 'react';
+import {
+	SubmitHandler,
+	UseFormHandleSubmit,
+	UseFormReset,
+} from 'react-hook-form';
 import { Transition } from 'react-transition-group';
 
 import { Button } from '../../common/Button';
+import { CategModalContext } from '../../pages/Settings/SettingsCategories/SettingsCategories';
 
-import styles from './Modal.module.scss';
 import {
 	useAddCategoryMutation,
 	useEditCategoryMutation,
 } from '../../store/categories/categoriesApi';
 
+import styles from './Modal.module.scss';
+
 type ModalPropsType = {
-	setActive: (state: boolean) => void;
-	title: string;
 	children: React.ReactNode;
 	isValid: boolean;
-	handleSubmit: Function;
-	activeModal: boolean;
-	resetForm: Function;
-	editedCategory: string | undefined;
-	setEditMode: Function;
+	handleSubmit: UseFormHandleSubmit<FormValues>;
+	resetForm: UseFormReset<FormValues>;
 };
 
 type FormValues = {
@@ -28,40 +29,46 @@ type FormValues = {
 };
 
 const Modal: FC<ModalPropsType> = ({
-	editedCategory,
-	activeModal,
-	setActive,
-	setEditMode,
-	title,
 	isValid,
 	children,
 	handleSubmit,
 	resetForm,
 }) => {
+	const { editedCategory, activeModal, setActiveModal, editMode, setEditMode } =
+		useContext(CategModalContext);
+
 	function handleClose(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
 		setEditMode(null);
-		setActive(false);
-		resetForm();
+		setActiveModal(false);
 	}
 
 	const [createCategory, {}] = useAddCategoryMutation();
 	const [editCategory, {}] = useEditCategoryMutation();
 
 	const onSubmit: SubmitHandler<FormValues> = (data) => {
-		setActive(false);
-		if (editedCategory) {
-			editCategory({ ...data, _id: editedCategory });
+		if (editMode) {
+			editCategory({ ...data, _id: editedCategory._id });
 		} else {
 			createCategory(data);
 		}
 		setEditMode(null);
-		resetForm();
+		setActiveModal(false);
 	};
+
+	const [title, setTitle] = useState('');
 
 	return (
 		<Transition in={activeModal} timeout={200} mountOnEnter unmountOnExit>
 			{(state) => {
+				if (state === 'exited') {
+					if (editMode) {
+						setTitle('Edit');
+					} else {
+						setTitle('Add');
+					}
+					resetForm();
+				}
 				return (
 					<div className={`${styles.modal} ${styles[state]}`}>
 						<form

@@ -74,16 +74,17 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 	});
 
 	return (
-		<Modal
-			editedCategory=''
-			activeModal={activeModal}
-			setActive={setActiveModal}
-			title='Add task'
-			isValid={isValid}
-			handleSubmit={handleSubmit}
-			handleCheck={createCategory}
-			resetForm={reset}
-		>
+		<>
+			{/* <Modal
+				editedCategory=''
+				activeModal={activeModal}
+				setActive={setActiveModal}
+				title='Add task'
+				isValid={isValid}
+				handleSubmit={handleSubmit}
+				handleCheck={createCategory}
+				resetForm={reset}
+			> */}
 			<Input legendText='Title:' error={errors.title}>
 				<input
 					type='text'
@@ -144,7 +145,8 @@ const TaskModal: FC<TaskModalProps> = ({ activeModal, setActiveModal }) => {
 			<Input legendText='Priority:' error={errors.priority}>
 				<div className={styles.priorityWrapper}>{priorityRadios}</div>
 			</Input>
-		</Modal>
+			{/* </Modal> */}
+		</>
 	);
 };
 

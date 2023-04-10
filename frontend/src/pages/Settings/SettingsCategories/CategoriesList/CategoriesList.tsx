@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -6,6 +6,7 @@ import {
 	useGetCategoriesQuery,
 } from '../../../../store/categories/categoriesApi';
 import { ICategory } from '../../../../types/Category';
+import { CategModalContext } from '../SettingsCategories';
 
 import styles from './CategoriesList.module.scss';
 
@@ -13,12 +14,8 @@ interface ICategProps {
 	color: string;
 }
 
-type CategoriesListProps = {
-	onEdit: (item: ICategory) => void;
-};
-
-const CategoriesList: FC<CategoriesListProps> = ({ onEdit }) => {
-	const { data, isLoading } = useGetCategoriesQuery();
+const CategoriesList: FC = () => {
+	const { data, isLoading, isFetching } = useGetCategoriesQuery();
 	const [delCategory, {}] = useDelCategoryMutation();
 	const CategoriesItem = styled.li`
 		:before {
@@ -26,30 +23,43 @@ const CategoriesList: FC<CategoriesListProps> = ({ onEdit }) => {
 		}
 	`;
 
+	const { setEditedCategory, setActiveModal, setEditMode } =
+		useContext(CategModalContext);
+
+	function onEdit(item: ICategory) {
+		setEditedCategory(item);
+		setEditMode(true);
+		setActiveModal(true);
+	}
+
 	return (
-		<ul className={styles.categList}>
-			{data?.map((item: ICategory) => {
-				return (
-					<CategoriesItem
-						key={item._id}
-						className={styles.categItem}
-						color={item.color}
-					>
-						{item.name}
-						<div className={styles.categButtonsHolder}>
-							<button
-								className={`${styles.categButton} icon-edit`}
-								onClick={() => onEdit(item)}
-							></button>
-							<button
-								className={`${styles.categButton} icon-delete`}
-								onClick={() => delCategory(item)}
-							></button>
-						</div>
-					</CategoriesItem>
-				);
-			})}
-		</ul>
+		<>
+			{isLoading && <h2>Loading...</h2>}
+			{isFetching && <h2>Loading...</h2>}
+			<ul className={styles.categList}>
+				{data?.map((item: ICategory) => {
+					return (
+						<CategoriesItem
+							key={item._id}
+							className={styles.categItem}
+							color={item.color}
+						>
+							{item.name}
+							<div className={styles.categButtonsHolder}>
+								<button
+									className={`${styles.categButton} icon-edit`}
+									onClick={() => onEdit(item)}
+								></button>
+								<button
+									className={`${styles.categButton} icon-delete`}
+									onClick={() => delCategory(item)}
+								></button>
+							</div>
+						</CategoriesItem>
+					);
+				})}
+			</ul>
+		</>
 	);
 };
 

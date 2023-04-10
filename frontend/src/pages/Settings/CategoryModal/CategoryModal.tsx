@@ -1,57 +1,38 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Modal } from '../../../components/Modal';
 import { Input } from '../../../common/Input';
 
-import { ICategory } from '../../../types/Category';
-
-type AddCategoryModalProps = {
-	activeModal: boolean;
-	setActiveModal: (state: boolean) => void;
-	editMode: boolean;
-	editedCategory?: ICategory;
-	setEditMode: Function;
-};
+import { CategModalContext } from '../SettingsCategories/SettingsCategories';
 
 type FormValues = {
 	name: string;
 	color: string;
 };
 
-const AddCategoryModal: FC<AddCategoryModalProps> = ({
-	activeModal,
-	setActiveModal,
-	editMode,
-	editedCategory,
-	setEditMode,
-}) => {
+const CategoryModal: FC = () => {
+	const { editedCategory, editMode } = useContext(CategModalContext);
+
 	const {
 		register,
 		handleSubmit,
 		reset,
 		setValue,
 		formState: { errors, isValid },
-	} = useForm<FormValues>({ mode: 'onChange' });
+	} = useForm<FormValues>({
+		mode: 'onChange',
+	});
 
 	useEffect(() => {
-		if (editedCategory) {
+		if (editMode) {
 			setValue('name', `${editedCategory.name}`);
 			setValue('color', `${editedCategory.color}`);
 		}
-	}, [editedCategory]);
+	}, [editedCategory, editMode]);
 
 	return (
-		<Modal
-			activeModal={activeModal}
-			setEditMode={setEditMode}
-			setActive={setActiveModal}
-			editedCategory={editedCategory?._id}
-			title={editMode ? 'Edit category' : 'Add category'}
-			isValid={isValid}
-			handleSubmit={handleSubmit}
-			resetForm={reset}
-		>
+		<Modal isValid={isValid} handleSubmit={handleSubmit} resetForm={reset}>
 			<Input legendText='Name:' error={errors.name}>
 				<input
 					type='text'
@@ -81,4 +62,4 @@ const AddCategoryModal: FC<AddCategoryModalProps> = ({
 	);
 };
 
-export default AddCategoryModal;
+export default CategoryModal;
