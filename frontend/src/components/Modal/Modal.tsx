@@ -1,13 +1,13 @@
 import React, { FC, useContext, useState } from 'react';
+import { Transition } from 'react-transition-group';
 import {
 	SubmitHandler,
 	UseFormHandleSubmit,
 	UseFormReset,
 } from 'react-hook-form';
-import { Transition } from 'react-transition-group';
 
-import { Button } from '../../common/Button';
 import { CategModalContext } from '../../pages/Settings/SettingsCategories/SettingsCategories';
+import { Button } from '../../common/Button';
 
 import {
 	useAddCategoryMutation,
@@ -34,6 +34,10 @@ const Modal: FC<ModalPropsType> = ({
 	handleSubmit,
 	resetForm,
 }) => {
+	const [createCategory, {}] = useAddCategoryMutation();
+	const [editCategory, {}] = useEditCategoryMutation();
+	const [title, setTitle] = useState('');
+
 	const { editedCategory, activeModal, setActiveModal, editMode, setEditMode } =
 		useContext(CategModalContext);
 
@@ -43,20 +47,15 @@ const Modal: FC<ModalPropsType> = ({
 		setActiveModal(false);
 	}
 
-	const [createCategory, {}] = useAddCategoryMutation();
-	const [editCategory, {}] = useEditCategoryMutation();
-
 	const onSubmit: SubmitHandler<FormValues> = (data) => {
 		if (editMode) {
 			editCategory({ ...data, _id: editedCategory._id });
+			setEditMode(null);
 		} else {
 			createCategory(data);
 		}
-		setEditMode(null);
 		setActiveModal(false);
 	};
-
-	const [title, setTitle] = useState('');
 
 	return (
 		<Transition in={activeModal} timeout={200} mountOnEnter unmountOnExit>
