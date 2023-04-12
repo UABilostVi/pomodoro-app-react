@@ -34,8 +34,6 @@ const CategoriesList: FC = () => {
 
 	return (
 		<>
-			{isLoading && <h2>Loading...</h2>}
-			{isFetching && <h2>Loading...</h2>}
 			<ul className={styles.categList}>
 				{data?.map((item: ICategory) => {
 					return (

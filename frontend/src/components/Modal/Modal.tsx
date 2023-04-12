@@ -1,14 +1,12 @@
 import React, { FC, useContext, useState } from 'react';
-import ReactDOM from 'react-dom';
 import {
 	SubmitHandler,
 	UseFormHandleSubmit,
 	UseFormReset,
 } from 'react-hook-form';
-import { Transition } from 'react-transition-group';
 
-import { Button } from '../../common/Button';
 import { CategModalContext } from '../../pages/Settings/SettingsCategories/SettingsCategories';
+import { Button } from '../../common/Button';
 
 import {
 	useAddCategoryMutation,
@@ -16,6 +14,8 @@ import {
 } from '../../store/categories/categoriesApi';
 
 import styles from './Modal.module.scss';
+import ReactDOM from 'react-dom';
+import { Transition } from 'react-transition-group';
 
 type ModalPropsType = {
 	children: React.ReactNode;
@@ -35,6 +35,10 @@ const Modal: FC<ModalPropsType> = ({
 	handleSubmit,
 	resetForm,
 }) => {
+	const [createCategory, {}] = useAddCategoryMutation();
+	const [editCategory, {}] = useEditCategoryMutation();
+	const [title, setTitle] = useState('');
+
 	const { editedCategory, activeModal, setActiveModal, editMode, setEditMode } =
 		useContext(CategModalContext);
 
@@ -44,20 +48,16 @@ const Modal: FC<ModalPropsType> = ({
 		setActiveModal(false);
 	}
 
-	const [createCategory, {}] = useAddCategoryMutation();
-	const [editCategory, {}] = useEditCategoryMutation();
-
 	const onSubmit: SubmitHandler<FormValues> = (data) => {
 		if (editMode) {
 			editCategory({ ...data, _id: editedCategory._id });
+			setEditMode(null);
 		} else {
 			createCategory(data);
 		}
-		setEditMode(null);
 		setActiveModal(false);
 	};
 
-	const [title, setTitle] = useState('');
 	const modalRoot = document.getElementById('root-modal') as HTMLElement;
 
 	return ReactDOM.createPortal(
