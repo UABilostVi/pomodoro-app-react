@@ -1,4 +1,5 @@
 import React, { FC, useContext, useState } from 'react';
+import ReactDOM from 'react-dom';
 import {
 	SubmitHandler,
 	UseFormHandleSubmit,
@@ -57,8 +58,9 @@ const Modal: FC<ModalPropsType> = ({
 	};
 
 	const [title, setTitle] = useState('');
+	const modalRoot = document.getElementById('root-modal') as HTMLElement;
 
-	return (
+	return ReactDOM.createPortal(
 		<Transition in={activeModal} timeout={200} mountOnEnter unmountOnExit>
 			{(state) => {
 				if (state === 'exited') {
@@ -115,7 +117,8 @@ const Modal: FC<ModalPropsType> = ({
 					</div>
 				);
 			}}
-		</Transition>
+		</Transition>,
+		modalRoot
 	);
 };
 
