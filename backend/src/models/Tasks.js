@@ -16,13 +16,14 @@ const taskJoiSchema = Joi.object({
 
   createdDate: Joi.date(),
 
-  deadLine: Joi.date(),
+  deadline: Joi.date(),
 
-  estimationTotal: Joi.number(),
+  estimationTotal: Joi.number()
+    .min(1)
+    .max(5),
 
-  priority: Joi.number()
-    .min(0)
-    .max(3),
+  priority: Joi.string()
+    .valid('urgent', 'high', 'medium', 'low'),
 
   createdBy: Joi.string(),
 
@@ -43,15 +44,12 @@ const taskSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  startDate: {
-    type: Date || null,
-  },
-  deadLine: {
+  deadline: {
     type: Date,
   },
   isActive: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   estimationTotal: {
     type: Number,
@@ -61,13 +59,10 @@ const taskSchema = mongoose.Schema({
     default: 0,
   },
   priority: {
-    type: Number,
-  },
-  category: {
     type: String,
   },
-  logs: {
-    type: Array,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
   },
 
 });

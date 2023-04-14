@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -6,7 +6,6 @@ import {
 	useGetCategoriesQuery,
 } from '../../../../store/categories/categoriesApi';
 import { ICategory } from '../../../../types/Category';
-import { CategModalContext } from '../SettingsCategories';
 
 import styles from './CategoriesList.module.scss';
 
@@ -14,7 +13,17 @@ interface ICategProps {
 	color: string;
 }
 
-const CategoriesList: FC = () => {
+type CategListPropsType = {
+	setEditedCategory: React.Dispatch<React.SetStateAction<ICategory | null>>;
+	setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+	setActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const CategoriesList: FC<CategListPropsType> = ({
+	setEditedCategory,
+	setEditMode,
+	setActiveModal,
+}) => {
 	const { data, isLoading, isFetching } = useGetCategoriesQuery();
 	const [delCategory, {}] = useDelCategoryMutation();
 	const CategoriesItem = styled.li`
@@ -22,9 +31,6 @@ const CategoriesList: FC = () => {
 			background-color: ${(props: ICategProps) => props.color};
 		}
 	`;
-
-	const { setEditedCategory, setActiveModal, setEditMode } =
-		useContext(CategModalContext);
 
 	function onEdit(item: ICategory) {
 		setEditedCategory(item);

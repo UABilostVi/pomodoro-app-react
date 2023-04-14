@@ -1,62 +1,39 @@
-import React, { FC, useContext, useState } from 'react';
-import {
-	SubmitHandler,
-	UseFormHandleSubmit,
-	UseFormReset,
-} from 'react-hook-form';
-
-import { CategModalContext } from '../../pages/Settings/SettingsCategories/SettingsCategories';
-import { Button } from '../../common/Button';
-
-import {
-	useAddCategoryMutation,
-	useEditCategoryMutation,
-} from '../../store/categories/categoriesApi';
-
-import styles from './Modal.module.scss';
+import React, { FC, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Transition } from 'react-transition-group';
+
+import { Button } from '../../common/Button';
+
+import styles from './Modal.module.scss';
 
 type ModalPropsType = {
 	children: React.ReactNode;
 	isValid: boolean;
-	handleSubmit: UseFormHandleSubmit<FormValues>;
-	resetForm: UseFormReset<FormValues>;
-};
-
-type FormValues = {
-	name: string;
-	color: string;
+	onSubmit: () => void;
+	resetForm: () => void;
+	activeModal: boolean;
+	setActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
+	editMode: boolean;
+	setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Modal: FC<ModalPropsType> = ({
 	isValid,
 	children,
-	handleSubmit,
+	onSubmit,
 	resetForm,
+	activeModal,
+	setActiveModal,
+	editMode,
+	setEditMode,
 }) => {
-	const [createCategory, {}] = useAddCategoryMutation();
-	const [editCategory, {}] = useEditCategoryMutation();
 	const [title, setTitle] = useState('');
-
-	const { editedCategory, activeModal, setActiveModal, editMode, setEditMode } =
-		useContext(CategModalContext);
 
 	function handleClose(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
-		setEditMode(null);
+		setEditMode(false);
 		setActiveModal(false);
 	}
-
-	const onSubmit: SubmitHandler<FormValues> = (data) => {
-		if (editMode) {
-			editCategory({ ...data, _id: editedCategory._id });
-			setEditMode(null);
-		} else {
-			createCategory(data);
-		}
-		setActiveModal(false);
-	};
 
 	const modalRoot = document.getElementById('root-modal') as HTMLElement;
 
@@ -74,7 +51,7 @@ const Modal: FC<ModalPropsType> = ({
 				return (
 					<div className={`${styles.modal} ${styles[state]}`}>
 						<form
-							onSubmit={handleSubmit(onSubmit)}
+							onSubmit={onSubmit}
 							className={`${styles.modalContent} ${styles[state]}`}
 						>
 							<ul className={styles.buttonsHolder}>

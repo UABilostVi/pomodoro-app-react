@@ -1,18 +1,17 @@
 const { Task } = require('../models/Tasks');
 
 const saveTask = async ({
-  title, description, category, deadLine, priority, estimationTotal, userId,
+  title, description, category, deadline, priority, estimationTotal, userId,
 }) => {
   const task = new Task({
     title,
     description,
     category,
-    deadLine,
+    deadline: new Date(deadline),
     priority,
     estimationTotal,
     createdBy: userId,
-    createdDate: new Date().toISOString(),
-    logs: [{ message: 'Task was created', time: new Date().toISOString() }],
+    createdDate: new Date(),
   });
   return task.save();
 };

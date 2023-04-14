@@ -1,12 +1,56 @@
 import React, { FC, useState } from 'react';
-// import { TaskModal } from './TaskModal';
+import { useGetTasksQuery } from '../../store/tasks/tasksApi';
+import { Tabs } from '../../components/Tabs';
+import { Task } from './Task';
+import { TaskModal } from './TaskModal';
+
+import styles from './TaskList.module.scss';
+import { ITask } from '../../types/Tasks';
 
 const TaskList: FC = () => {
-	const [isActiveModal, setActiveModal] = useState(true);
+	const [isActiveModal, setActiveModal] = useState<boolean>(false);
+	const { data } = useGetTasksQuery();
+	const statusTabs = ['To do', 'Done'];
+	const [statusState, setStatusState] = useState<string>(statusTabs[0]);
+	const [editMode, setEditMode] = useState<boolean>(false);
+	const [editedTask, setEditedTask] = useState<ITask | null>(null);
+
 	return (
 		<>
-			<div>TaskList</div>
-			{/* <TaskModal activeModal={isActiveModal} setActiveModal={setActiveModal} /> */}
+			<div className={statusState === 'To do' ? styles.tabsHolder : ''}>
+				{statusState === 'To do' && (
+					<button
+						className={`${styles.addTaskButton}`}
+						onClick={() => setActiveModal(true)}
+					>
+						Add new task <span className={`${styles.plus} icon-plus`}></span>
+					</button>
+				)}
+				<Tabs
+					tabsItems={statusTabs}
+					setToggleState={setStatusState}
+					tabState={statusState}
+				/>
+			</div>
+
+			<div>
+				{data?.length === 0 && <div>No tasks</div>}
+				{data
+					?.filter((task) =>
+						statusState === 'To do' ? task.isActive : !task.isActive
+					)
+					.map((task) => {
+						return <Task task={task} key={task._id} />;
+					})}
+			</div>
+			<TaskModal
+				activeModal={isActiveModal}
+				setActiveModal={setActiveModal}
+				editMode={editMode}
+				editedTask={editedTask}
+				setEditMode={setEditMode}
+				setEditedTask={setEditedTask}
+			/>
 		</>
 	);
 };

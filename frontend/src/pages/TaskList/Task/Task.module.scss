@@ -1,0 +1,139 @@
+@import '../../../variables.scss';
+
+.taskWrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: $white;
+  min-height: 100px;
+  margin-bottom: 12px;
+}
+
+.contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.taskButton {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 19px;
+  color: $prime-font-color;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: $el-hover-color;
+  }
+}
+
+.taskTitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+
+.taskDescription {
+  margin: 0;
+  padding: 0;
+}
+
+.taskEstimation {
+  flex-basis: 100px;
+  background: none;
+  border: none;
+  color: $white;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:before {
+    color: $white;
+    font-size: 48px;
+    position: absolute;
+  }
+  &:not(:disabled):hover {
+    filter: brightness(80%);
+  }
+}
+
+.buttonsHolder {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.deadLine {
+  flex-basis: 100px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker {
+    left: 0;
+    position: absolute;
+    width: 8px;
+    height: 100%;
+}
+
+.deadLineDay {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.deadLineMonth {
+  text-transform: uppercase;
+}
+
+.deadLineToday {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.doneBackgroud {
+  background-color: $silver;
+}
+
+.doneTitle {
+  text-decoration: line-through;
+}
+
+.bg-urgent {
+  background-color: $urgent-color;
+}
+
+.bg-high {
+  background-color: $high-color;
+}
+
+.bg-middle {
+  background-color: $middle-color;
+}
+
+.bg-low {
+  background-color: $low-color;
+}
+
+.title-color-urgent {
+  color: $urgent-color;
+}
+
+.title-color-high {
+  color: $high-color;
+}
+
+.title-color-middle {
+  color: $middle-color;
+}
+
+.title-color-low {
+  color: $low-color;
+}

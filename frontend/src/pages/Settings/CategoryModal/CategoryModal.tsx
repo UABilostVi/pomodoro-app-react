@@ -1,19 +1,36 @@
-import React, { FC, useContext, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { FC, useEffect } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Modal } from '../../../components/Modal';
 import { Input } from '../../../common/Input';
 
-import { CategModalContext } from '../SettingsCategories/SettingsCategories';
+import {
+	useAddCategoryMutation,
+	useEditCategoryMutation,
+} from '../../../store/categories/categoriesApi';
+import { ICategory } from '../../../types/Category';
 
 type FormValues = {
 	name: string;
 	color: string;
 };
 
-const CategoryModal: FC = () => {
-	const { editedCategory, editMode } = useContext(CategModalContext);
+type CategModalType = {
+	activeModal: boolean;
+	setActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
+	editMode: boolean;
+	setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+	editedCategory: ICategory | null;
+	setEditedCategory: React.Dispatch<React.SetStateAction<ICategory | null>>;
+};
 
+const CategoryModal: FC<CategModalType> = ({
+	activeModal,
+	editedCategory,
+	setActiveModal,
+	editMode,
+	setEditMode,
+}) => {
 	const {
 		register,
 		handleSubmit,
@@ -24,15 +41,36 @@ const CategoryModal: FC = () => {
 		mode: 'onChange',
 	});
 
+	const [createCategory, {}] = useAddCategoryMutation();
+	const [editCategory, {}] = useEditCategoryMutation();
+
+	const onSubmit: SubmitHandler<FormValues> = (data) => {
+		if (editMode) {
+			editCategory({ ...data, _id: editedCategory?._id });
+			setEditMode(false);
+		} else {
+			createCategory(data);
+		}
+		setActiveModal(false);
+	};
+
 	useEffect(() => {
 		if (editMode) {
-			setValue('name', `${editedCategory.name}`);
-			setValue('color', `${editedCategory.color}`);
+			setValue('name', `${editedCategory?.name}`);
+			setValue('color', `${editedCategory?.color}`);
 		}
 	}, [editedCategory, editMode]);
 
 	return (
-		<Modal isValid={isValid} handleSubmit={handleSubmit} resetForm={reset}>
+		<Modal
+			isValid={isValid}
+			onSubmit={handleSubmit(onSubmit)}
+			resetForm={reset}
+			activeModal={activeModal}
+			editMode={editMode}
+			setActiveModal={setActiveModal}
+			setEditMode={setEditMode}
+		>
 			<Input legendText='Name:' error={errors.name}>
 				<input
 					type='text'
