@@ -46,14 +46,14 @@ const getUserTaskById = async (req, res) => {
 
 const updateUserTaskById = async (req, res) => {
   const {
-    title, description, category, deadLine, priority, estimationTotal,
+    title, description, category, deadline, priority, estimationTotal,
   } = req.body;
   const { id } = req.params;
   await taskJoiSchema.validateAsync({
-    title, description, category, deadLine, priority, estimationTotal,
+    title, description, category, deadline, priority, estimationTotal,
   });
   await updateTask({
-    title, description, category, deadLine, priority, estimationTotal, id,
+    title, description, category, deadline, priority, estimationTotal, id,
   })
     .then((task) => {
       if (!task) {

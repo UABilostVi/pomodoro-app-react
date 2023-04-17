@@ -27,12 +27,12 @@ const getTasksById = async (taskId, userId) => {
 };
 
 const updateTask = async ({
-  title, description, category, deadLine, priority, estimationTotal, id,
+  title, description, category, deadline, priority, estimationTotal, id,
 }) => {
   const task = await Task.findOneAndUpdate(
     { _id: id },
     {
-      title, description, category, deadLine, priority, estimationTotal,
+      title, description, category, deadline, priority, estimationTotal,
     },
     { new: true },
   );

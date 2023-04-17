@@ -4,7 +4,7 @@ export interface ITask {
 	description: string;
 	createdDate: Date;
 	createdBy: string;
-	deadline: Date;
+	deadline: Date | string;
 	isActive: boolean;
 	estimationTotal: number;
 	estimationUsed: number;

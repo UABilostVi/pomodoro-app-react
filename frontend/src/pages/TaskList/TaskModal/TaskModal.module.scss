@@ -101,3 +101,13 @@
     background: url('../../../assets/svg/fill-tomato.svg');
   }
 }
+
+.pom {
+  width: 20px;
+  height: 20px;
+  background: url('../../../assets/svg/empty-tomato.svg');
+  &:hover,
+  &:checked {
+    background: url('../../../assets/svg/fill-tomato.svg');
+  }
+}

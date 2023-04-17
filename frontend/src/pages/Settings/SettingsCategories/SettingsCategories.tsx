@@ -7,12 +7,18 @@ import { CategoriesList } from './CategoriesList';
 import { ICategory } from '../../../types/Category';
 
 import styles from './SettingsCategories.module.scss';
+import { ModalModeType } from '../../../types/ModalModeType';
 
 const SettingsCategories: FC = () => {
 	const navigate = useNavigate();
 	const [activeModal, setActiveModal] = useState<boolean>(false);
-	const [editMode, setEditMode] = useState<boolean>(false);
+	const [mode, setMode] = useState<ModalModeType>('add');
 	const [editedCategory, setEditedCategory] = useState<ICategory | null>(null);
+
+	function addHandler() {
+		setMode('add');
+		setActiveModal(true);
+	}
 
 	return (
 		<>
@@ -20,7 +26,7 @@ const SettingsCategories: FC = () => {
 			<div className={styles.settingsContent}>
 				<CategoriesList
 					setEditedCategory={setEditedCategory}
-					setEditMode={setEditMode}
+					setMode={setMode}
 					setActiveModal={setActiveModal}
 				/>
 				<div className='buttonsHolder'>
@@ -34,7 +40,7 @@ const SettingsCategories: FC = () => {
 					<Button
 						buttonType='button'
 						customType='save'
-						onClickHandler={() => setActiveModal(true)}
+						onClickHandler={addHandler}
 					>
 						Add new
 					</Button>
@@ -43,8 +49,8 @@ const SettingsCategories: FC = () => {
 			<CategoryModal
 				activeModal={activeModal}
 				setActiveModal={setActiveModal}
-				editMode={editMode}
-				setEditMode={setEditMode}
+				mode={mode}
+				setMode={setMode}
 				editedCategory={editedCategory}
 				setEditedCategory={setEditedCategory}
 			/>

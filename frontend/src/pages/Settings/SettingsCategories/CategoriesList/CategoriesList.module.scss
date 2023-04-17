@@ -33,21 +33,21 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  &::before {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    left: -36px;
-    top: 0;
-    transform: translateY(50%);
-    @media (min-width: $tablet-width) {
-      top: -4px;
-    }
-  }
   @media (min-width: $tablet-width) {
     font-size: 16px;
     padding-bottom: 8px;
+  }
+}
+
+.categColorMark {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  left: -36px;
+  top: 0;
+  transform: translateY(50%);
+  @media (min-width: $tablet-width) {
+    top: -4px;
   }
 }

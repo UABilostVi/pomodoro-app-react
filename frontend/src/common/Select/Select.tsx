@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { FieldError } from 'react-hook-form';
-import styled from 'styled-components';
 
 import { ICategory } from '../../types/Category';
 
@@ -16,10 +15,6 @@ type InputProps = {
 	registerData: RegisterDataProps;
 };
 
-interface IOptionProps {
-	color: string;
-}
-
 const Select: FC<InputProps> = ({
 	categories,
 	labelText,
@@ -27,10 +22,6 @@ const Select: FC<InputProps> = ({
 	register,
 	registerData,
 }) => {
-	const OptionItem = styled.option`
-		color: ${(props: IOptionProps) => props.color};
-	`;
-
 	return (
 		<div className={styles.selectWrapper}>
 			<label htmlFor='category' className={styles.customSelect}>
@@ -39,13 +30,13 @@ const Select: FC<InputProps> = ({
 			<select name='category' {...register(...registerData)}>
 				{categories.map((category) => {
 					return (
-						<OptionItem
+						<option
 							value={category._id}
 							key={category._id}
-							color={category.color}
+							style={{ color: `${category.color}` }}
 						>
 							{category.name}
-						</OptionItem>
+						</option>
 					);
 				})}
 			</select>

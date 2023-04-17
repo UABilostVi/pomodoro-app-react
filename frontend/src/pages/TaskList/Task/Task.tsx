@@ -1,16 +1,25 @@
 import React, { FC } from 'react';
 
 import { ITask } from '../../../types/Tasks';
+import { ModalModeType } from '../../../types/ModalModeType';
 import { useGetCategoriesQuery } from '../../../store/categories/categoriesApi';
+import { useDelTaskMutation } from '../../../store/tasks/tasksApi';
 
 import styles from './Task.module.scss';
-import { useDelTaskMutation } from '../../../store/tasks/tasksApi';
 
 type TaskPropsType = {
 	task: ITask;
+	setEditedTask: React.Dispatch<React.SetStateAction<ITask | null>>;
+	setActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
+	setMode: React.Dispatch<React.SetStateAction<ModalModeType>>;
 };
 
-const Task: FC<TaskPropsType> = ({ task }) => {
+const Task: FC<TaskPropsType> = ({
+	task,
+	setEditedTask,
+	setActiveModal,
+	setMode,
+}) => {
 	const {
 		title,
 		description,
@@ -21,19 +30,21 @@ const Task: FC<TaskPropsType> = ({ task }) => {
 		category,
 	} = task;
 	const { data: categList } = useGetCategoriesQuery();
-	const [delTask, {}] = useDelTaskMutation();
+	const [delTask] = useDelTaskMutation();
 	const taskCateg = categList?.find((categ) => categ._id === category);
 	const date = new Date(deadline);
 	const day = date.getDate();
 	const month = date.toLocaleString('en', { month: 'short' });
 	const today = new Date().toDateString() === date.toDateString();
 
-	function onDelete(task: ITask) {
-		// eslint-disable-next-line no-restricted-globals
-		const res = confirm('Del?');
-		if (res) {
-			delTask(task);
-		}
+	function handleDelete(task: ITask) {
+		delTask(task);
+	}
+
+	function handleEdit(task: ITask) {
+		setMode('edit');
+		setEditedTask(task);
+		setActiveModal(true);
 	}
 
 	return (
@@ -74,13 +85,18 @@ const Task: FC<TaskPropsType> = ({ task }) => {
 							></button>
 						</li>
 						<li>
-							<button className={`${styles.taskButton} icon-edit`}></button>
+							<button
+								className={`${styles.taskButton} icon-edit`}
+								onClick={() => {
+									handleEdit(task);
+								}}
+							></button>
 						</li>
 						<li>
 							<button
 								className={`${styles.taskButton} icon-delete`}
 								onClick={() => {
-									onDelete(task);
+									handleDelete(task);
 								}}
 							></button>
 						</li>

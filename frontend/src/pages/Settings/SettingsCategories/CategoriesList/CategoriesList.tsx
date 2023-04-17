@@ -1,40 +1,31 @@
 import { FC } from 'react';
-import styled from 'styled-components';
 
 import {
 	useDelCategoryMutation,
 	useGetCategoriesQuery,
 } from '../../../../store/categories/categoriesApi';
 import { ICategory } from '../../../../types/Category';
+import { ModalModeType } from '../../../../types/ModalModeType';
 
 import styles from './CategoriesList.module.scss';
 
-interface ICategProps {
-	color: string;
-}
-
 type CategListPropsType = {
 	setEditedCategory: React.Dispatch<React.SetStateAction<ICategory | null>>;
-	setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+	setMode: React.Dispatch<React.SetStateAction<ModalModeType>>;
 	setActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CategoriesList: FC<CategListPropsType> = ({
 	setEditedCategory,
-	setEditMode,
+	setMode,
 	setActiveModal,
 }) => {
-	const { data, isLoading, isFetching } = useGetCategoriesQuery();
-	const [delCategory, {}] = useDelCategoryMutation();
-	const CategoriesItem = styled.li`
-		:before {
-			background-color: ${(props: ICategProps) => props.color};
-		}
-	`;
+	const { data } = useGetCategoriesQuery();
+	const [delCategory] = useDelCategoryMutation();
 
 	function onEdit(item: ICategory) {
 		setEditedCategory(item);
-		setEditMode(true);
+		setMode('edit');
 		setActiveModal(true);
 	}
 
@@ -43,12 +34,12 @@ const CategoriesList: FC<CategListPropsType> = ({
 			<ul className={styles.categList}>
 				{data?.map((item: ICategory) => {
 					return (
-						<CategoriesItem
-							key={item._id}
-							className={styles.categItem}
-							color={item.color}
-						>
+						<li key={item._id} className={styles.categItem}>
 							{item.name}
+							<span
+								className={styles.categColorMark}
+								style={{ backgroundColor: `${item.color}` }}
+							></span>
 							<div className={styles.categButtonsHolder}>
 								<button
 									className={`${styles.categButton} icon-edit`}
@@ -59,7 +50,7 @@ const CategoriesList: FC<CategListPropsType> = ({
 									onClick={() => delCategory(item)}
 								></button>
 							</div>
-						</CategoriesItem>
+						</li>
 					);
 				})}
 			</ul>

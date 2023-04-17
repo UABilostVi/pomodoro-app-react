@@ -23,7 +23,7 @@ const taskJoiSchema = Joi.object({
     .max(5),
 
   priority: Joi.string()
-    .valid('urgent', 'high', 'medium', 'low'),
+    .valid('urgent', 'high', 'middle', 'low'),
 
   createdBy: Joi.string(),
 
