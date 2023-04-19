@@ -1,34 +1,39 @@
 import { FC } from 'react';
-import { FieldError } from 'react-hook-form';
 
 import { ICategory } from '../../types/Category';
 
 import styles from './Select.module.scss';
 
-type RegisterDataProps = [string, object];
-
 type InputProps = {
-	categories: ICategory[];
+	categories?: ICategory[];
 	labelText: string;
-	error?: FieldError;
-	register: Function;
-	registerData: RegisterDataProps;
+	error?: string;
+	onChange: Function;
+	value?: string;
+	isDirty: boolean;
 };
 
 const Select: FC<InputProps> = ({
 	categories,
 	labelText,
 	error,
-	register,
-	registerData,
+	onChange,
+	value,
+	isDirty,
 }) => {
 	return (
 		<div className={styles.selectWrapper}>
 			<label htmlFor='category' className={styles.customSelect}>
 				{labelText}
 			</label>
-			<select name='category' {...register(...registerData)}>
-				{categories.map((category) => {
+			<select
+				defaultValue={value}
+				name='category'
+				onChange={(e) => {
+					onChange(e);
+				}}
+			>
+				{categories?.map((category) => {
 					return (
 						<option
 							value={category._id}
@@ -40,8 +45,8 @@ const Select: FC<InputProps> = ({
 					);
 				})}
 			</select>
-			{error && (
-				<div className={styles.err}>{error?.message || 'Error occured'}</div>
+			{error && isDirty && (
+				<div className={styles.err}>{error || 'Error occured'}</div>
 			)}
 		</div>
 	);

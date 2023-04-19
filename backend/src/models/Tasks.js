@@ -10,7 +10,7 @@ const taskJoiSchema = Joi.object({
 
   description: Joi.string()
     .min(3)
-    .max(30),
+    .max(100),
 
   category: Joi.string(),
 

@@ -1,4 +1,4 @@
-@import '../../../variables.scss';
+@import '../../../../variables.scss';
 
 .priorityWrapper {
   display: flex;
@@ -50,6 +50,12 @@
   text-transform: capitalize;
 }
 
+.priorityHolder {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .urgentradio:checked,
 .urgentradio:checked::after {
   background-color: $urgent-color;
@@ -68,46 +74,4 @@
 .lowradio:checked,
 .lowradio:checked::after {
   background-color: $low-color;
-}
-
-.priorityHolder {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.estimationHolder {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  gap: 5px;
-  padding: 8px 0;
-}
-
-.estimationsInput{
-  appearance: none;
-  margin: 0;
-  display: inline-block;
-  position: relative;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  transition: all 0.1s ease-in-out;
-  background: url('../../../assets/svg/empty-tomato.svg'); 
-  &:hover,
-  &:hover ~ input,
-  &:checked,
-  &:checked ~ input {
-    background: url('../../../assets/svg/fill-tomato.svg');
-  }
-}
-
-.pom {
-  width: 20px;
-  height: 20px;
-  background: url('../../../assets/svg/empty-tomato.svg');
-  &:hover,
-  &:checked {
-    background: url('../../../assets/svg/fill-tomato.svg');
-  }
 }

@@ -1,0 +1,27 @@
+@import '../../../../variables.scss';
+
+.estimationHolder {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 8px 0;
+}
+
+.estimationsInput{
+  appearance: none;
+  margin: 0;
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.1s ease-in-out;
+  background: url('../../../../assets/svg/empty-tomato.svg'); 
+  &:hover,
+  &:hover ~ input,
+  &:checked,
+  &:checked ~ input {
+    background: url('../../../../assets/svg/fill-tomato.svg');
+  }
+}

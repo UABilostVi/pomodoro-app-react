@@ -1,7 +1,6 @@
 import { FC, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Watch } from 'react-loader-spinner';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Input } from '../../common/Input';
 import { Button } from '../../common/Button';
@@ -10,12 +9,19 @@ import { useNotification } from '../../components/Notification/NotificationProvi
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { registerUser } from '../../store/auth/async';
 import { unSetSucces } from '../../store/auth/authSlice';
+import useInput from '../../hooks/useInput';
 
 const Registration: FC = () => {
 	const dispatch = useAppDispatch();
 	const dispatchNotification = useNotification();
 	const navigate = useNavigate();
 	const { loading, error, success } = useAppSelector((state) => state.auth);
+
+	const username = useInput('', { maxLength: 30, minLength: 3 });
+	const email = useInput('', { isEmail: true });
+	const password = useInput('', { maxLength: 30, minLength: 3 });
+	const isDisabled =
+		email.error || password.error || username.error ? true : false;
 
 	useEffect(() => {
 		if (success) {
@@ -33,76 +39,60 @@ const Registration: FC = () => {
 		}
 	}, [error]);
 
-	type FormValues = {
-		username: string;
-		email: string;
-		password: string;
-	};
-
-	const {
-		register,
-		handleSubmit,
-		formState: { errors, isValid },
-	} = useForm<FormValues>({ mode: 'onBlur' });
-
-	const onSubmit: SubmitHandler<FormValues> = (data) =>
-		dispatch(registerUser(data));
+	function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+		dispatch(
+			registerUser({
+				username: username.value,
+				email: email.value,
+				password: password.value,
+			})
+		);
+	}
 
 	return (
 		<div className='auth-wrapper'>
-			<form onSubmit={handleSubmit(onSubmit)} className='customForm'>
+			<form onSubmit={onSubmit} className='customForm'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Registration</legend>
-					<Input legendText='Username' error={errors.username}>
+					<Input
+						legendText='Username'
+						error={username.error}
+						isDirty={username.isDirty}
+					>
 						<input
 							type='text'
 							placeholder='Add username here'
-							{...register('username', {
-								required: 'Must be filled',
-								minLength: {
-									value: 3,
-									message: 'Min length 3',
-								},
-								maxLength: {
-									value: 30,
-									message: 'Max length 30',
-								},
-							})}
+							value={username.value}
+							onChange={(e) => username.onChange(e)}
+							onBlur={() => username.onBlur()}
 						/>
 					</Input>
-					<Input legendText='Email' error={errors.email}>
+					<Input legendText='Email' error={email.error} isDirty={email.isDirty}>
 						<input
 							type='email'
 							placeholder='Add email here'
-							{...register('email', {
-								required: 'Must be filled',
-								pattern: {
-									value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
-									message: 'Invalid e-mail format',
-								},
-							})}
+							value={email.value}
+							onChange={(e) => email.onChange(e)}
+							onBlur={() => email.onBlur()}
 						/>
 					</Input>
-					<Input legendText='Password' error={errors.password}>
+					<Input
+						legendText='Password'
+						error={password.error}
+						isDirty={password.isDirty}
+					>
 						<input
 							type='password'
 							placeholder='Add password here'
-							{...register('password', {
-								required: 'Must be filled',
-								minLength: {
-									value: 3,
-									message: 'Min length 3',
-								},
-								maxLength: {
-									value: 30,
-									message: 'Max length 30',
-								},
-							})}
+							value={password.value}
+							onChange={(e) => password.onChange(e)}
+							onBlur={() => password.onBlur()}
 						/>
 					</Input>
 				</fieldset>
 				<div className='buttonsHolder'>
-					<Button buttonType='submit' customType='save' disabled={!isValid}>
+					<Button buttonType='submit' customType='save' disabled={isDisabled}>
 						{!loading && 'Register'}
 						{loading && (
 							<Watch wrapperClass='loader' color='white' height={24} />

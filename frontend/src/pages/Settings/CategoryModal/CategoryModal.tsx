@@ -1,22 +1,16 @@
 import React, { FC, useEffect } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import ReactDOM from 'react-dom';
-import { Transition } from 'react-transition-group';
 
+import useInput from '../../../hooks/useInput';
+import { ModalModeType } from '../../../types/ModalModeType';
 import { ICategory } from '../../../types/Category';
+
 import { Input } from '../../../common/Input';
-import { Button } from '../../../common/Button';
+import { Modal } from '../../../components/Modal';
 
 import {
 	useAddCategoryMutation,
 	useEditCategoryMutation,
 } from '../../../store/categories/categoriesApi';
-import { ModalModeType } from '../../../types/ModalModeType';
-
-type FormValues = {
-	name: string;
-	color: string;
-};
 
 type CategModalType = {
 	activeModal: boolean;
@@ -33,118 +27,73 @@ const CategoryModal: FC<CategModalType> = ({
 	setActiveModal,
 	mode,
 }) => {
-	useEffect(() => {
-		if (mode === 'edit' && editedCategory) {
-			setValue('name', `${editedCategory?.name}`);
-			setValue('color', `${editedCategory?.color}`);
-		} else {
-			setValue('name', '');
-			setValue('color', '#000');
-		}
-	}, [editedCategory, mode]);
-
 	const [createCategory] = useAddCategoryMutation();
 	const [editCategory] = useEditCategoryMutation();
-	const modalRoot = document.getElementById('root-modal') as HTMLElement;
 
-	const {
-		register,
-		handleSubmit,
-		setValue,
-		formState: { errors, isValid },
-	} = useForm<FormValues>({
-		mode: 'onChange',
-	});
+	const name = useInput('', { maxLength: 30, minLength: 3 });
+	const color = useInput('', { isEmpty: true });
 
-	const onSubmit: SubmitHandler<FormValues> = (data) => {
-		if (mode === 'edit') {
-			editCategory({ ...data, _id: editedCategory?._id });
+	useEffect(() => {
+		if (mode === 'edit' && editedCategory) {
+			name.onDefault(editedCategory.name);
+			color.onDefault(editedCategory.color);
 		} else {
-			createCategory(data);
+			name.onDefault('');
+			color.onDefault('');
+		}
+	}, [activeModal]);
+
+	const isDisabled = name.error || color.error ? true : false;
+
+	function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+		const submitData = {
+			name: name.value,
+			color: color.value,
+		};
+		if (mode === 'edit') {
+			editCategory({ ...submitData, _id: editedCategory?._id });
+		} else {
+			createCategory(submitData);
 		}
 		setActiveModal(false);
-	};
+	}
 
 	function handleClose(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
 		setActiveModal(false);
 	}
 
-	return ReactDOM.createPortal(
-		<Transition in={activeModal} timeout={200} mountOnEnter unmountOnExit>
-			{(state) => {
-				return (
-					<div className={`modal ${state}`}>
-						<form
-							onSubmit={handleSubmit(onSubmit)}
-							className={`modalContent ${state}`}
-						>
-							<ul className={`ModalButtonsHolder`}>
-								<li>
-									<button
-										type='button'
-										className={`modalButton icon-close`}
-										onClick={handleClose}
-									></button>
-								</li>
-								<li>
-									<button
-										type='submit'
-										className={`modalButton icon-check`}
-										disabled={!isValid}
-									></button>
-								</li>
-							</ul>
-							<div>
-								<h2 className={`modalTitle`}>{mode}</h2>
-								<Input legendText='Name:' error={errors.name}>
-									<input
-										type='text'
-										placeholder='Enter category name'
-										{...register('name', {
-											required: 'Must be filled',
-											minLength: {
-												value: 3,
-												message: 'Min length 3',
-											},
-											maxLength: {
-												value: 30,
-												message: 'Max length 30',
-											},
-										})}
-									/>
-								</Input>
-								<Input legendText='Choose color:' error={errors.color}>
-									<input
-										type='color'
-										{...register('color', {
-											required: 'Must be filled',
-										})}
-									/>
-								</Input>
-							</div>
-							<div className={`phoneButtonsHolder`}>
-								<Button
-									buttonType='button'
-									customType='cancel'
-									onClickHandler={handleClose}
-								>
-									Cancel
-								</Button>
-								<Button
-									buttonType='submit'
-									customType='save'
-									disabled={!isValid}
-								>
-									Save
-								</Button>
-							</div>
-						</form>
-					</div>
-				);
-			}}
-		</Transition>,
-		modalRoot
+	return (
+		<Modal
+			activeModal={activeModal}
+			isDisabled={isDisabled}
+			mode={mode}
+			handleClose={handleClose}
+			onSubmit={onSubmit}
+		>
+			<Input legendText='Name:' error={name.error} isDirty={name.isDirty}>
+				<input
+					type='text'
+					placeholder='Enter category name'
+					value={name.value}
+					onChange={(e) => name.onChange(e)}
+					onBlur={() => name.onBlur()}
+				/>
+			</Input>
+			<Input
+				legendText='Choose color:'
+				error={color.error}
+				isDirty={color.isDirty}
+			>
+				<input
+					type='color'
+					value={color.value}
+					onChange={(e) => color.onChange(e)}
+					onBlur={() => color.onBlur()}
+				/>
+			</Input>
+		</Modal>
 	);
 };
 

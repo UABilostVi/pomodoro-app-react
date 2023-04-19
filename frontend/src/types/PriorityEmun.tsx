@@ -1,4 +1,4 @@
-export enum Priority {
+export enum PriorityEmun {
 	urgent,
 	high,
 	middle,
