@@ -1,0 +1,85 @@
+@import '../../variables.scss';
+
+@keyframes show-modal-content {
+  0% {
+    transform: scale(0.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes show-modal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.dialog {
+  position: fixed;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  overflow-y: scroll;
+  &.entering {
+    animation: show-modal 0.5s forwards;
+  }
+  &.exiting {
+    animation: show-modal 0.5s reverse;
+  }
+  @media (min-width: $tablet-width) {
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.dialogContent {
+  min-height: 100%;
+  width: 100%;
+  background-color: $prime-bg-color;
+  padding: 48px 96px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+  &.entering {
+    animation: show-modal-content 0.5s forwards;
+  }
+  &.exiting {
+    animation: show-modal-content 0.5s reverse;
+  }
+  @media (min-width: $tablet-width) {
+    min-height: 350px;
+    max-width: 520px;
+    padding: 40px 48px;
+    justify-content: space-between;
+  }
+}
+
+.phoneButtonsHolder {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.dialogTitle {
+  color: $white;
+  text-align: center;
+  font-size: 28px;
+  text-transform: capitalize;
+}
+
+.dialogMessage {
+  font-size: 30px;
+  text-align: center;
+}

@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 import { ITask } from '../../../types/Tasks';
 import { ModalModeType } from '../../../types/ModalModeType';
 import { useGetCategoriesQuery } from '../../../store/categories/categoriesApi';
-import { useDelTaskMutation } from '../../../store/tasks/tasksApi';
 
 import styles from './Task.module.scss';
 
@@ -12,6 +11,7 @@ type TaskPropsType = {
 	setEditedTask: React.Dispatch<React.SetStateAction<ITask | null>>;
 	setActiveModal: React.Dispatch<React.SetStateAction<boolean>>;
 	setMode: React.Dispatch<React.SetStateAction<ModalModeType>>;
+	delTaskHandler: (task: ITask) => void;
 };
 
 const Task: FC<TaskPropsType> = ({
@@ -19,6 +19,7 @@ const Task: FC<TaskPropsType> = ({
 	setEditedTask,
 	setActiveModal,
 	setMode,
+	delTaskHandler,
 }) => {
 	const {
 		title,
@@ -30,16 +31,11 @@ const Task: FC<TaskPropsType> = ({
 		category,
 	} = task;
 	const { data: categList } = useGetCategoriesQuery();
-	const [delTask] = useDelTaskMutation();
 	const taskCateg = categList?.find((categ) => categ._id === category);
 	const date = new Date(deadline);
 	const day = date.getDate();
 	const month = date.toLocaleString('en', { month: 'short' });
 	const today = new Date().toDateString() === date.toDateString();
-
-	function handleDelete(task: ITask) {
-		delTask(task);
-	}
 
 	function handleEdit(task: ITask) {
 		setMode('edit');
@@ -96,7 +92,7 @@ const Task: FC<TaskPropsType> = ({
 							<button
 								className={`${styles.taskButton} icon-delete`}
 								onClick={() => {
-									handleDelete(task);
+									delTaskHandler(task);
 								}}
 							></button>
 						</li>
