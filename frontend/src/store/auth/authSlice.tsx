@@ -1,33 +1,39 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../../types/User';
 import { registerUser, loginUser, getCurrentUser } from './async';
+import { IUserSettings } from '../../types/User';
+import { IAuthState, IUserInfo } from '../../types/Auth';
 
-interface IState {
-	loading: boolean;
-	userInfo: IUser | null;
-	error: null | any;
-	success: boolean;
-}
-
-const initialState: IState = {
+const initialState: IAuthState = {
 	loading: false,
-	userInfo: null,
 	error: null,
 	success: false,
+	userInfo: {
+		username: '',
+		email: '',
+		settings: {
+			worktime: 15,
+			shortbreak: 3,
+			longbreak: 15,
+			iterations: 2,
+		},
+	},
 };
 
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
-		setUser: (state, action: PayloadAction<IUser>) => {
+		setUser: (state, action: PayloadAction<IUserInfo>) => {
 			state.userInfo = action.payload;
 		},
 		unSetUser: (state) => {
-			state.userInfo = null;
+			state.userInfo = initialState.userInfo;
 		},
 		unSetSucces: (state) => {
 			state.success = false;
+		},
+		setSettings: (state, action: PayloadAction<IUserSettings>) => {
+			state.userInfo.settings = action.payload;
 		},
 	},
 	extraReducers(builder) {
@@ -49,6 +55,7 @@ export const authSlice = createSlice({
 		});
 		builder.addCase(loginUser.fulfilled, (state) => {
 			state.loading = false;
+			state.success = true;
 		});
 		builder.addCase(loginUser.rejected, (state, { payload }) => {
 			state.loading = false;
@@ -68,6 +75,7 @@ export const authSlice = createSlice({
 	},
 });
 
-export const { setUser, unSetUser, unSetSucces } = authSlice.actions;
+export const { setUser, unSetUser, unSetSucces, setSettings } =
+	authSlice.actions;
 
 export default authSlice.reducer;

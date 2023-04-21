@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { userJoiSchema } = require('../models/Users');
 const {
-  saveUser, savePass, loginUser, getProfile, delProfile,
+  saveUser, savePass, loginUser, getProfile, delProfile, updateSettings,
 } = require('../services/usersService');
 
 const createProfile = async (req, res) => {
@@ -64,10 +64,22 @@ const changePass = async (req, res) => {
     });
 };
 
+const changeSettings = async (req, res) => {
+  const { settings } = req.body;
+  await updateSettings(settings, req.user.userId)
+    .then((user) => {
+      if (user) {
+        return res.status(200).json(user.settings);
+      }
+      return res.status(400).json({ message: 'Something wrong!' });
+    });
+};
+
 module.exports = {
   createProfile,
   login,
   getProfileInfo,
   deleteUser,
   changePass,
+  changeSettings,
 };

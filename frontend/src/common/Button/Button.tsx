@@ -3,7 +3,7 @@ import React, { FC, MouseEventHandler } from 'react';
 import styles from './Button.module.scss';
 
 type CustomType = 'save' | 'ok' | 'cancel';
-type ButtonType = 'submit' | 'reset' | 'button' | undefined;
+type ButtonType = 'submit' | 'reset' | 'button';
 
 interface IButtonProps {
 	buttonType: ButtonType;

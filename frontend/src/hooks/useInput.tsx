@@ -6,7 +6,9 @@ const useInput = (initialValue: any, validations?: any) => {
 	const [isDirty, setIsDirty] = useState<boolean>(false);
 	const valid = useValidation(value, validations);
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const onChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
 		setValue(e.target.value);
 	};
 

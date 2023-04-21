@@ -91,7 +91,7 @@ const TaskModal: FC<TaskModalProps> = ({
 		setActiveModal(false);
 	}
 
-	function handleClose(e: React.MouseEvent<HTMLElement>) {
+	function handleClose(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
 		setActiveModal(false);
 	}
@@ -130,7 +130,7 @@ const TaskModal: FC<TaskModalProps> = ({
 				labelText='Category:'
 				categories={categories}
 				error={category.error}
-				onChange={category.onChange}
+				onChange={(e) => category.onChange(e)}
 				value={editedTask?.category}
 				isDirty={category.isDirty}
 			/>
@@ -142,7 +142,7 @@ const TaskModal: FC<TaskModalProps> = ({
 				<input
 					type='date'
 					value={deadline.value}
-					onChange={(e: any) => deadline.onChange(e)}
+					onChange={(e) => deadline.onChange(e)}
 					onBlur={() => deadline.onBlur()}
 				/>
 			</Input>

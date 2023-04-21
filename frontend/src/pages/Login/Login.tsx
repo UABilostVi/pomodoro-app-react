@@ -15,16 +15,16 @@ const Login: FC = () => {
 	const dispatch = useAppDispatch();
 	const dispatchNotification = useNotification();
 	const navigate = useNavigate();
-	const { loading, error, userInfo } = useAppSelector((state) => state.auth);
+	const { loading, error, success } = useAppSelector((state) => state.auth);
 	const email = useInput('', { isEmail: true });
 	const password = useInput('', { maxLength: 30, minLength: 3 });
 	const isDisabled = email.error || password.error ? true : false;
 
 	useEffect(() => {
-		if (userInfo) {
+		if (success) {
 			navigate('/');
 		}
-	}, [userInfo]);
+	}, [success]);
 
 	useEffect(() => {
 		if (error) {

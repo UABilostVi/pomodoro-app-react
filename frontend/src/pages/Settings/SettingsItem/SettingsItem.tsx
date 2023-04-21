@@ -10,8 +10,7 @@ type SettingsItemPropsType = {
 	max: number;
 	min: number;
 	step: number;
-	increase: (step: number) => void;
-	decrease: (step: number) => void;
+	setValue: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const SettingsItem: FC<SettingsItemPropsType> = ({
@@ -21,8 +20,7 @@ const SettingsItem: FC<SettingsItemPropsType> = ({
 	max,
 	min,
 	step,
-	increase,
-	decrease,
+	setValue,
 }) => {
 	const measure = option === 'workIter' ? 'iterations' : 'minutes';
 
@@ -33,7 +31,7 @@ const SettingsItem: FC<SettingsItemPropsType> = ({
 				<div className={styles.inputWrapper}>
 					<button
 						className={`${styles.button} icon-minus`}
-						onClick={() => decrease(step)}
+						onClick={() => setValue((prev) => prev - step)}
 						disabled={value === min}
 					></button>
 					<input
@@ -44,7 +42,7 @@ const SettingsItem: FC<SettingsItemPropsType> = ({
 					/>
 					<button
 						className={`${styles.button} icon-plus`}
-						onClick={() => increase(step)}
+						onClick={() => setValue((prev) => prev + step)}
 						disabled={value === max}
 					></button>
 				</div>

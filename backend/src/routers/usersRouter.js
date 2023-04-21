@@ -11,12 +11,14 @@ const {
   getProfileInfo,
   deleteUser,
   changePass,
+  changeSettings,
 } = require('../controllers/usersController');
 
 router.post('/register', asyncWrapper(createProfile));
 router.post('/login', asyncWrapper(login));
 router.get('/me', authMiddleware, asyncWrapper(getProfileInfo));
 router.delete('/me', authMiddleware, asyncWrapper(deleteUser));
+router.patch('/me/', authMiddleware, asyncWrapper(changeSettings));
 router.patch('/me/password', authMiddleware, asyncWrapper(changePass));
 
 module.exports = {

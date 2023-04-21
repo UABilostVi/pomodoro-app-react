@@ -4,16 +4,16 @@ import { ICategory } from '../../types/Category';
 
 import styles from './Select.module.scss';
 
-type InputProps = {
+type SelectProps = {
 	categories?: ICategory[];
 	labelText: string;
 	error?: string;
-	onChange: Function;
+	onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 	value?: string;
 	isDirty: boolean;
 };
 
-const Select: FC<InputProps> = ({
+const Select: FC<SelectProps> = ({
 	categories,
 	labelText,
 	error,
@@ -26,13 +26,7 @@ const Select: FC<InputProps> = ({
 			<label htmlFor='category' className={styles.customSelect}>
 				{labelText}
 			</label>
-			<select
-				defaultValue={value}
-				name='category'
-				onChange={(e) => {
-					onChange(e);
-				}}
-			>
+			<select defaultValue={value} name='category' onChange={onChange}>
 				{categories?.map((category) => {
 					return (
 						<option

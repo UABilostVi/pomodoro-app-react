@@ -19,6 +19,24 @@ const userJoiSchema = Joi.object({
     .pattern(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
     .required()
     .messages({ 'string.email': 'Email must have look like `email@email.com`' }),
+  settings: Joi.object({
+    worktime: Joi.number()
+      .min(15)
+      .max(25)
+      .required(),
+    shortbreak: Joi.number()
+      .min(3)
+      .max(5)
+      .required(),
+    longbreak: Joi.number()
+      .min(15)
+      .max(30)
+      .required(),
+    iterations: Joi.number()
+      .min(2)
+      .max(5)
+      .required(),
+  }),
 });
 
 const User = mongoose.model('User', {
@@ -35,6 +53,12 @@ const User = mongoose.model('User', {
   email: {
     type: String,
     required: true,
+  },
+  settings: {
+    worktime: { type: Number, required: true },
+    shortbreak: { type: Number, required: true },
+    longbreak: { type: Number, required: true },
+    iterations: { type: Number, required: true },
   },
 });
 

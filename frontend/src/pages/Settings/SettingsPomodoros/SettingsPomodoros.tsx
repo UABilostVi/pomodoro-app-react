@@ -5,14 +5,26 @@ import { Button } from '../../../common/Button';
 import { Graph } from '../Graph';
 import { SettingsItem } from '../SettingsItem';
 
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+
 import styles from './SettingsPomodoros.module.scss';
+import { changeSettings } from '../../../store/auth/async';
 
 const SettingsPomodoros: FC = () => {
-	const [workTime, setWorkTime] = useState(15);
-	const [workIter, setWorkIter] = useState(3);
-	const [shortBreak, setShortBreak] = useState(3);
-	const [longBreak, setLongBreak] = useState(15);
+	const { userInfo } = useAppSelector((state) => state.auth);
+
+	const [workTime, setWorkTime] = useState<number>(userInfo?.settings.worktime);
+	const [workIter, setWorkIter] = useState<number>(
+		userInfo?.settings.iterations
+	);
+	const [shortBreak, setShortBreak] = useState<number>(
+		userInfo?.settings.shortbreak
+	);
+	const [longBreak, setLongBreak] = useState<number>(
+		userInfo?.settings.longbreak
+	);
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	return (
 		<>
@@ -20,8 +32,7 @@ const SettingsPomodoros: FC = () => {
 			<div className={styles.settingsContent}>
 				<div className={styles.itemsWrapper}>
 					<SettingsItem
-						increase={(step) => setWorkTime((prev: number) => prev + step)}
-						decrease={(step) => setWorkTime((prev: number) => prev - step)}
+						setValue={setWorkTime}
 						value={workTime}
 						title='Work time'
 						option='workTime'
@@ -30,8 +41,7 @@ const SettingsPomodoros: FC = () => {
 						step={5}
 					/>
 					<SettingsItem
-						increase={(step) => setWorkIter((prev: number) => prev + step)}
-						decrease={(step) => setWorkIter((prev: number) => prev - step)}
+						setValue={setWorkIter}
 						value={workIter}
 						title='Work iterations'
 						option='workIter'
@@ -40,8 +50,7 @@ const SettingsPomodoros: FC = () => {
 						step={1}
 					/>
 					<SettingsItem
-						increase={(step) => setShortBreak((prev: number) => prev + step)}
-						decrease={(step) => setShortBreak((prev: number) => prev - step)}
+						setValue={setShortBreak}
 						value={shortBreak}
 						title='Short break'
 						option='shortBreak'
@@ -50,8 +59,7 @@ const SettingsPomodoros: FC = () => {
 						step={1}
 					/>
 					<SettingsItem
-						increase={(step) => setLongBreak((prev: number) => prev + step)}
-						decrease={(step) => setLongBreak((prev: number) => prev - step)}
+						setValue={setLongBreak}
 						value={longBreak}
 						title='Long break'
 						option='longBreak'
@@ -74,7 +82,20 @@ const SettingsPomodoros: FC = () => {
 					>
 						Go to Tasks
 					</Button>
-					<Button buttonType='button' customType='save'>
+					<Button
+						buttonType='button'
+						customType='save'
+						onClickHandler={() =>
+							dispatch(
+								changeSettings({
+									worktime: workTime,
+									iterations: workIter,
+									shortbreak: shortBreak,
+									longbreak: longBreak,
+								})
+							)
+						}
+					>
 						Save
 					</Button>
 				</div>
