@@ -6,29 +6,22 @@ import { ITask } from '../../../../types/Tasks';
 import styles from './Estimations.module.scss';
 
 type EstimationsPropsType = {
-	mode: ModalModeType;
 	editedTask: ITask | null;
-	estimationTotal: {
-		onDefault: (val?: string | number) => void;
-		error: string;
-		value: any;
-		onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-		onBlur: () => void;
-		isDirty: boolean;
-	};
+	mode: ModalModeType;
+	error: string;
+	isDirty: boolean;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Estimations: FC<EstimationsPropsType> = ({
 	mode,
 	editedTask,
-	estimationTotal,
+	error,
+	isDirty,
+	onChange,
 }) => {
 	return (
-		<Input
-			legendText='Estimations:'
-			error={estimationTotal.error}
-			isDirty={estimationTotal.isDirty}
-		>
+		<Input legendText='Estimations:' error={error} isDirty={isDirty}>
 			<div className={styles.estimationHolder}>
 				{[...Array(5)].map((e, i) => {
 					const val = (i - 5) * -1;
@@ -43,7 +36,7 @@ const Estimations: FC<EstimationsPropsType> = ({
 							type='radio'
 							value={val}
 							defaultChecked={isChecked}
-							onChange={(e) => estimationTotal.onChange(e)}
+							onChange={(e) => onChange(e)}
 						/>
 					);
 				})}

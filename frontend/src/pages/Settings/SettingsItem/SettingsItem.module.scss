@@ -68,18 +68,18 @@
   }
 }
 
-.workTime::before {
+.worktime::before {
   background-color: $worktime-color;
 }
 
-.workIter::before {
+.iterations::before {
   background-color: $workiteration-color;
 }
 
-.shortBreak::before {
+.shortbreak::before {
   background-color: $shortbreak-color;
 }
 
-.longBreak::before {
+.longbreak::before {
   background-color: $longbreak-color;
 }

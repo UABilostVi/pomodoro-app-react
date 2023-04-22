@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styles from './SettingsItem.module.scss';
 
-type optionType = 'workTime' | 'workIter' | 'shortBreak' | 'longBreak';
+type optionType = 'worktime' | 'iterations' | 'shortbreak' | 'longbreak';
 
 type SettingsItemPropsType = {
 	value: number;
@@ -22,7 +22,7 @@ const SettingsItem: FC<SettingsItemPropsType> = ({
 	step,
 	setValue,
 }) => {
-	const measure = option === 'workIter' ? 'iterations' : 'minutes';
+	const measure = option === 'iterations' ? 'iterations' : 'minutes';
 
 	return (
 		<div className={`${styles.item} ${styles[option]}`}>

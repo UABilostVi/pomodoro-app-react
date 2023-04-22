@@ -9,27 +9,24 @@ import styles from './Priority.module.scss';
 type PriorityPropsType = {
 	mode: ModalModeType;
 	editedTask: ITask | null;
-	priority: {
-		onDefault: (val?: string | number | undefined) => void;
-		error: string;
-		value: any;
-		onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-		onBlur: () => void;
-		isDirty: boolean;
-	};
+	isDirty: boolean;
+	error: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Priority: FC<PriorityPropsType> = ({ priority, mode, editedTask }) => {
+const Priority: FC<PriorityPropsType> = ({
+	isDirty,
+	mode,
+	editedTask,
+	error,
+	onChange,
+}) => {
 	const priorityList = Object.keys(PriorityEmun).filter((v) =>
 		isNaN(Number(v))
 	);
 
 	return (
-		<Input
-			legendText='Priority:'
-			error={priority.error}
-			isDirty={priority.isDirty}
-		>
+		<Input legendText='Priority:' error={error} isDirty={isDirty}>
 			<div className={styles.priorityWrapper}>
 				{priorityList.map((priorityItem, index) => {
 					const isChecked =
@@ -43,7 +40,7 @@ const Priority: FC<PriorityPropsType> = ({ priority, mode, editedTask }) => {
 								type='radio'
 								value={priorityItem}
 								defaultChecked={isChecked}
-								onChange={(e) => priority.onChange(e)}
+								onChange={(e) => onChange(e)}
 							/>
 							<label
 								htmlFor={`${priorityItem}radio`}

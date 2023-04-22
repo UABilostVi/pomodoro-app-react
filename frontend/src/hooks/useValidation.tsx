@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const useValidation = (value: any, validations: any) => {
-	const [error, setError] = useState('');
+	const [error, setError] = useState<string>('');
 	useEffect(() => {
 		for (const validation in validations) {
 			switch (validation) {

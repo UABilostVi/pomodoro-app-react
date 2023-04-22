@@ -1,41 +1,35 @@
 import React, { FC } from 'react';
 
 import styles from './Graph.module.scss';
+import { IUserSettings } from '../../../types/User';
 
-type CyclePropsType = {
-	workTime: number;
-	workIter: number;
-	shortBreak: number;
-	longBreak: number;
-};
-
-const Graph: FC<CyclePropsType> = ({
-	workTime,
-	workIter,
-	shortBreak,
-	longBreak,
+const Graph: FC<IUserSettings> = ({
+	worktime,
+	iterations,
+	shortbreak,
+	longbreak,
 }) => {
 	const fullCycleTime =
-		longBreak + (workIter * workTime + (workIter - 1) * shortBreak) * 2;
+		longbreak + (iterations * worktime + (iterations - 1) * shortbreak) * 2;
 	const firstCycle =
-		longBreak + (workIter * workTime + (workIter - 1) * shortBreak);
-	const longBreakPercent = `${(longBreak / fullCycleTime) * 100}%`;
-	const shortBreakPercent = `${(shortBreak / fullCycleTime) * 100}%`;
-	const workTimePercent = `${(workTime / fullCycleTime) * 100}%`;
+		longbreak + (iterations * worktime + (iterations - 1) * shortbreak);
+	const longBreakPercent = `${(longbreak / fullCycleTime) * 100}%`;
+	const shortBreakPercent = `${(longbreak / fullCycleTime) * 100}%`;
+	const workTimePercent = `${(worktime / fullCycleTime) * 100}%`;
 	const fullCycleHours = Math.trunc(fullCycleTime / 60);
 	const fullCycleminutes = fullCycleTime % 60;
 	const firstCycleHours = Math.trunc(firstCycle / 60);
 	const firstCycleminutes = firstCycle % 60;
 	const firstCyclePercent = `${(firstCycle / fullCycleTime) * 100}%`;
 
-	const halfCycle = [...Array(workIter)].map((e, i) => {
+	const halfCycle = [...Array(iterations)].map((e, i) => {
 		return (
 			<React.Fragment key={i}>
 				<div
 					className={styles.workTime}
 					style={{ width: workTimePercent }}
 				></div>
-				{i !== workIter - 1 && (
+				{i !== iterations - 1 && (
 					<div
 						className={styles.shortBreak}
 						style={{ width: shortBreakPercent }}

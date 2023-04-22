@@ -13,14 +13,14 @@ import { changeSettings } from '../../../store/auth/async';
 const SettingsPomodoros: FC = () => {
 	const { userInfo } = useAppSelector((state) => state.auth);
 
-	const [workTime, setWorkTime] = useState<number>(userInfo?.settings.worktime);
-	const [workIter, setWorkIter] = useState<number>(
+	const [worktime, setWorkTime] = useState<number>(userInfo?.settings.worktime);
+	const [iterations, setWorkIter] = useState<number>(
 		userInfo?.settings.iterations
 	);
-	const [shortBreak, setShortBreak] = useState<number>(
+	const [shortbreak, setShortBreak] = useState<number>(
 		userInfo?.settings.shortbreak
 	);
-	const [longBreak, setLongBreak] = useState<number>(
+	const [longbreak, setLongBreak] = useState<number>(
 		userInfo?.settings.longbreak
 	);
 	const navigate = useNavigate();
@@ -33,46 +33,46 @@ const SettingsPomodoros: FC = () => {
 				<div className={styles.itemsWrapper}>
 					<SettingsItem
 						setValue={setWorkTime}
-						value={workTime}
+						value={worktime}
 						title='Work time'
-						option='workTime'
+						option='worktime'
 						max={25}
 						min={15}
 						step={5}
 					/>
 					<SettingsItem
 						setValue={setWorkIter}
-						value={workIter}
+						value={iterations}
 						title='Work iterations'
-						option='workIter'
+						option='iterations'
 						max={5}
 						min={2}
 						step={1}
 					/>
 					<SettingsItem
 						setValue={setShortBreak}
-						value={shortBreak}
+						value={shortbreak}
 						title='Short break'
-						option='shortBreak'
+						option='shortbreak'
 						max={5}
 						min={3}
 						step={1}
 					/>
 					<SettingsItem
 						setValue={setLongBreak}
-						value={longBreak}
+						value={longbreak}
 						title='Long break'
-						option='longBreak'
+						option='longbreak'
 						max={30}
 						min={15}
 						step={5}
 					/>
 				</div>
 				<Graph
-					workTime={workTime}
-					workIter={workIter}
-					shortBreak={shortBreak}
-					longBreak={longBreak}
+					worktime={worktime}
+					iterations={iterations}
+					shortbreak={shortbreak}
+					longbreak={longbreak}
 				/>
 				<div className='buttonsHolder'>
 					<Button
@@ -87,12 +87,7 @@ const SettingsPomodoros: FC = () => {
 						customType='save'
 						onClickHandler={() =>
 							dispatch(
-								changeSettings({
-									worktime: workTime,
-									iterations: workIter,
-									shortbreak: shortBreak,
-									longbreak: longBreak,
-								})
+								changeSettings({ worktime, iterations, shortbreak, longbreak })
 							)
 						}
 					>

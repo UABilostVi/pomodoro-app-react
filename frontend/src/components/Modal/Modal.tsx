@@ -15,7 +15,7 @@ type ModalPropsType = {
 	isDisabled: boolean;
 	mode: ModalModeType;
 	onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-	handleClose: any;
+	handleClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const Modal: FC<ModalPropsType> = ({

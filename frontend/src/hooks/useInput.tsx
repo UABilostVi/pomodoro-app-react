@@ -12,7 +12,7 @@ const useInput = (initialValue: any, validations?: any) => {
 		setValue(e.target.value);
 	};
 
-	const onDefault = (val?: string | number) => {
+	const onDefault = (val: any) => {
 		setIsDirty(false);
 		setValue(val);
 	};

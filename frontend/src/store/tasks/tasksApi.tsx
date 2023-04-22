@@ -1,4 +1,3 @@
-import React from 'react';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ITask } from '../../types/Tasks';
 

@@ -149,9 +149,17 @@ const TaskModal: FC<TaskModalProps> = ({
 			<Estimations
 				editedTask={editedTask}
 				mode={mode}
-				estimationTotal={estimationTotal}
+				error={estimationTotal.error}
+				isDirty={estimationTotal.isDirty}
+				onChange={estimationTotal.onChange}
 			/>
-			<Priority editedTask={editedTask} mode={mode} priority={priority} />
+			<Priority
+				editedTask={editedTask}
+				mode={mode}
+				isDirty={priority.isDirty}
+				error={priority.error}
+				onChange={priority.onChange}
+			/>
 		</Modal>
 	);
 };

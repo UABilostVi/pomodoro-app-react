@@ -19,14 +19,16 @@ interface PayloadType extends NotifPropsType {
 }
 
 export interface NotificationProps extends PayloadType {
-	dispatch: Function;
+	dispatch: React.Dispatch<AppActions>;
 }
 
 type AddType = { type: 'ADD_NOTIFICATION'; payload: PayloadType };
 type DelType = { type: 'REMOVE_NOTIFICATION'; id: string };
 type AppActions = AddType | DelType;
 
-const NotificationContext = createContext<Function | null>(null);
+const NotificationContext = createContext<React.Dispatch<AppActions> | null>(
+	null
+);
 
 const NotificationProvider: FC<ProviderProps> = ({ children }) => {
 	const [state, dispatch] = useReducer(
