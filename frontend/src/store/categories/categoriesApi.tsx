@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ICategory } from '../../types/Category';
 
+type submitData = {
+	name: string;
+	color: string;
+};
+
 export const categoriesApi = createApi({
 	reducerPath: 'categoriesApi',
 	tagTypes: ['Categories'],
@@ -22,7 +27,7 @@ export const categoriesApi = createApi({
 			query: (id) => `categories/${id}`,
 			providesTags: () => ['Categories'],
 		}),
-		addCategory: builder.mutation<ICategory, ICategory>({
+		addCategory: builder.mutation<ICategory, submitData>({
 			query: (categ) => ({ url: `categories`, method: 'POST', body: categ }),
 			invalidatesTags: ['Categories'],
 		}),

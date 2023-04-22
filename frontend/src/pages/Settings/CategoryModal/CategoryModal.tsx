@@ -51,8 +51,8 @@ const CategoryModal: FC<CategModalType> = ({
 			name: name.value,
 			color: color.value,
 		};
-		if (mode === 'edit') {
-			editCategory({ ...submitData, _id: editedCategory?._id });
+		if (mode === 'edit' && editedCategory) {
+			editCategory({ ...submitData, _id: editedCategory._id });
 		} else {
 			createCategory(submitData);
 		}

@@ -57,7 +57,6 @@ export const changeSettings = createAsyncThunk(
 	async function (payload: IUserSettings, { dispatch, rejectWithValue }) {
 		try {
 			const response = await serviceAPI.fetchUserSettings(payload);
-			console.log(response.data);
 			dispatch(setSettings(response.data));
 		} catch (err: any) {
 			if (err.response && err.response.data.message) {

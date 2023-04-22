@@ -25,20 +25,20 @@ type TaskModalProps = {
 
 const TaskModal: FC<TaskModalProps> = ({
 	activeModal,
-	setActiveModal,
 	mode,
 	editedTask,
+	setActiveModal,
 }) => {
 	const { data: categories } = useGetCategoriesQuery();
 	const [editTask] = useEditTaskMutation();
 	const [createTask] = useAddTaskMutation();
 
-	const title = useInput('', { maxLength: 30, minLength: 3 });
-	const description = useInput('', { maxLength: 100, minLength: 3 });
-	const category = useInput('', { isEmpty: true });
-	const deadline = useInput('', { isEmpty: true });
-	const estimationTotal = useInput(0, { isEmpty: true });
-	const priority = useInput('', { isEmpty: true });
+	const title = useInput<string>('', { maxLength: 30, minLength: 3 });
+	const category = useInput<string>('', { isEmpty: true });
+	const deadline = useInput<string>('', { isEmpty: true });
+	const priority = useInput<string>('', { isEmpty: true });
+	const description = useInput<string>('', { maxLength: 100, minLength: 3 });
+	const estimationTotal = useInput<number>(0, { isEmpty: true });
 
 	const isDisabled =
 		title.error ||
@@ -60,13 +60,13 @@ const TaskModal: FC<TaskModalProps> = ({
 			estimationTotal.onDefault(editedTask.estimationTotal);
 			priority.onDefault(editedTask.priority);
 			category.onDefault(editedTask.category);
-		} else {
+		} else if (mode === 'add' && categories) {
 			title.onDefault('');
 			description.onDefault('');
 			deadline.onDefault('');
-			estimationTotal.onDefault('');
+			estimationTotal.onDefault(0);
 			priority.onDefault('');
-			category.onDefault(categories && categories[0]._id);
+			category.onDefault(categories[0]._id);
 		}
 	}, [activeModal]);
 
@@ -77,7 +77,7 @@ const TaskModal: FC<TaskModalProps> = ({
 			description: description.value,
 			category: category.value,
 			deadline: deadline.value,
-			estimationTotal: Number(estimationTotal.value),
+			estimationTotal: estimationTotal.value,
 			priority: priority.value,
 		};
 		if (mode === 'edit') {

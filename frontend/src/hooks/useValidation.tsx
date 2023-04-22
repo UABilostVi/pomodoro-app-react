@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
+import { IValidations } from '../types/Validations';
 
-export const useValidation = (value: any, validations: any) => {
+export const useValidation = <T,>(value: T, validations: IValidations) => {
 	const [error, setError] = useState<string>('');
 	useEffect(() => {
 		for (const validation in validations) {
 			switch (validation) {
 				case 'minLength':
-					value.trim().length < validations[validation]
+					String(value).trim().length < validations[validation]
 						? setError(`Min ${validations[validation]} symbols`)
 						: setError('');
 					break;
 				case 'maxLength':
-					value.trim().length > validations[validation]
+					String(value).trim().length > validations[validation]
 						? setError(`Max ${validations[validation]} symbols`)
 						: setError('');
 					break;
@@ -20,7 +21,7 @@ export const useValidation = (value: any, validations: any) => {
 					break;
 				case 'isEmail':
 					const regExp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-					regExp.test(String(value.trim()).toLocaleLowerCase())
+					regExp.test(String(value).trim().toLocaleLowerCase())
 						? setError('')
 						: setError('Wrong email format');
 					break;
