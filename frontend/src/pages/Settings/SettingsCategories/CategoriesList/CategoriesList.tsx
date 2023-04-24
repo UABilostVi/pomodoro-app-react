@@ -20,7 +20,7 @@ const CategoriesList: FC<CategListPropsType> = ({
 	setMode,
 	setActiveModal,
 }) => {
-	const { data } = useGetCategoriesQuery();
+	const { data = [], error: dataErr } = useGetCategoriesQuery();
 	const [delCategory] = useDelCategoryMutation();
 
 	function onEdit(item: ICategory) {
@@ -31,29 +31,39 @@ const CategoriesList: FC<CategListPropsType> = ({
 
 	return (
 		<>
-			<ul className={styles.categList}>
-				{data?.map((item: ICategory) => {
-					return (
-						<li key={item._id} className={styles.categItem}>
-							{item.name}
-							<span
-								className={styles.categColorMark}
-								style={{ backgroundColor: `${item.color}` }}
-							></span>
-							<div className={styles.categButtonsHolder}>
-								<button
-									className={`${styles.categButton} icon-edit`}
-									onClick={() => onEdit(item)}
-								></button>
-								<button
-									className={`${styles.categButton} icon-delete`}
-									onClick={() => delCategory(item)}
-								></button>
-							</div>
-						</li>
-					);
-				})}
-			</ul>
+			{dataErr && (
+				<div>
+					<p>You have no category!</p>
+					<p>Add first!</p>
+				</div>
+			)}
+			{data && !dataErr && (
+				<ul className={styles.categList}>
+					{data?.map((item: ICategory) => {
+						return (
+							<li key={item._id} className={styles.categItem}>
+								{item.name}
+								<span
+									className={styles.categColorMark}
+									style={{ backgroundColor: `${item.color}` }}
+								></span>
+								<div className={styles.categButtonsHolder}>
+									<button
+										className={`${styles.categButton} icon-edit`}
+										onClick={() => onEdit(item)}
+									></button>
+									<button
+										className={`${styles.categButton} icon-delete`}
+										onClick={() => {
+											delCategory(item);
+										}}
+									></button>
+								</div>
+							</li>
+						);
+					})}
+				</ul>
+			)}
 		</>
 	);
 };

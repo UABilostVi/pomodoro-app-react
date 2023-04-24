@@ -6,9 +6,9 @@ import { Graph } from '../Graph';
 import { SettingsItem } from '../SettingsItem';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { changeSettings } from '../../../store/auth/async';
 
 import styles from './SettingsPomodoros.module.scss';
-import { changeSettings } from '../../../store/auth/async';
 
 const SettingsPomodoros: FC = () => {
 	const { userInfo } = useAppSelector((state) => state.auth);

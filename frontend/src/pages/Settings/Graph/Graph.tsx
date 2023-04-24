@@ -14,7 +14,7 @@ const Graph: FC<IUserSettings> = ({
 	const firstCycle =
 		longbreak + (iterations * worktime + (iterations - 1) * shortbreak);
 	const longBreakPercent = `${(longbreak / fullCycleTime) * 100}%`;
-	const shortBreakPercent = `${(longbreak / fullCycleTime) * 100}%`;
+	const shortBreakPercent = `${(shortbreak / fullCycleTime) * 100}%`;
 	const workTimePercent = `${(worktime / fullCycleTime) * 100}%`;
 	const fullCycleHours = Math.trunc(fullCycleTime / 60);
 	const fullCycleminutes = fullCycleTime % 60;

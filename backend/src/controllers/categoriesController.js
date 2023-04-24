@@ -50,8 +50,11 @@ const updateUserCategoryById = async (req, res) => {
 
 const deleteUserCategoryById = async (req, res) => {
   await delCategory(req.params.id)
-    .then(() => {
-      res.status(200).json({ message: 'Category deleted successfully' });
+    .then((categ) => {
+      if (categ) {
+        return res.status(200).json({ message: 'Category deleted successfully' });
+      }
+      return res.status(400).json({ message: 'Cant delete category' });
     });
 };
 
