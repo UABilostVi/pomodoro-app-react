@@ -47,7 +47,7 @@ const Login: FC = () => {
 
 	return (
 		<div className='auth-wrapper'>
-			<form onSubmit={onSubmit} className='customForm'>
+			<form onSubmit={onSubmit} className='customForm' id='loginform'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Login</legend>
 					<Input legendText='Email' error={email.error} isDirty={email.isDirty}>

@@ -1,5 +1,3 @@
-import { IUserSettings } from './User';
-
 export interface ILoginPayload {
 	password: string;
 	email: string;
@@ -7,6 +5,13 @@ export interface ILoginPayload {
 
 export interface IRegPayload extends ILoginPayload {
 	username: string;
+}
+
+export interface IUserSettings {
+	worktime: number;
+	shortbreak: number;
+	longbreak: number;
+	iterations: number;
 }
 
 export interface IUserInfo {

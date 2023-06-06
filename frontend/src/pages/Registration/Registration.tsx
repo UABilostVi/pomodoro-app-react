@@ -52,7 +52,7 @@ const Registration: FC = () => {
 
 	return (
 		<div className='auth-wrapper'>
-			<form onSubmit={onSubmit} className='customForm'>
+			<form onSubmit={onSubmit} className='customForm' id='regisform'>
 				<fieldset className='customFieldset'>
 					<legend className='legend'>Registration</legend>
 					<Input

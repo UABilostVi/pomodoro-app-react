@@ -1,0 +1,27 @@
+@import '../../../variables.scss';
+
+.noTasksBanner {
+  font-size: 36px;
+  font-weight: 300;
+  text-align: center;
+  margin: 60px 0;
+  @media (min-width: $tablet-width) {
+    font-size: 30px;
+  }
+}
+
+.tasksHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.select {
+  background: none;
+  border: none;
+  color: $prime-font-color;
+  cursor: pointer;
+  &:hover {
+    color: $el-hover-color;
+  }
+}

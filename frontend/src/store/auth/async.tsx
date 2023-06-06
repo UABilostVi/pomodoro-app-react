@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { serviceAPI } from '../../services';
-import { IUserSettings } from '../../types/User';
 import { setUser, setSettings } from './authSlice';
-import { ILoginPayload, IRegPayload } from '../../types/Auth';
+import { ILoginPayload, IRegPayload, IUserSettings } from '../../types/Auth';
 
 export const getCurrentUser = createAsyncThunk(
 	'auth/getCurrentUser',

@@ -32,6 +32,7 @@ const Modal: FC<ModalPropsType> = ({
 				return (
 					<div className={`${styles.modal} ${styles[state]}`}>
 						<form
+							name='modalform'
 							onSubmit={onSubmit}
 							className={`${styles.modalContent} ${styles[state]}`}
 						>

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { registerUser, loginUser, getCurrentUser } from './async';
-import { IUserSettings } from '../../types/User';
-import { IAuthState, IUserInfo } from '../../types/Auth';
+import { IAuthState, IUserInfo, IUserSettings } from '../../types/Auth';
 
 const initialState: IAuthState = {
 	loading: false,
@@ -11,10 +10,10 @@ const initialState: IAuthState = {
 		username: '',
 		email: '',
 		settings: {
-			worktime: 15,
-			shortbreak: 3,
-			longbreak: 15,
-			iterations: 2,
+			worktime: 0,
+			shortbreak: 0,
+			longbreak: 0,
+			iterations: 0,
 		},
 	},
 };

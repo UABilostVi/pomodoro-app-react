@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { IUserSettings } from '../../../types/Auth';
 
 import styles from './Graph.module.scss';
-import { IUserSettings } from '../../../types/User';
 
 const Graph: FC<IUserSettings> = ({
 	worktime,

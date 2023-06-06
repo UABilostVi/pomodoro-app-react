@@ -39,7 +39,7 @@ const App: FC = () => {
 	return (
 		<div className='container'>
 			{headerRender}
-			<main>
+			<main className='main'>
 				<Routes>
 					<Route path='/' element={<Navigate to='/tasklist' />} />
 					<Route

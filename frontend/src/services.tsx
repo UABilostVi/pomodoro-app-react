@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { IUserSettings } from './types/User';
-import { ILoginPayload, IRegPayload } from './types/Auth';
+import { ILoginPayload, IRegPayload, IUserSettings } from './types/Auth';
 
 const axs = axios.create({
 	baseURL: 'http://localhost:3001/api',

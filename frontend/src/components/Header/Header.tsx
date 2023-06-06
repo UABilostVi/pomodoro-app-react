@@ -22,7 +22,7 @@ const Header: FC = () => {
 				setTitle('Reports');
 				break;
 			case '/tasklist':
-				setTitle('Daily task');
+				setTitle('Task list');
 				break;
 			default:
 				break;

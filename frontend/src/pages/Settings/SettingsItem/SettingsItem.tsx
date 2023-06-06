@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, SetStateAction } from 'react';
 import styles from './SettingsItem.module.scss';
 
 type optionType = 'worktime' | 'iterations' | 'shortbreak' | 'longbreak';
@@ -10,7 +10,7 @@ type SettingsItemPropsType = {
 	max: number;
 	min: number;
 	step: number;
-	setValue: React.Dispatch<React.SetStateAction<number>>;
+	setValue: React.Dispatch<SetStateAction<number>>;
 };
 
 const SettingsItem: FC<SettingsItemPropsType> = ({

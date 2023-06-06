@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../../../common/Button';
@@ -11,20 +11,22 @@ import { changeSettings } from '../../../store/auth/async';
 import styles from './SettingsPomodoros.module.scss';
 
 const SettingsPomodoros: FC = () => {
-	const { userInfo } = useAppSelector((state) => state.auth);
-
-	const [worktime, setWorkTime] = useState<number>(userInfo?.settings.worktime);
-	const [iterations, setWorkIter] = useState<number>(
-		userInfo?.settings.iterations
-	);
-	const [shortbreak, setShortBreak] = useState<number>(
-		userInfo?.settings.shortbreak
-	);
-	const [longbreak, setLongBreak] = useState<number>(
-		userInfo?.settings.longbreak
-	);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
+
+	const { userInfo } = useAppSelector((state) => state.auth);
+
+	const [worktime, setWorkTime] = useState<number>(0);
+	const [iterations, setWorkIter] = useState<number>(0);
+	const [shortbreak, setShortBreak] = useState<number>(0);
+	const [longbreak, setLongBreak] = useState<number>(0);
+
+	useEffect(() => {
+		setLongBreak(userInfo.settings.longbreak);
+		setShortBreak(userInfo.settings.shortbreak);
+		setWorkIter(userInfo.settings.iterations);
+		setWorkTime(userInfo.settings.worktime);
+	}, [userInfo.settings]);
 
 	return (
 		<>

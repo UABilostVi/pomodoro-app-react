@@ -1,6 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ITask } from '../../types/Tasks';
 
+type submitData = {
+	_id?: string;
+	title: string;
+	description: string;
+	category: string;
+	deadline: string;
+	estimationTotal: number;
+	priority: string;
+};
+
 export const tasksApi = createApi({
 	reducerPath: 'tasksApi',
 	tagTypes: ['Tasks'],
@@ -22,7 +32,7 @@ export const tasksApi = createApi({
 			query: (id) => `tasks/${id}`,
 			providesTags: () => ['Tasks'],
 		}),
-		addTask: builder.mutation<ITask, ITask>({
+		addTask: builder.mutation<ITask, submitData>({
 			query: (task) => ({ url: `tasks`, method: 'POST', body: task }),
 			invalidatesTags: ['Tasks'],
 		}),
@@ -30,7 +40,7 @@ export const tasksApi = createApi({
 			query: (task) => ({ url: `tasks/${task._id}`, method: 'DELETE' }),
 			invalidatesTags: ['Tasks'],
 		}),
-		editTask: builder.mutation<ITask, ITask>({
+		editTask: builder.mutation<ITask, submitData>({
 			query: (task) => ({
 				url: `tasks/${task._id}`,
 				method: 'PATCH',

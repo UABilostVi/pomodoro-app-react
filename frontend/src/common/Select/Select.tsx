@@ -26,7 +26,12 @@ const Select: FC<SelectProps> = ({
 			<label htmlFor='category' className={styles.customSelect}>
 				{labelText}
 			</label>
-			<select defaultValue={value} name='category' onChange={onChange}>
+			<select
+				defaultValue={value}
+				name='category'
+				id='category'
+				onChange={onChange}
+			>
 				{categories?.map((category) => {
 					return (
 						<option
