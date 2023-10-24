@@ -1,0 +1,42 @@
+{
+  "todotree": {
+    "tree": [
+      {
+        "key": 1697476908063,
+        "children": [],
+        "todo": {
+          "content": "FrontEnd",
+          "id": 1697476908063,
+          "level": "default",
+          "done": false,
+          "start": 1697476908063
+        }
+      },
+      {
+        "key": 1697477415009,
+        "children": [],
+        "todo": {
+          "content": "BackEnd",
+          "id": 1697477415009,
+          "level": "default",
+          "done": false,
+          "start": 1697477415009
+        }
+      }
+    ],
+    "expandKeys": [],
+    "schema": "https://github.com/Saber2pr/vsc-ext-todolist/blob/master/src/api/type.ts#L3",
+    "add_mode": "bottom",
+    "virtual": false,
+    "showLine": false,
+    "restDays": [],
+    "playFontSize": 24,
+    "title": "PomodoroApp",
+    "autoSort": false,
+    "showEndTime": false,
+    "simpleMode": false,
+    "lang": "en",
+    "desc": "Pomodoro App on React",
+    "version": "1697477721009"
+  }
+}

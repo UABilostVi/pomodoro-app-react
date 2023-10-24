@@ -1,10 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NavItem } from './NavItem';
-
-import styles from './Header.module.scss';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { unSetUser } from '../../store/auth/authSlice';
+import styles from './Header.module.scss';
 
 const Header: FC = () => {
 	const location = useLocation();

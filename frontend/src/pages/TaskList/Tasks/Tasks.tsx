@@ -3,7 +3,7 @@ import { useGetTasksQuery } from '../../../store/tasks/tasksApi';
 import { ModalModeType } from '../../../types/ModalModeType';
 import { ITask } from '../../../types/Tasks';
 import { Task } from '../Task';
-import { PriorityEmun } from '../../../types/PriorityEmun';
+import { PriorityEnum } from '../../../types/PriorityEnum';
 
 import styles from './Tasks.module.scss';
 import { NoTaskLeft } from '../NoTaskLeft';
@@ -30,7 +30,7 @@ const Tasks: FC<TasksPropsType> = ({
 	const [sortGlobalState, setSortGlobalState] = useState<string>('dateAsc');
 	const [sortDailyState, setSortDailyState] = useState<string>('priorityASC');
 
-	const priorObject = Object.keys(PriorityEmun).filter((v) => isNaN(Number(v)));
+	const priorObject = Object.keys(PriorityEnum).filter((v) => isNaN(Number(v)));
 	const sortMethods: any = {
 		dateAsc: (a: ITask, b: ITask) =>
 			new Date(a.deadline).getTime() - new Date(b.deadline).getTime(),

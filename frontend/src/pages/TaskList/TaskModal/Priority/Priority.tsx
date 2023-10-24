@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Input } from '../../../../common/Input';
 import { ModalModeType } from '../../../../types/ModalModeType';
-import { PriorityEmun } from '../../../../types/PriorityEmun';
+import { PriorityEnum } from '../../../../types/PriorityEnum';
 import { ITask } from '../../../../types/Tasks';
 
 import styles from './Priority.module.scss';
@@ -21,7 +21,7 @@ const Priority: FC<PriorityPropsType> = ({
 	error,
 	onChange,
 }) => {
-	const priorityList = Object.keys(PriorityEmun).filter((v) =>
+	const priorityList = Object.keys(PriorityEnum).filter((v) =>
 		isNaN(Number(v))
 	);
 

@@ -5,9 +5,9 @@ import { Button } from '../../../common/Button';
 import { CategoryModal } from '../CategoryModal';
 import { CategoriesList } from './CategoriesList';
 import { ICategory } from '../../../types/Category';
+import { ModalModeType } from '../../../types/ModalModeType';
 
 import styles from './SettingsCategories.module.scss';
-import { ModalModeType } from '../../../types/ModalModeType';
 
 const SettingsCategories: FC = () => {
 	const navigate = useNavigate();
