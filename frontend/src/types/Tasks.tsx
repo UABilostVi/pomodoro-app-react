@@ -10,4 +10,5 @@ export interface ITask {
 	estimationTotal: number;
 	estimationUsed: number;
 	priority: string;
+	done: boolean;
 }

@@ -48,11 +48,13 @@
               "content": "change task model",
               "id": 1698162615704,
               "level": "default",
-              "done": false,
+              "done": true,
               "start": 1698162615704,
               "tags": [
                 "1698162642309"
-              ]
+              ],
+              "focus": false,
+              "end": 1698169493886
             }
           }
         ],
@@ -124,6 +126,17 @@
           "done": false,
           "start": 1698164765266
         }
+      },
+      {
+        "key": 1698169444601,
+        "children": [],
+        "todo": {
+          "content": "Fix task done layout",
+          "id": 1698169444601,
+          "level": "default",
+          "done": false,
+          "start": 1698169444601
+        }
       }
     ],
     "expandKeys": [
@@ -156,6 +169,6 @@
     "simpleMode": false,
     "lang": "en",
     "desc": "Pomodoro App on React",
-    "version": "1698164820058"
+    "version": "1698169493966"
   }
 }

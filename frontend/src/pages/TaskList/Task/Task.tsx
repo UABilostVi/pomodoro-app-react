@@ -26,9 +26,9 @@ const Task: FC<TaskPropsType> = ({
 		description,
 		estimationTotal,
 		deadline,
-		isActive,
 		priority,
 		category,
+		done,
 	} = task;
 	const { data: categList } = useGetCategoriesQuery();
 	const taskCateg = categList?.find((categ) => categ._id === category);
@@ -45,9 +45,7 @@ const Task: FC<TaskPropsType> = ({
 
 	return (
 		<div
-			className={`${styles.taskWrapper} ${
-				styles[isActive ? '' : 'doneBackgroud']
-			}`}
+			className={`${styles.taskWrapper} ${styles[done ? 'doneBackgroud' : '']}`}
 		>
 			<div className={styles.deadLine}>
 				<div
@@ -66,14 +64,14 @@ const Task: FC<TaskPropsType> = ({
 				<div>
 					<h4
 						className={`${styles.taskTitle} ${
-							styles[isActive ? '' : 'doneTitle']
+							styles[done ? 'doneTitle' : '']
 						} ${styles[`title-color-${priority}`]}`}
 					>
 						{title}
 					</h4>
 					<p className={styles.taskDescription}>{description}</p>
 				</div>
-				{isActive && (
+				{!done && (
 					<ul className={styles.buttonsHolder}>
 						<li>
 							<button
@@ -103,7 +101,7 @@ const Task: FC<TaskPropsType> = ({
 				className={`${styles.taskEstimation} ${
 					styles[`bg-${priority}`]
 				} icon-tomato`}
-				disabled={!isActive}
+				disabled={done}
 			>
 				{estimationTotal}
 			</button>

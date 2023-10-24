@@ -49,7 +49,11 @@ const taskSchema = mongoose.Schema({
   },
   isActive: {
     type: Boolean,
-    default: true,
+    default: false,
+  },
+  done: {
+    type: Boolean,
+    default: false
   },
   estimationTotal: {
     type: Number,

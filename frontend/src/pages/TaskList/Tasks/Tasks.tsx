@@ -24,8 +24,8 @@ const Tasks: FC<TasksPropsType> = ({
 	delTaskHandler,
 }) => {
 	const { data: tasks = [] } = useGetTasksQuery();
-	const toDoTasks = tasks.filter((task) => task.isActive);
-	const doneTasks = tasks.filter((task) => !task.isActive);
+	const toDoTasks = tasks.filter((task) => !task.done);
+	const doneTasks = tasks.filter((task) => task.done);
 	const list = statusState === 'To do' ? toDoTasks : doneTasks;
 	const [sortGlobalState, setSortGlobalState] = useState<string>('dateAsc');
 	const [sortDailyState, setSortDailyState] = useState<string>('priorityASC');
