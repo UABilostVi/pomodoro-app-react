@@ -1,6 +1,6 @@
 # Productivity Tracker <img src='./frontend/public/favicon.ico'/>
 
-This project was developed as my Pet project. It is a classic Pomodoro App but with some new features.
+This project was developed as my Pet project. It is a classic Pomodoro App but with some new features. 
 
 ## Getting started
 
@@ -27,3 +27,4 @@ Frontend:
 - Edit/delete task
 - Tasks sorting
 - Timer
+- Mobile first approach
