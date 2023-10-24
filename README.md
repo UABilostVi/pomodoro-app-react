@@ -1,11 +1,12 @@
-# Pomodoro App <img src='./frontend/public/favicon.ico'/>
+<img src='./frontend/src/assets/img/prudtracker.png'/>
 
-This project is a Pomodoro App with some new features.
+___
+
+This project was developed as my Pet project. It is a classic Pomodoro App but with some new features.
 
 ## Getting started
 
-In both of directories (backend and frontend), you should run: `npm i` 
+In both of directories (backend and frontend), you should run `npm i`, and after run `npm start` (in both).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Description
 
