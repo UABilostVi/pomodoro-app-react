@@ -1,0 +1,16 @@
+@import '../../variables.scss';
+.timer {
+    text-align: center;
+    color: $white;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.description {
+    font-size: 20px;
+    font-weight: 400;
+    // color: $white;
+}
